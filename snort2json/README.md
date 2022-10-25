@@ -21,7 +21,8 @@ Options:
 # Example:
 
 `python3 snort2json.py -f sample.rules` will print to stdout
-`python3 snort2json.py -f sample.rules -o /tmp/converted_rules.json` will print to file `/tmp/converted_rules.json
+
+`python3 snort2json.py -f sample.rules -o /tmp/converted_rules.json` will print to file `/tmp/converted_rules.json`
 
 For example, the Snort rule:
 
