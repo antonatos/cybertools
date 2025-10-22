@@ -1,0 +1,177 @@
+{
+  "id": "playbook--08488ba1-b531-4b88-9222-2269e93916d8",
+  "name": "SOC Playbook Gap Assessment Checklist (copy) (copy)",
+  "type": "playbook",
+  "impact": 0,
+  "labels": [
+    "CVE-2025-20362",
+    "CVE-2025-20333",
+    "asasd",
+    "Cisco",
+    "Gap Analysis",
+    "test2"
+  ],
+  "created": "2025-10-08T08:28:58.875Z",
+  "revoked": false,
+  "modified": "2025-10-09T12:56:52.524Z",
+  "priority": 0,
+  "severity": 0,
+  "workflow": {
+    "end--fb3ca825-ab0a-4061-bf49-8da8960e124d": {
+      "name": "End",
+      "type": "end"
+    },
+    "start--1634c26c-79f0-4afc-8e42-dcc812482b38": {
+      "name": "Start",
+      "type": "start",
+      "on_completion": "action--6369cbee-11ed-4110-aabf-2ac0e3e0f3d2"
+    },
+    "action--08851c3f-e873-43bd-9e0c-91b853960578": {
+      "name": "Check for inefficient use of automation - repetitive tasks handled manually instead of via SOAR/SIEM integration.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Check for inefficient use of automation - repetitive tasks handled manually instead of via SOAR/SIEM integration.",
+          "description": "Check for inefficient use of automation - repetitive tasks handled manually instead of via SOAR/SIEM integration."
+        }
+      ],
+      "on_completion": "action--42f1e327-98b6-4eb9-9b18-e6a5bc8e9c36"
+    },
+    "action--2d268d14-5821-4c36-ab7a-d62bb152b0f1": {
+      "name": "Check for high error or missed step rates - important containment or communication steps skipped.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Check for high error or missed step rates - important containment or communication steps skipped.",
+          "description": "Check for high error or missed step rates - important containment or communication steps skipped."
+        }
+      ],
+      "on_completion": "action--69e1143d-af62-4ec5-9162-2b4d363494ae"
+    },
+    "action--2e832017-712e-4dc2-b3a2-8ba9e9d8cd77": {
+      "name": "Check for over-reliance on tribal knowledge - critical steps live in people's heads, not in documented playbooks.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Check for over-reliance on tribal knowledge - critical steps live in people's heads, not in documented playbooks.",
+          "description": "Check for over-reliance on tribal knowledge - critical steps live in people's heads, not in documented playbooks."
+        }
+      ],
+      "on_completion": "action--7c576635-47e2-440e-ba9e-836de26197c6"
+    },
+    "action--3d6a8f1a-84c1-4fda-88fa-322e8719eead": {
+      "name": "Check for analyst burnout and alert fatigue - lack of structure forces analysts to reinvent processes repeatedly.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Check for analyst burnout and alert fatigue - lack of structure forces analysts to reinvent processes repeatedly.",
+          "description": "Check for analyst burnout and alert fatigue - lack of structure forces analysts to reinvent processes repeatedly."
+        }
+      ],
+      "on_completion": "end--fb3ca825-ab0a-4061-bf49-8da8960e124d"
+    },
+    "action--42f1e327-98b6-4eb9-9b18-e6a5bc8e9c36": {
+      "name": "Check for poor knowledge transfer during turnover - new hires struggle without structured guidance.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Check for poor knowledge transfer during turnover - new hires struggle without structured guidance.",
+          "description": "Check for poor knowledge transfer during turnover - new hires struggle without structured guidance."
+        }
+      ],
+      "on_completion": "action--8700b485-74be-41aa-b3ac-52f48aa74ed7"
+    },
+    "action--6369cbee-11ed-4110-aabf-2ac0e3e0f3d2": {
+      "name": "Check for inconsistent responses to the same incident type - different analysts resolve the same alerts in different ways.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Check for inconsistent responses to the same incident type - different analysts resolve the same alerts in different ways.",
+          "description": "Check for inconsistent responses to the same incident type - different analysts resolve the same alerts in different ways."
+        }
+      ],
+      "on_completion": "action--2e832017-712e-4dc2-b3a2-8ba9e9d8cd77"
+    },
+    "action--69e1143d-af62-4ec5-9162-2b4d363494ae": {
+      "name": "Check for difficulty adapting to new threats - playbooks only cover 'classic' scenarios, not modern TTPs.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Check for difficulty adapting to new threats - playbooks only cover 'classic' scenarios, not modern TTPs.",
+          "description": "Check for difficulty adapting to new threats - playbooks only cover 'classic' scenarios, not modern TTPs."
+        }
+      ],
+      "on_completion": "action--08851c3f-e873-43bd-9e0c-91b853960578"
+    },
+    "action--7c576635-47e2-440e-ba9e-836de26197c6": {
+      "name": "Check for delays in escalation or decision-making - unclear ownership of next steps.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Check for delays in escalation or decision-making - unclear ownership of next steps.",
+          "description": "Check for delays in escalation or decision-making - unclear ownership of next steps."
+        }
+      ],
+      "on_completion": "action--2d268d14-5821-4c36-ab7a-d62bb152b0f1"
+    },
+    "action--8700b485-74be-41aa-b3ac-52f48aa74ed7": {
+      "name": "Check for post-incident reviews reveal chaos - roles, responsibilities, and timelines unclear during real events.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Check for post-incident reviews reveal chaos - roles, responsibilities, and timelines unclear during real events.",
+          "description": "Check for post-incident reviews reveal chaos - roles, responsibilities, and timelines unclear during real events."
+        }
+      ],
+      "on_completion": "action--b4740b12-d9ec-46cf-8139-f7cd96945591"
+    },
+    "action--b4740b12-d9ec-46cf-8139-f7cd96945591": {
+      "name": "Check for compliance or audit gaps - auditors request documentation, but playbooks are outdated or missing.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Check for compliance or audit gaps - auditors request documentation, but playbooks are outdated or missing.",
+          "description": "Check for compliance or audit gaps - auditors request documentation, but playbooks are outdated or missing."
+        }
+      ],
+      "on_completion": "action--3d6a8f1a-84c1-4fda-88fa-322e8719eead"
+    }
+  },
+  "created_by": "identity--112e9923-5c87-4cf2-9685-eda58a162a7a",
+  "valid_from": "2025-10-23T12:52:09.100Z",
+  "description": "A checklist to identify common gaps and weaknesses in Security Operations Center (SOC) playbooks, helping to improve incident response consistency and strengthen overall security posture.",
+  "spec_version": "cacao-2.0",
+  "playbook_types": [
+    "Attack",
+    "Detection",
+    "Investigation"
+  ],
+  "workflow_start": "start--1634c26c-79f0-4afc-8e42-dcc812482b38",
+  "agent_definitions": {
+    "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81": {
+      "name": "DummyAgent",
+      "type": "individual",
+      "description": "Dummy Agent to be changed"
+    }
+  }
+}

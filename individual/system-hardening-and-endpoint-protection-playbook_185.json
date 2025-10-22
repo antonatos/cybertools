@@ -1,0 +1,125 @@
+{
+  "id": "playbook--014d0b53-eb85-4eb4-a7bc-294a3e757da7",
+  "name": "System Hardening and Endpoint Protection Playbook",
+  "type": "playbook",
+  "impact": 0,
+  "labels": [
+    "system-hardening",
+    "endpoint-security",
+    "access-control"
+  ],
+  "created": "2025-10-17T09:41:58.798Z",
+  "revoked": false,
+  "modified": "2025-10-17T09:41:58.798Z",
+  "priority": 0,
+  "severity": 0,
+  "workflow": {
+    "end--7a6d4db8-e964-47a8-b136-8cccd74eede7": {
+      "name": "End",
+      "type": "end"
+    },
+    "end--7d3c5e72-00f8-47fe-ad42-930576328e87": {
+      "name": "End",
+      "type": "end"
+    },
+    "end--9db8d1c4-5272-4331-b03e-c9085c753ad0": {
+      "name": "End",
+      "type": "end"
+    },
+    "end--d3024965-b356-4a33-a4b2-01cbbe40b09d": {
+      "name": "End",
+      "type": "end"
+    },
+    "start--9321fb33-9682-4500-be09-df8bfc91d8b7": {
+      "name": "Start",
+      "type": "start",
+      "on_completion": "action--92d57efe-2efa-40ce-a694-a935849b7011"
+    },
+    "action--3e4e9ead-7195-4523-8d68-3f53500cdcf5": {
+      "name": "Prevent suspicious API call behavior",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Prevent suspicious API call behavior",
+          "description": ""
+        }
+      ],
+      "on_completion": "end--d3024965-b356-4a33-a4b2-01cbbe40b09d"
+    },
+    "action--875bd763-5eb2-4d8a-9d55-b0b41a44d3cc": {
+      "name": "Prevent suspicious file behavior",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Prevent suspicious file behavior",
+          "description": ""
+        }
+      ],
+      "on_completion": "end--7d3c5e72-00f8-47fe-ad42-930576328e87"
+    },
+    "action--92d57efe-2efa-40ce-a694-a935849b7011": {
+      "name": "Disable or Remove Feature or Program: Remove or deny access to unnecessary and potentially vulnerable software to prevent abuse by adversaries.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Disable or Remove Feature or Program: Remove or deny access to unnecessary and potentially vulnerable software to prevent abuse by adversaries.",
+          "description": "Disable or Remove Feature or Program: Remove or deny access to unnecessary and potentially vulnerable software to prevent abuse by adversaries."
+        }
+      ],
+      "on_completion": "action--df697bdf-6356-4ca8-8647-13229f6ec43d"
+    },
+    "action--df697bdf-6356-4ca8-8647-13229f6ec43d": {
+      "name": "Limit Hardware Installation: Block users or groups from installing or using unapproved hardware on systems, including USB devices.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Limit Hardware Installation: Block users or groups from installing or using unapproved hardware on systems, including USB devices.",
+          "description": "Limit Hardware Installation: Block users or groups from installing or using unapproved hardware on systems, including USB devices."
+        }
+      ],
+      "on_completion": "parallel--f936bdd6-4845-48db-a1ef-8963d5555abb"
+    },
+    "action--f619b008-9e56-478c-9efb-63f05c902bb0": {
+      "name": "Prevent suspicious process behavior",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Prevent suspicious process behavior",
+          "description": ""
+        }
+      ],
+      "on_completion": "end--9db8d1c4-5272-4331-b03e-c9085c753ad0"
+    },
+    "parallel--f936bdd6-4845-48db-a1ef-8963d5555abb": {
+      "name": "Behavior Prevention on Endpoint: Use capabilities to prevent suspicious behavior patterns from occurring on endpoint systems.",
+      "type": "parallel",
+      "next_steps": [
+        "action--f619b008-9e56-478c-9efb-63f05c902bb0",
+        "action--875bd763-5eb2-4d8a-9d55-b0b41a44d3cc",
+        "action--3e4e9ead-7195-4523-8d68-3f53500cdcf5"
+      ],
+      "on_completion": "end--7a6d4db8-e964-47a8-b136-8cccd74eede7"
+    }
+  },
+  "created_by": "identity--112e9923-5c87-4cf2-9685-eda58a162a7a",
+  "description": "A playbook for hardening systems by removing vulnerable software, restricting hardware installation, and implementing endpoint behavior monitoring to prevent malicious activities.",
+  "spec_version": "cacao-2.0",
+  "workflow_start": "start--9321fb33-9682-4500-be09-df8bfc91d8b7",
+  "agent_definitions": {
+    "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81": {
+      "name": "DummyAgent",
+      "type": "individual",
+      "description": "Dummy Agent to be changed"
+    }
+  }
+}

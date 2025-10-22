@@ -1,0 +1,98 @@
+{
+  "id": "playbook--5e15b4fd-9397-4ba9-9617-ce0f10b3a5d2",
+  "name": "System Activity Monitoring Playbook",
+  "type": "playbook",
+  "impact": 0,
+  "labels": [
+    "file-access",
+    "process-creation",
+    "drive-creation",
+    "windows-events",
+    "sysmon",
+    "✅ Live",
+    "asasd",
+    "Firepower"
+  ],
+  "created": "2025-10-14T19:06:57.095Z",
+  "revoked": false,
+  "modified": "2025-10-14T19:06:57.095Z",
+  "priority": 0,
+  "severity": 0,
+  "workflow": {
+    "end--39908002-f3e9-4ad7-8554-5b28636b2b8b": {
+      "name": "End",
+      "type": "end"
+    },
+    "start--449ad0af-2f5a-4415-8595-7cd7fc478f27": {
+      "name": "Start",
+      "type": "start",
+      "on_completion": "action--a4cab898-a3ab-479d-8f99-282d42e9e783"
+    },
+    "action--9fa8abf9-29cc-45bb-a95c-34359c523e54": {
+      "name": "Process Creation: The initial construction of an executable managed by the OS, that may involve one or more tasks or threads. (e.g. Win EID 4688, Sysmon EID 1, cmd.exe > net use, etc.)",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Process Creation: The initial construction of an executable managed by the OS, that may involve one or more tasks or threads. (e.g. Win EID 4688, Sysmon EID 1, cmd.exe > net use, etc.)",
+          "description": "Process Creation: The initial construction of an executable managed by the OS, that may involve one or more tasks or threads. (e.g. Win EID 4688, Sysmon EID 1, cmd.exe > net use, etc.)"
+        }
+      ],
+      "on_completion": "action--dbfc2496-a60c-4a34-adee-c23c89f09efa"
+    },
+    "action--a4cab898-a3ab-479d-8f99-282d42e9e783": {
+      "name": "File Access: Opening a file, which makes the file contents available to the requestor (ex: Windows EID 4663)",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "File Access: Opening a file, which makes the file contents available to the requestor (ex: Windows EID 4663)",
+          "description": "File Access: Opening a file, which makes the file contents available to the requestor (ex: Windows EID 4663)"
+        }
+      ],
+      "on_completion": "action--9fa8abf9-29cc-45bb-a95c-34359c523e54"
+    },
+    "action--dbfc2496-a60c-4a34-adee-c23c89f09efa": {
+      "name": "Drive Creation: Initial construction of a drive letter or mount point to a data storage device",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Drive Creation: Initial construction of a drive letter or mount point to a data storage device",
+          "description": "Drive Creation: Initial construction of a drive letter or mount point to a data storage device"
+        }
+      ],
+      "on_completion": "action--efe9e158-f6e4-420b-b160-185dc792af0b"
+    },
+    "action--efe9e158-f6e4-420b-b160-185dc792af0b": {
+      "name": "File Creation: Initial construction of a new file (ex: Sysmon EID 11)",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "File Creation: Initial construction of a new file (ex: Sysmon EID 11)",
+          "description": "File Creation: Initial construction of a new file (ex: Sysmon EID 11)"
+        }
+      ],
+      "on_completion": "end--39908002-f3e9-4ad7-8554-5b28636b2b8b"
+    }
+  },
+  "created_by": "identity--112e9923-5c87-4cf2-9685-eda58a162a7a",
+  "description": "A playbook for monitoring and responding to key system activities including file access, process creation, drive creation, and file creation events using Windows Event IDs and Sysmon logging.",
+  "spec_version": "cacao-2.0",
+  "playbook_types": [
+    "Mitigation"
+  ],
+  "workflow_start": "start--449ad0af-2f5a-4415-8595-7cd7fc478f27",
+  "agent_definitions": {
+    "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81": {
+      "name": "DummyAgent",
+      "type": "individual",
+      "description": "Dummy Agent to be changed"
+    }
+  }
+}

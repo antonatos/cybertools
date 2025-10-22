@@ -1,0 +1,245 @@
+{
+  "id": "playbook--099841ac-e3b8-4109-86f6-0bad51befe76",
+  "name": "a1",
+  "type": "playbook",
+  "impact": 0,
+  "created": "2025-09-25T21:02:52.962Z",
+  "revoked": false,
+  "modified": "2025-09-26T11:43:12.040Z",
+  "priority": 0,
+  "severity": 0,
+  "workflow": {
+    "end--38d30918-699d-4d97-959f-0df2b01c0ca9": {
+      "type": "end"
+    },
+    "end--67f8440b-fbc1-45a8-a433-f15191b5ed60": {
+      "type": "end"
+    },
+    "end--80d0c1a6-5a4d-4f95-8e1a-91bcf2af748f": {
+      "type": "end"
+    },
+    "end--b1313135-6bac-45cb-b177-64f584cf2dfe": {
+      "type": "end"
+    },
+    "loop--16790e56-816a-4d82-af91-bbed88546ddc": {
+      "name": "For all public-facing Cisco ASA hardware appliances:",
+      "type": "loop",
+      "on_each_item": "action--371847e7-8046-4996-8308-b3895ecc9e46",
+      "on_completion": "action--7b6298b4-6cb8-4634-a0f8-2fa277c923ed"
+    },
+    "loop--3e2ea637-af1c-4e44-9d04-61b6cae25d50": {
+      "name": "For ASA hardware models with an end of support date of August 31, 2026 \nAND\nFor all ASAv and Firepower FTD",
+      "type": "loop",
+      "on_each_item": "action--19de9efb-7aa6-4bea-9abb-c0024562733b",
+      "on_completion": "action--7b6298b4-6cb8-4634-a0f8-2fa277c923ed"
+    },
+    "start--52963609-2516-43b8-a901-337a3e7f75da": {
+      "name": "Starting work",
+      "type": "start",
+      "on_completion": "action--8397e0eb-4d28-4a6b-b983-8e2f118df385"
+    },
+    "action--0c12d0fd-cf00-4a33-8bc9-40f5b4b2a6b1": {
+      "name": "Work with CISA on incident response and eviction actions",
+      "type": "action",
+      "agent": "individual--58647bd3-e076-47d1-938a-a78134890835",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Work with CISA on incident response and eviction actions"
+        }
+      ],
+      "on_completion": "end--38d30918-699d-4d97-959f-0df2b01c0ca9",
+      "external_references": [
+        {
+          "name": "General information, assistance, and reporting – CyberDirectives@cisa.dhs.gov \nReporting indications of compromise – contact@cisa.dhs.gov"
+        }
+      ]
+    },
+    "action--19de9efb-7aa6-4bea-9abb-c0024562733b": {
+      "name": "Download and apply the latest Cisco-provided updates",
+      "type": "action",
+      "agent": "individual--58647bd3-e076-47d1-938a-a78134890835",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Download and apply the latest Cisco-provided updates for software by 11:59PM EDT on September 26, 2025, and apply all subsequent updates via Cisco’s download portal within 48 hours of release.  "
+        }
+      ],
+      "description": "Download and apply the latest Cisco-provided updates for software by 11:59PM EDT on September 26, 2025, and apply all subsequent updates via Cisco’s download portal within 48 hours of release.  ",
+      "on_completion": "end--80d0c1a6-5a4d-4f95-8e1a-91bcf2af748f"
+    },
+    "action--371847e7-8046-4996-8308-b3895ecc9e46": {
+      "name": " Follow CISA’s step-by-step Core Dump and Hunt Instructions Parts 1-3 ",
+      "type": "action",
+      "agent": "individual--58647bd3-e076-47d1-938a-a78134890835",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Follow CISA’s step-by-step Core Dump and Hunt Instructions Parts 1-3 "
+        }
+      ],
+      "on_completion": "action--9f6c34f9-9261-4262-973a-1c55ebe1c3db",
+      "external_references": [
+        {
+          "url": "https://www.cisa.gov/news-events/directives/supplemental-direction-ed-25-03-core-dump-and-hunt-instructions",
+          "name": " CISA’s step-by-step Core Dump and Hunt Instructions Parts 1-3 "
+        }
+      ]
+    },
+    "action--37e06b89-b8ec-474c-8d0f-cc5c8f40f9ea": {
+      "name": "Immediately separates the device from the network (not silent power)",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Immediately separates the device from the network (not silent power)",
+          "description": ""
+        }
+      ],
+      "description": "If the result is “Compromise deteted”, it immediately separates the device from the network (not silent power)",
+      "on_completion": "action--417df933-cafd-4127-ad92-43267e704577"
+    },
+    "action--417df933-cafd-4127-ad92-43267e704577": {
+      "name": "Report the Incident to CISA",
+      "type": "action",
+      "agent": "individual--58647bd3-e076-47d1-938a-a78134890835",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Report the Incident to CISA"
+        }
+      ],
+      "on_completion": "action--0c12d0fd-cf00-4a33-8bc9-40f5b4b2a6b1",
+      "external_references": [
+        {
+          "name": "General information, assistance, and reporting – CyberDirectives@cisa.dhs.gov \nReporting indications of compromise – contact@cisa.dhs.gov"
+        }
+      ]
+    },
+    "action--4b695237-8c07-428e-bb75-2c258ada9e56": {
+      "name": "\nAgencies that cannot meet this requirement must apply the latest Cisco-provided updates for software by 11:59PM EDT on September 26, 2025, report to CISA mission critical needs preventing such action and plans for eventual decommissioning of the device as directed by requirement 6.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Agencies that cannot meet this requirement must apply the latest Cisco-provided updates for software by 11:59PM EDT on September 26, 2025, report to CISA mission critical needs preventing such action and plans for eventual decommissioning of the device as directed by requirement 6.",
+          "description": ""
+        }
+      ],
+      "on_completion": "end--b1313135-6bac-45cb-b177-64f584cf2dfe"
+    },
+    "action--60ad3817-65c7-47c0-a29e-faf8a129ed22": {
+      "name": "Permanently disconnect these devices on or before September 30, 2025, as these legacy platforms/releases cannot meet current vendor support and update requirements.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Permanently disconnect these devices on or before September 30, 2025, as these legacy platforms/releases cannot meet current vendor support and update requirements.",
+          "description": ""
+        }
+      ],
+      "on_failure": "action--4b695237-8c07-428e-bb75-2c258ada9e56",
+      "on_success": "action--19de9efb-7aa6-4bea-9abb-c0024562733b"
+    },
+    "action--7b6298b4-6cb8-4634-a0f8-2fa277c923ed": {
+      "name": "Report to CISA (using the provided template) a complete inventory of all instances of products within scope on agency networks, including details on actions taken and results.",
+      "type": "action",
+      "agent": "individual--58647bd3-e076-47d1-938a-a78134890835",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Report to CISA (using the provided template) a complete inventory of all instances of products within scope on agency networks, including details on actions taken and results."
+        }
+      ],
+      "description": "All agencies, regardless of the results of requirement 2, must:  By 11:59 PM EDT on October 2, 2025, report to CISA (using the provided template) a complete inventory of all instances of products within scope on agency networks, including details on actions taken and results.",
+      "on_completion": "end--67f8440b-fbc1-45a8-a433-f15191b5ed60",
+      "external_references": [
+        {
+          "url": "https://www.cisa.gov/news-events/directives ",
+          "name": "General information, assistance, and reporting – CyberDirectives@cisa.dhs.gov \nReporting indications of compromise – contact@cisa.dhs.gov"
+        }
+      ]
+    },
+    "action--8397e0eb-4d28-4a6b-b983-8e2f118df385": {
+      "name": "Identify ASA platforms",
+      "type": "action",
+      "agent": "individual--58647bd3-e076-47d1-938a-a78134890835",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Immediately identify all Cisco ASA platforms (ASA hardware, ASA-Service Module [ASA-SM], ASA Virtual [ASAv], and ASA firmware on Firepower 2100/4100/9300) and all Cisco Firepower Threat Defense (FTD) appliances."
+        }
+      ],
+      "description": "Immediately identify all Cisco ASA platforms (ASA hardware, ASA-Service Module [ASA-SM], ASA Virtual [ASAv], and ASA firmware on Firepower 2100/4100/9300) and all Cisco Firepower Threat Defense (FTD) appliances.",
+      "on_completion": "loop--16790e56-816a-4d82-af91-bbed88546ddc"
+    },
+    "action--9f6c34f9-9261-4262-973a-1c55ebe1c3db": {
+      "name": "submit core dump(s) via the Malware Next Gen portal by 11:59PM EDT on September 26, 2025",
+      "type": "action",
+      "agent": "individual--58647bd3-e076-47d1-938a-a78134890835",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Submit core dump(s) via the Malware Next Gen portal by 11:59PM EDT on September 26, 2025"
+        }
+      ],
+      "on_completion": "if-condition--50bcf6c2-7e90-4702-9dc0-19a84f0d13ef",
+      "external_references": [
+        {
+          "url": "https://malware.cisa.gov/",
+          "name": "Malware Next Gen portal"
+        }
+      ]
+    },
+    "if-condition--26a5a762-87fa-4071-9f35-056a0dfba36a": {
+      "name": "Check the ASA Hardware Models end of support date.",
+      "type": "if-condition",
+      "on_true": "action--60ad3817-65c7-47c0-a29e-faf8a129ed22",
+      "on_false": "loop--3e2ea637-af1c-4e44-9d04-61b6cae25d50",
+      "condition": "ASA_End_of_support_date < 30/09/2025",
+      "description": "For ASA hardware models with an end of support date on or before September 30, 2025, take the following action:"
+    },
+    "if-condition--50bcf6c2-7e90-4702-9dc0-19a84f0d13ef": {
+      "name": "Compromise Detected",
+      "type": "if-condition",
+      "on_true": "action--37e06b89-b8ec-474c-8d0f-cc5c8f40f9ea",
+      "on_false": "if-condition--26a5a762-87fa-4071-9f35-056a0dfba36a",
+      "condition": "Compromise_detected = TRUE"
+    }
+  },
+  "created_by": "identity--112e9923-5c87-4cf2-9685-eda58a162a7a",
+  "description": "A gamebook to identify and reduce the potential risk of Cisco ASA and Firepower devices due to the exploitation of zero-day vulnerabilities, including evaluation procedures, incident response and modification as CISA 25-03 emergency guidelines.",
+  "spec_version": "cacao-2.0",
+  "workflow_start": "start--52963609-2516-43b8-a901-337a3e7f75da",
+  "agent_definitions": {
+    "individual--58647bd3-e076-47d1-938a-a78134890835": {
+      "name": "Manos Athanatos",
+      "type": "individual",
+      "description": "Manos Athanatos"
+    },
+    "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81": {
+      "name": "DummyAgent",
+      "type": "individual",
+      "description": "Dummy Agent to be changed"
+    }
+  },
+  "external_references": [
+    {
+      "url": "https://www.cisa.gov/news-events/directives/ed-25-03-identify-and-mitigate-potential-compromise-cisco-devices",
+      "name": "ED 25-03: Identify and Mitigate Potential Compromise of Cisco Devices"
+    },
+    {
+      "url": "https://www.cve.org/CVERecord?id=CVE-2025-20333",
+      "name": "CVE-2025-20333",
+      "description": "allows for remote code execution"
+    },
+    {
+      "url": "https://www.cve.org/CVERecord?id=CVE-2025-20362",
+      "name": "CVE-2025-20362",
+      "description": "Allows for privilege escalation"
+    }
+  ]
+}

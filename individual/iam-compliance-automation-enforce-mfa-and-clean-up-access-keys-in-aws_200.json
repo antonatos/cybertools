@@ -1,0 +1,148 @@
+{
+  "id": "playbook--30ea0f93-d5a5-44c8-aa70-7f95b09d5bd4",
+  "name": "IAM Compliance Automation: Enforce MFA and Clean Up Access Keys in AWS",
+  "type": "playbook",
+  "impact": 0,
+  "created": "2025-10-21T18:31:16.116Z",
+  "revoked": false,
+  "modified": "2025-10-21T18:31:16.116Z",
+  "priority": 0,
+  "severity": 0,
+  "workflow": {
+    "start--261a089d-fd29-4954-a850-5627734cd5be": {
+      "name": "Start",
+      "type": "start",
+      "on_completion": "action--76482aaf-a675-42d2-a6d2-9fe76f2cf6ee"
+    },
+    "action--0ef645d4-6f1b-4598-a0b8-1b9581cc399c": {
+      "name": "Send message and wait for response",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "slack_post_message"
+        }
+      ],
+      "on_completion": "action--e17012cb-23d9-47b0-89e7-ece493f045c4"
+    },
+    "action--55314f8f-98ba-4f68-bdca-4608c16c3b44": {
+      "name": "Get IAM User MFA Devices",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "url": "__url__",
+          "type": "http-api",
+          "method": "GET",
+          "http_version": "HTTP/1.1"
+        }
+      ],
+      "on_completion": "if-condition--6f6ae69a-d55c-4e09-bbce-3474ec8abdc1",
+      "step_variables": {
+        "__url__": {
+          "type": "string",
+          "value": "=https://iam.amazonaws.com/?Action=ListMFADevices&UserName={{ $json.UserName }}&Version=2010-05-08"
+        }
+      }
+    },
+    "action--76482aaf-a675-42d2-a6d2-9fe76f2cf6ee": {
+      "name": "Get many users",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "aws_iam_get_all_users",
+          "returnAll": true
+        }
+      ],
+      "on_completion": "action--55314f8f-98ba-4f68-bdca-4608c16c3b44"
+    },
+    "action--a43667f8-4ebd-4391-8b8e-05bed529a829": {
+      "name": "Send warning message(s)",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "text": "=⚠️ Security Warning\nThe system has detected that user {{ $('Get many users').item.json.UserName }}, created on {{ $('Get many users').item.json.CreateDate.toDateTime('s') }}, does not have an MFA (Multi-Factor Authentication) device enabled.\nPlease enable MFA immediately to comply with security best practices.",
+          "type": "slack_post_message",
+          "channel": "C097VAKKPUP"
+        }
+      ]
+    },
+    "action--a8f5de29-3c8f-4882-aee9-70db8b60c3d4": {
+      "name": "Parse the list of user access key(s)",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "code": "const items = await $input.all();\nconst results = [];\n\nfor (const item of items) {\n  const accessKeys = item.json?.ListAccessKeysResponse?.ListAccessKeysResult?.AccessKeyMetadata || [];\n\n  for (const key of accessKeys) {\n    results.push({\n      json: {\n        UserName: key.UserName,\n        AccessKeyId: key.AccessKeyId,\n        Status: key.Status,\n        CreateDate: new Date(key.CreateDate * 1000).toISOString(),\n      }\n    });\n  }\n}\n\nreturn results.length > 0\n  ? results\n  : [{ json: { warning: 'No access keys found in input data' } }];",
+          "type": "javascript_code"
+        }
+      ],
+      "on_completion": "if-condition--a9132cd8-cd91-4d22-ab49-9d7f75a1f809"
+    },
+    "action--e17012cb-23d9-47b0-89e7-ece493f045c4": {
+      "name": "Deactivate Access Key(s)",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "url": "__url__",
+          "type": "http-api",
+          "method": "GET",
+          "http_version": "HTTP/1.1"
+        }
+      ],
+      "step_variables": {
+        "__url__": {
+          "type": "string",
+          "value": "=https://iam.amazonaws.com/?Action=UpdateAccessKey&UserName={{ $json.UserName }}&AccessKeyId={{ $json.AccessKeyId }}&Status=Inactive&Version=2010-05-08"
+        }
+      }
+    },
+    "action--edc5c146-807c-423b-a257-f32343edcc17": {
+      "name": "Get User Access Key(s)",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "url": "__url__",
+          "type": "http-api",
+          "method": "GET",
+          "http_version": "HTTP/1.1"
+        }
+      ],
+      "on_completion": "action--a8f5de29-3c8f-4882-aee9-70db8b60c3d4",
+      "step_variables": {
+        "__url__": {
+          "type": "string",
+          "value": "=https://iam.amazonaws.com/?Action=ListAccessKeys&UserName={{ $('Get many users').item.json.UserName }}&Version=2010-05-08"
+        }
+      }
+    },
+    "if-condition--6f6ae69a-d55c-4e09-bbce-3474ec8abdc1": {
+      "name": "Filter out IAM user with MFA device",
+      "type": "if-condition",
+      "on_true": "action--a43667f8-4ebd-4391-8b8e-05bed529a829",
+      "on_false": "action--edc5c146-807c-423b-a257-f32343edcc17",
+      "condition": "={{ $json.ListMFADevicesResponse.ListMFADevicesResult.MFADevices }} is_empty"
+    },
+    "if-condition--a9132cd8-cd91-4d22-ab49-9d7f75a1f809": {
+      "name": "Filter out inactive keys",
+      "type": "if-condition",
+      "on_true": "action--0ef645d4-6f1b-4598-a0b8-1b9581cc399c",
+      "condition": "={{ $json.Status }} = Active"
+    }
+  },
+  "created_by": "identity--112e9923-5c87-4cf2-9685-eda58a162a7a",
+  "description": "",
+  "spec_version": "cacao-2.0",
+  "workflow_start": "start--261a089d-fd29-4954-a850-5627734cd5be",
+  "agent_definitions": {
+    "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81": {
+      "name": "DummyAgent",
+      "type": "individual",
+      "description": "Dummy Agent to be changed"
+    }
+  }
+}
