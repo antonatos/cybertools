@@ -1,0 +1,373 @@
+{
+  "id": "playbook--a8da2d02-bb73-4d11-8393-240386a1d4f3",
+  "name": "Windows Network Enumeration (T1046) Detection Playbook",
+  "type": "playbook",
+  "labels": [
+    "T1046",
+    "Network Enumeration",
+    "Windows",
+    "Detection",
+    "MITRE ATT&CK"
+  ],
+  "created": "2026-03-09T16:16:24.382Z",
+  "revoked": false,
+  "modified": "2026-03-09T16:31:53.245Z",
+  "priority": 0,
+  "workflow": {
+    "end--2cdc5d77-dd7b-4a99-bd3e-b55db6a566e0": {
+      "name": "End",
+      "type": "end"
+    },
+    "end--d3c692f3-503c-4c9a-a57d-ba21bc96911e": {
+      "name": "End",
+      "type": "end"
+    },
+    "end--e4c83a60-7a39-4a73-8fa7-478a66f3cbfd": {
+      "name": "End",
+      "type": "end"
+    },
+    "end--f1b39688-db98-43c4-a4f3-63657422e689": {
+      "name": "End",
+      "type": "end"
+    },
+    "start--40514b26-7696-4c36-bb51-eec3d71e812e": {
+      "name": "Start",
+      "type": "start",
+      "on_completion": "action--40ebe8bb-42c0-4dba-aa5b-45026c23415f"
+    },
+    "action--1edd5d10-5830-45a4-b4d8-89beca0ec435": {
+      "name": "Tune the detection to exclude legitimate administrative or network scanning tools used by the organization.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Tune the detection to exclude legitimate administrative or network scanning tools used by the organization.",
+          "description": "Tune the detection to exclude legitimate administrative or network scanning tools used by the organization."
+        }
+      ],
+      "on_completion": "action--3b84c8ce-9ce9-4670-81c6-f96ec7bd106c"
+    },
+    "action--25340dda-7b99-4e30-a28d-b978b572c7dd": {
+      "name": "Analyze for high counts of unique destination IPs or ports per process over a defined period.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Analyze for high counts of unique destination IPs or ports per process over a defined period.",
+          "description": ""
+        }
+      ],
+      "on_completion": "end--e4c83a60-7a39-4a73-8fa7-478a66f3cbfd"
+    },
+    "action--3b84c8ce-9ce9-4670-81c6-f96ec7bd106c": {
+      "name": "Set up alerts for detected enumeration activity, including details like process name, command line, and destination IPs/ports.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Set up alerts for detected enumeration activity, including details like process name, command line, and destination IPs/ports.",
+          "description": "Set up alerts for detected enumeration activity, including details like process name, command line, and destination IPs/ports."
+        }
+      ],
+      "on_completion": "action--d3909810-e3d0-4060-9947-3aeaa0f74f15"
+    },
+    "action--40ebe8bb-42c0-4dba-aa5b-45026c23415f": {
+      "name": "Deploy and configure a SIEM or log aggregation tool to collect and correlate Windows event logs (e.g., Security, Sysmon) and network data.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Deploy and configure a SIEM or log aggregation tool to collect and correlate Windows event logs (e.g., Security, Sysmon) and network data.",
+          "description": "Deploy and configure a SIEM or log aggregation tool to collect and correlate Windows event logs (e.g., Security, Sysmon) and network data."
+        }
+      ],
+      "on_completion": "action--fdcd6701-0f7f-41db-a576-e599b537a448"
+    },
+    "action--632e646d-ebed-4511-878c-a08c25b7167d": {
+      "name": "Set thresholds to reduce false positives (e.g., >50 unique IPs/ports in 5 minutes).",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Set thresholds to reduce false positives (e.g., >50 unique IPs/ports in 5 minutes).",
+          "description": ""
+        }
+      ],
+      "on_completion": "end--2cdc5d77-dd7b-4a99-bd3e-b55db6a566e0"
+    },
+    "action--76cf6cdd-4c8d-4d78-9733-87fc29001993": {
+      "name": "Group network connection events by source process and timestamp.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Group network connection events by source process and timestamp.",
+          "description": ""
+        }
+      ],
+      "on_completion": "end--f1b39688-db98-43c4-a4f3-63657422e689"
+    },
+    "action--7a6fe433-f41e-4878-9aa9-b3e26cb6da80": {
+      "name": "Enable Windows Security auditing for process creation (Audit Process Creation) and network connections if not using Sysmon.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Enable Windows Security auditing for process creation (Audit Process Creation) and network connections if not using Sysmon.",
+          "description": "Enable Windows Security auditing for process creation (Audit Process Creation) and network connections if not using Sysmon."
+        }
+      ],
+      "on_completion": "action--f31c46d8-8192-4a8c-a652-df4fe23875aa"
+    },
+    "action--a6891166-9b73-46a1-980c-366735c2ee33": {
+      "name": "Create a detection rule to identify processes that create multiple network connections to different destination IPs or ports within a short time window (e.g., 5-10 minutes).",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Create a detection rule to identify processes that create multiple network connections to different destination IPs or ports within a short time window (e.g., 5-10 minutes).",
+          "description": "Create a detection rule to identify processes that create multiple network connections to different destination IPs or ports within a short time window (e.g., 5-10 minutes)."
+        }
+      ],
+      "on_completion": "parallel--897c37d6-01c6-480d-87fa-4a6e02a7f81f"
+    },
+    "action--d3909810-e3d0-4060-9947-3aeaa0f74f15": {
+      "name": "Integrate alerts with incident response workflows for rapid investigation and containment.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Integrate alerts with incident response workflows for rapid investigation and containment.",
+          "description": "Integrate alerts with incident response workflows for rapid investigation and containment."
+        }
+      ],
+      "on_completion": "end--d3c692f3-503c-4c9a-a57d-ba21bc96911e"
+    },
+    "action--f31c46d8-8192-4a8c-a652-df4fe23875aa": {
+      "name": "Configure network monitoring tools (e.g., Zeek, Suricata) to log outbound connections and detect scanning patterns.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Configure network monitoring tools (e.g., Zeek, Suricata) to log outbound connections and detect scanning patterns.",
+          "description": "Configure network monitoring tools (e.g., Zeek, Suricata) to log outbound connections and detect scanning patterns."
+        }
+      ],
+      "on_completion": "action--a6891166-9b73-46a1-980c-366735c2ee33"
+    },
+    "action--fdcd6701-0f7f-41db-a576-e599b537a448": {
+      "name": "Enable and configure Sysmon logging with a focus on Event ID 1 (Process creation) and Event ID 3 (Network connection).",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Enable and configure Sysmon logging with a focus on Event ID 1 (Process creation) and Event ID 3 (Network connection).",
+          "description": "Enable and configure Sysmon logging with a focus on Event ID 1 (Process creation) and Event ID 3 (Network connection)."
+        }
+      ],
+      "on_completion": "action--7a6fe433-f41e-4878-9aa9-b3e26cb6da80"
+    },
+    "parallel--897c37d6-01c6-480d-87fa-4a6e02a7f81f": {
+      "name": "Implement correlation logic to flag sequential probing behavior:",
+      "type": "parallel",
+      "next_steps": [
+        "action--76cf6cdd-4c8d-4d78-9733-87fc29001993",
+        "action--25340dda-7b99-4e30-a28d-b978b572c7dd",
+        "action--632e646d-ebed-4511-878c-a08c25b7167d"
+      ],
+      "on_completion": "action--1edd5d10-5830-45a4-b4d8-89beca0ec435"
+    }
+  },
+  "created_by": "individual--506bcd7d-f79e-4c2a-acbe-5fdee7552639",
+  "description": "This is an automatically generated playbook based on the question: A detections playbook for T1046 of MITRE ATT&CK Matrix for Enterprise framework is required.The target platform is Windows. You can find more information at https://attack.mitre.org/detectionstrategies/DET0376#AN1057 . The description of the approach follows: Detects processes performing network enumeration (e.g., port scans, service probing) by correlating process creation, socket connections, and sequential destination IP probing within a time window.",
+  "spec_version": "cacao-2.0",
+  "workflow_start": "start--40514b26-7696-4c36-bb51-eec3d71e812e",
+  "agent_definitions": {
+    "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81": {
+      "name": "DummyAgent",
+      "type": "individual",
+      "description": "Dummy Agent to be changed"
+    }
+  },
+  "external_references": [
+    {
+      "url": "https://attack.mitre.org/techniques/T1046/",
+      "name": "MITRE ATT&CK Technique T1046: Network Service Discovery"
+    },
+    {
+      "url": "https://attack.mitre.org/detectionstrategies/DET0376#AN1057",
+      "name": "MITRE ATT&CK Detection Strategy DET0376: Network Service Discovery"
+    }
+  ],
+  "__cymph_metadata": {
+    "nodes": {
+      "end--2cdc5d77-dd7b-4a99-bd3e-b55db6a566e0": {
+        "x": 1250,
+        "y": 2846.5
+      },
+      "end--d3c692f3-503c-4c9a-a57d-ba21bc96911e": {
+        "x": 190,
+        "y": 3505
+      },
+      "end--e4c83a60-7a39-4a73-8fa7-478a66f3cbfd": {
+        "x": 720,
+        "y": 2846.5
+      },
+      "end--f1b39688-db98-43c4-a4f3-63657422e689": {
+        "x": 1780,
+        "y": 2846.5
+      },
+      "start--40514b26-7696-4c36-bb51-eec3d71e812e": {
+        "x": 985,
+        "y": 88
+      },
+      "action--1edd5d10-5830-45a4-b4d8-89beca0ec435": {
+        "x": 190,
+        "y": 2503.5
+      },
+      "action--25340dda-7b99-4e30-a28d-b978b572c7dd": {
+        "x": 720,
+        "y": 2503.5
+      },
+      "action--3b84c8ce-9ce9-4670-81c6-f96ec7bd106c": {
+        "x": 190,
+        "y": 2846.5
+      },
+      "action--40ebe8bb-42c0-4dba-aa5b-45026c23415f": {
+        "x": 985,
+        "y": 422.5
+      },
+      "action--632e646d-ebed-4511-878c-a08c25b7167d": {
+        "x": 1250,
+        "y": 2503.5
+      },
+      "action--76cf6cdd-4c8d-4d78-9733-87fc29001993": {
+        "x": 1780,
+        "y": 2503.5
+      },
+      "action--7a6fe433-f41e-4878-9aa9-b3e26cb6da80": {
+        "x": 985,
+        "y": 1108.5
+      },
+      "action--a6891166-9b73-46a1-980c-366735c2ee33": {
+        "x": 985,
+        "y": 1804.5
+      },
+      "action--d3909810-e3d0-4060-9947-3aeaa0f74f15": {
+        "x": 190,
+        "y": 3180
+      },
+      "action--f31c46d8-8192-4a8c-a652-df4fe23875aa": {
+        "x": 985,
+        "y": 1451.5
+      },
+      "action--fdcd6701-0f7f-41db-a576-e599b537a448": {
+        "x": 985,
+        "y": 765.5
+      },
+      "parallel--897c37d6-01c6-480d-87fa-4a6e02a7f81f": {
+        "x": 985,
+        "y": 2159
+      }
+    },
+    "notes": {},
+    "mappings": {
+      "MITRE ATT&CK Matrix for Enterprise": [
+        "T1046"
+      ]
+    },
+    "document": {
+      "time": 1773072984394,
+      "blocks": [
+        {
+          "id": "A0uguGRzAg",
+          "data": {
+            "meta": {
+              "start": 1,
+              "counterType": "numeric"
+            },
+            "items": [
+              {
+                "meta": {},
+                "items": [],
+                "content": "Deploy and configure a SIEM or log aggregation tool to collect and correlate Windows event logs (e.g., Security, Sysmon) and network data."
+              },
+              {
+                "meta": {},
+                "items": [],
+                "content": "Enable and configure Sysmon logging with a focus on Event ID 1 (Process creation) and Event ID 3 (Network connection)."
+              },
+              {
+                "meta": {},
+                "items": [],
+                "content": "Enable Windows Security auditing for process creation (Audit Process Creation) and network connections if not using Sysmon."
+              },
+              {
+                "meta": {},
+                "items": [],
+                "content": "Configure network monitoring tools (e.g., Zeek, Suricata) to log outbound connections and detect scanning patterns."
+              },
+              {
+                "meta": {},
+                "items": [],
+                "content": "Create a detection rule to identify processes that create multiple network connections to different destination IPs or ports within a short time window (e.g., 5-10 minutes)."
+              },
+              {
+                "meta": {},
+                "items": [
+                  {
+                    "meta": {},
+                    "items": [],
+                    "content": "Group network connection events by source process and timestamp."
+                  },
+                  {
+                    "meta": {},
+                    "items": [],
+                    "content": "Analyze for high counts of unique destination IPs or ports per process over a defined period."
+                  },
+                  {
+                    "meta": {},
+                    "items": [],
+                    "content": "Set thresholds to reduce false positives (e.g., >50 unique IPs/ports in 5 minutes)."
+                  }
+                ],
+                "content": "Implement correlation logic to flag sequential probing behavior:"
+              },
+              {
+                "meta": {},
+                "items": [],
+                "content": "Tune the detection to exclude legitimate administrative or network scanning tools used by the organization."
+              },
+              {
+                "meta": {},
+                "items": [],
+                "content": "Set up alerts for detected enumeration activity, including details like process name, command line, and destination IPs/ports."
+              },
+              {
+                "meta": {},
+                "items": [],
+                "content": "Integrate alerts with incident response workflows for rapid investigation and containment."
+              }
+            ],
+            "style": "ordered"
+          },
+          "type": "list",
+          "tunes": {
+            "textVariant": ""
+          }
+        }
+      ]
+    }
+  }
+}

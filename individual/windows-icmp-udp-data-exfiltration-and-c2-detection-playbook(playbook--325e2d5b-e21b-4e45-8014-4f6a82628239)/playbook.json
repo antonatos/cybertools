@@ -1,0 +1,343 @@
+{
+  "id": "playbook--325e2d5b-e21b-4e45-8014-4f6a82628239",
+  "name": "Windows ICMP/UDP Data Exfiltration and C2 Detection Playbook",
+  "type": "playbook",
+  "labels": [
+    "T1095",
+    "Exfiltration",
+    "Command and Control",
+    "Network Monitoring",
+    "Windows"
+  ],
+  "created": "2026-03-09T16:15:45.689Z",
+  "revoked": false,
+  "modified": "2026-03-09T16:15:45.689Z",
+  "priority": 0,
+  "workflow": {
+    "end--6cce38cf-6a91-419c-a9be-ea4f10b36bc4": {
+      "name": "End",
+      "type": "end"
+    },
+    "end--715c88d4-9f90-4f99-9864-fdeb9c4db3f9": {
+      "name": "End",
+      "type": "end"
+    },
+    "end--7d917c9f-e04e-4182-9a91-02668018bf2a": {
+      "name": "End",
+      "type": "end"
+    },
+    "end--8b6ba50c-cd89-482a-aa2f-ba80bcc87f99": {
+      "name": "End",
+      "type": "end"
+    },
+    "end--d5cc0c77-93a7-47e7-85ae-bc8efb1d9fa1": {
+      "name": "End",
+      "type": "end"
+    },
+    "start--858b1d74-b8cc-48ba-b8de-eca7296a2d77": {
+      "name": "Start",
+      "type": "start",
+      "on_completion": "action--274ede5f-ed9e-4eef-9e36-fec318eec48a"
+    },
+    "action--01fcc45c-3a65-47a3-888e-2fff050abd41": {
+      "name": "Implement process-to-network correlation by monitoring process IDs associated with network connections using EDR, Sysmon, or similar endpoint monitoring solutions.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Implement process-to-network correlation by monitoring process IDs associated with network connections using EDR, Sysmon, or similar endpoint monitoring solutions.",
+          "description": "Implement process-to-network correlation by monitoring process IDs associated with network connections using EDR, Sysmon, or similar endpoint monitoring solutions."
+        }
+      ],
+      "on_completion": "parallel--0a716604-63d5-4398-9a4d-70bfbfa8eef0"
+    },
+    "action--0e8107e4-28b8-486c-ba34-8e59b0b06e6a": {
+      "name": "Identify traffic that bypasses proxy servers or corporate gateways (direct internet connections)",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Identify traffic that bypasses proxy servers or corporate gateways (direct internet connections)",
+          "description": ""
+        }
+      ],
+      "on_completion": "end--8b6ba50c-cd89-482a-aa2f-ba80bcc87f99"
+    },
+    "action--274ede5f-ed9e-4eef-9e36-fec318eec48a": {
+      "name": "Deploy and configure network monitoring tools to capture and analyze ICMP and UDP traffic across the enterprise network.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Deploy and configure network monitoring tools to capture and analyze ICMP and UDP traffic across the enterprise network.",
+          "description": "Deploy and configure network monitoring tools to capture and analyze ICMP and UDP traffic across the enterprise network."
+        }
+      ],
+      "on_completion": "action--e84213fd-45fa-4d63-b78a-0f0c31c0923c"
+    },
+    "action--3be036e0-b055-421b-ab2c-763a6378031f": {
+      "name": "Conduct initial triage of alerts: verify process legitimacy, check digital signatures, and review user/host history.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Conduct initial triage of alerts: verify process legitimacy, check digital signatures, and review user/host history.",
+          "description": "Conduct initial triage of alerts: verify process legitimacy, check digital signatures, and review user/host history."
+        }
+      ],
+      "on_completion": "action--9b6dec59-8ed5-4931-b09f-c29225e40388"
+    },
+    "action--43f3757e-06b7-4e5d-99c1-13222f82d3f8": {
+      "name": "Escalate to incident response team for full investigation and remediation if confirmed malicious.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Escalate to incident response team for full investigation and remediation if confirmed malicious.",
+          "description": "Escalate to incident response team for full investigation and remediation if confirmed malicious."
+        }
+      ],
+      "on_completion": "end--7d917c9f-e04e-4182-9a91-02668018bf2a"
+    },
+    "action--4b5d73a9-51a9-43aa-bed1-eae3c5c74b1d": {
+      "name": "Detect ICMP/UDP traffic from processes not typically associated with network services (e.g., word.exe, excel.exe, user-initiated processes)",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Detect ICMP/UDP traffic from processes not typically associated with network services (e.g., word.exe, excel.exe, user-initiated processes)",
+          "description": ""
+        }
+      ],
+      "on_completion": "end--6cce38cf-6a91-419c-a9be-ea4f10b36bc4"
+    },
+    "action--70c633d0-f0b7-44d3-8196-8f5d39b8a0b8": {
+      "name": "Detect ICMP tunneling patterns: consistent payload sizes, encrypted payloads, or protocol misuse (e.g., ICMP echo requests with data)",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Detect ICMP tunneling patterns: consistent payload sizes, encrypted payloads, or protocol misuse (e.g., ICMP echo requests with data)",
+          "description": ""
+        }
+      ],
+      "on_completion": "end--d5cc0c77-93a7-47e7-85ae-bc8efb1d9fa1"
+    },
+    "action--9b6dec59-8ed5-4931-b09f-c29225e40388": {
+      "name": "If malicious activity is suspected, isolate the affected endpoint from the network to prevent further data exfiltration.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "If malicious activity is suspected, isolate the affected endpoint from the network to prevent further data exfiltration.",
+          "description": "If malicious activity is suspected, isolate the affected endpoint from the network to prevent further data exfiltration."
+        }
+      ],
+      "on_completion": "action--a408ba04-99bf-43d8-bea3-c2bd8a288f31"
+    },
+    "action--a408ba04-99bf-43d8-bea3-c2bd8a288f31": {
+      "name": "Collect and preserve evidence: network packet captures, endpoint process memory, and relevant logs for forensic analysis.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Collect and preserve evidence: network packet captures, endpoint process memory, and relevant logs for forensic analysis.",
+          "description": "Collect and preserve evidence: network packet captures, endpoint process memory, and relevant logs for forensic analysis."
+        }
+      ],
+      "on_completion": "action--43f3757e-06b7-4e5d-99c1-13222f82d3f8"
+    },
+    "action--c0a7d804-169a-4da4-b0f8-f6c013e21527": {
+      "name": "Correlate network events with endpoint process creation events to identify the originating process and user context.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Correlate network events with endpoint process creation events to identify the originating process and user context.",
+          "description": "Correlate network events with endpoint process creation events to identify the originating process and user context."
+        }
+      ],
+      "on_completion": "action--cefa876a-ccfe-409d-8cf7-68f36e6bd4c5"
+    },
+    "action--cefa876a-ccfe-409d-8cf7-68f36e6bd4c5": {
+      "name": "Implement alerting for detected anomalies with appropriate severity levels based on confidence and impact.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Implement alerting for detected anomalies with appropriate severity levels based on confidence and impact.",
+          "description": "Implement alerting for detected anomalies with appropriate severity levels based on confidence and impact."
+        }
+      ],
+      "on_completion": "action--3be036e0-b055-421b-ab2c-763a6378031f"
+    },
+    "action--da8cde9f-16aa-4efd-b38d-d530ce3aaa59": {
+      "name": "Flag unusual flow patterns: high frequency of small packets, large data transfers via ICMP/UDP, traffic to rare external IPs or domains",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Flag unusual flow patterns: high frequency of small packets, large data transfers via ICMP/UDP, traffic to rare external IPs or domains",
+          "description": ""
+        }
+      ],
+      "on_completion": "end--715c88d4-9f90-4f99-9864-fdeb9c4db3f9"
+    },
+    "action--e84213fd-45fa-4d63-b78a-0f0c31c0923c": {
+      "name": "Establish a baseline of normal ICMP and UDP traffic patterns, including typical source/destination IPs, ports, packet sizes, and frequencies for known network services and processes.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Establish a baseline of normal ICMP and UDP traffic patterns, including typical source/destination IPs, ports, packet sizes, and frequencies for known network services and processes.",
+          "description": "Establish a baseline of normal ICMP and UDP traffic patterns, including typical source/destination IPs, ports, packet sizes, and frequencies for known network services and processes."
+        }
+      ],
+      "on_completion": "action--01fcc45c-3a65-47a3-888e-2fff050abd41"
+    },
+    "parallel--0a716604-63d5-4398-9a4d-70bfbfa8eef0": {
+      "name": "Configure detection rules to identify anomalous ICMP or UDP activity",
+      "type": "parallel",
+      "next_steps": [
+        "action--4b5d73a9-51a9-43aa-bed1-eae3c5c74b1d",
+        "action--0e8107e4-28b8-486c-ba34-8e59b0b06e6a",
+        "action--da8cde9f-16aa-4efd-b38d-d530ce3aaa59",
+        "action--70c633d0-f0b7-44d3-8196-8f5d39b8a0b8"
+      ],
+      "on_completion": "action--c0a7d804-169a-4da4-b0f8-f6c013e21527"
+    }
+  },
+  "created_by": "individual--506bcd7d-f79e-4c2a-acbe-5fdee7552639",
+  "description": "This is an automatically generated playbook based on the question: A detections playbook for T1095 of MITRE ATT&CK Matrix for Enterprise framework is required.The target platform is Windows. You can find more information at https://attack.mitre.org/detectionstrategies/DET0457#AN1254 . The description of the approach follows: Anomalous use of ICMP or UDP by non-network service processes for data exfiltration or remote control, especially if traffic bypasses proxy infrastructure or shows unusual flow patterns.",
+  "spec_version": "cacao-2.0",
+  "workflow_start": "start--858b1d74-b8cc-48ba-b8de-eca7296a2d77",
+  "agent_definitions": {
+    "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81": {
+      "name": "DummyAgent",
+      "type": "individual",
+      "description": "Dummy Agent to be changed"
+    }
+  },
+  "external_references": [
+    {
+      "url": "https://attack.mitre.org/techniques/T1095/",
+      "name": "MITRE ATT&CK T1095: Non-Application Layer Protocol"
+    },
+    {
+      "url": "https://attack.mitre.org/detectionstrategies/DET0457#AN1254",
+      "name": "MITRE ATT&CK Detection Strategies DET0457"
+    }
+  ],
+  "__cymph_metadata": {
+    "mappings": {
+      "MITRE ATT&CK Matrix for Enterprise": [
+        "T1095"
+      ]
+    },
+    "document": {
+      "time": 1773072945709,
+      "blocks": [
+        {
+          "id": "SqTS15HFRZ",
+          "data": {
+            "meta": {
+              "start": 1,
+              "counterType": "numeric"
+            },
+            "items": [
+              {
+                "meta": {},
+                "items": [],
+                "content": "Deploy and configure network monitoring tools to capture and analyze ICMP and UDP traffic across the enterprise network."
+              },
+              {
+                "meta": {},
+                "items": [],
+                "content": "Establish a baseline of normal ICMP and UDP traffic patterns, including typical source/destination IPs, ports, packet sizes, and frequencies for known network services and processes."
+              },
+              {
+                "meta": {},
+                "items": [],
+                "content": "Implement process-to-network correlation by monitoring process IDs associated with network connections using EDR, Sysmon, or similar endpoint monitoring solutions."
+              },
+              {
+                "meta": {},
+                "items": [
+                  {
+                    "meta": {},
+                    "items": [],
+                    "content": "Detect ICMP/UDP traffic from processes not typically associated with network services (e.g., word.exe, excel.exe, user-initiated processes)"
+                  },
+                  {
+                    "meta": {},
+                    "items": [],
+                    "content": "Identify traffic that bypasses proxy servers or corporate gateways (direct internet connections)"
+                  },
+                  {
+                    "meta": {},
+                    "items": [],
+                    "content": "Flag unusual flow patterns: high frequency of small packets, large data transfers via ICMP/UDP, traffic to rare external IPs or domains"
+                  },
+                  {
+                    "meta": {},
+                    "items": [],
+                    "content": "Detect ICMP tunneling patterns: consistent payload sizes, encrypted payloads, or protocol misuse (e.g., ICMP echo requests with data)"
+                  }
+                ],
+                "content": "Configure detection rules to identify anomalous ICMP or UDP activity"
+              },
+              {
+                "meta": {},
+                "items": [],
+                "content": "Correlate network events with endpoint process creation events to identify the originating process and user context."
+              },
+              {
+                "meta": {},
+                "items": [],
+                "content": "Implement alerting for detected anomalies with appropriate severity levels based on confidence and impact."
+              },
+              {
+                "meta": {},
+                "items": [],
+                "content": "Conduct initial triage of alerts: verify process legitimacy, check digital signatures, and review user/host history."
+              },
+              {
+                "meta": {},
+                "items": [],
+                "content": "If malicious activity is suspected, isolate the affected endpoint from the network to prevent further data exfiltration."
+              },
+              {
+                "meta": {},
+                "items": [],
+                "content": "Collect and preserve evidence: network packet captures, endpoint process memory, and relevant logs for forensic analysis."
+              },
+              {
+                "meta": {},
+                "items": [],
+                "content": "Escalate to incident response team for full investigation and remediation if confirmed malicious."
+              }
+            ],
+            "style": "ordered"
+          },
+          "type": "list",
+          "tunes": {
+            "textVariant": ""
+          }
+        }
+      ]
+    }
+  }
+}

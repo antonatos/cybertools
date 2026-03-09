@@ -1,0 +1,399 @@
+{
+  "id": "playbook--8d45e660-c824-45a2-8af0-dbe1b0e9458e",
+  "name": "Windows Brute-Force Attack Detection and Response Playbook",
+  "type": "playbook",
+  "labels": [
+    "T1110",
+    "Brute Force",
+    "Windows",
+    "Logon",
+    "Detection"
+  ],
+  "created": "2026-03-09T16:14:32.805Z",
+  "revoked": false,
+  "modified": "2026-03-09T16:14:32.805Z",
+  "priority": 0,
+  "workflow": {
+    "end--02cf4c2c-10a7-4b2e-a409-825070d1394a": {
+      "name": "End",
+      "type": "end"
+    },
+    "end--251625f8-7149-4825-bd96-356cacdde107": {
+      "name": "End",
+      "type": "end"
+    },
+    "end--2bb3742a-adb5-48bf-8bdb-986095199b8f": {
+      "name": "End",
+      "type": "end"
+    },
+    "end--3c5fc9b2-1a33-4b47-90be-57f4b93f0363": {
+      "name": "End",
+      "type": "end"
+    },
+    "end--4a29f0af-8264-4872-a08e-bb597918e3ca": {
+      "name": "End",
+      "type": "end"
+    },
+    "end--538c0000-405a-4717-a7bc-20cb230a9a95": {
+      "name": "End",
+      "type": "end"
+    },
+    "end--af002e78-91cf-4880-88b9-f675ba1b3af2": {
+      "name": "End",
+      "type": "end"
+    },
+    "end--ced1ee46-37e8-41de-84a5-e6c78b7c07cf": {
+      "name": "End",
+      "type": "end"
+    },
+    "end--eb50b8c4-6a4e-41d2-93d9-39365904e334": {
+      "name": "End",
+      "type": "end"
+    },
+    "end--f09e9241-f72b-4b17-9da3-11426b5eb88b": {
+      "name": "End",
+      "type": "end"
+    },
+    "start--c37c457d-de03-47e7-a60f-f3a3dad79506": {
+      "name": "Start",
+      "type": "start",
+      "on_completion": "action--fd438c20-d6d4-4a74-8b8a-0b5433539569"
+    },
+    "action--03c2ab06-6cac-4e08-8e68-ff49d29b151a": {
+      "name": "Immediately investigate the alert to confirm potential compromise. Check the user account's recent activity and group memberships.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Immediately investigate the alert to confirm potential compromise. Check the user account's recent activity and group memberships.",
+          "description": ""
+        }
+      ],
+      "on_completion": "end--3c5fc9b2-1a33-4b47-90be-57f4b93f0363"
+    },
+    "action--0a9c2d30-a152-4ea9-b8d2-f6fd9f48ee68": {
+      "name": "Consider implementing account lockout policies to automatically slow down brute-force attacks, but be aware of potential denial-of-service implications.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Consider implementing account lockout policies to automatically slow down brute-force attacks, but be aware of potential denial-of-service implications.",
+          "description": "Consider implementing account lockout policies to automatically slow down brute-force attacks, but be aware of potential denial-of-service implications."
+        }
+      ],
+      "on_completion": "end--251625f8-7149-4825-bd96-356cacdde107"
+    },
+    "action--1208dca4-81cb-492a-9d7a-005adf14bff3": {
+      "name": "Incorporate logic to flag successful logons that occur from IP addresses not typically associated with the user or from geographic locations outside the norm.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Incorporate logic to flag successful logons that occur from IP addresses not typically associated with the user or from geographic locations outside the norm.",
+          "description": ""
+        }
+      ],
+      "on_completion": "end--4a29f0af-8264-4872-a08e-bb597918e3ca"
+    },
+    "action--1b6dc0ec-d8c2-4149-a402-2aa866952556": {
+      "name": "If a compromise is suspected, immediately initiate password reset procedures for the affected user account.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "If a compromise is suspected, immediately initiate password reset procedures for the affected user account.",
+          "description": ""
+        }
+      ],
+      "on_completion": "end--02cf4c2c-10a7-4b2e-a409-825070d1394a"
+    },
+    "action--3462f29c-4093-40b6-978e-8f9b97d33ca8": {
+      "name": "Temporarily block the source IP address of the attack at the network perimeter (firewall) or VPN concentrator to prevent further attempts.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Temporarily block the source IP address of the attack at the network perimeter (firewall) or VPN concentrator to prevent further attempts.",
+          "description": ""
+        }
+      ],
+      "on_completion": "end--ced1ee46-37e8-41de-84a5-e6c78b7c07cf"
+    },
+    "action--3a0c04ef-1728-43bb-81c2-36ccd29cdcbc": {
+      "name": "The rule should trigger when the number of failed logons for a user:IP pair exceeds a threshold (e.g., 5-10 failures). This indicates a potential brute-force attempt.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "The rule should trigger when the number of failed logons for a user:IP pair exceeds a threshold (e.g., 5-10 failures). This indicates a potential brute-force attempt.",
+          "description": ""
+        }
+      ],
+      "on_completion": "end--eb50b8c4-6a4e-41d2-93d9-39365904e334"
+    },
+    "action--3ee04521-0b35-4c9b-8000-86746a320e07": {
+      "name": "Correlate this alert with any subsequent successful logon event (4624) for the same username from the same source IP address within a short time frame (e.g., 1 hour) after the failed attempt series.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Correlate this alert with any subsequent successful logon event (4624) for the same username from the same source IP address within a short time frame (e.g., 1 hour) after the failed attempt series.",
+          "description": ""
+        }
+      ],
+      "on_completion": "end--af002e78-91cf-4880-88b9-f675ba1b3af2"
+    },
+    "action--407ee9e3-834a-49c5-bdd2-207dc18928ad": {
+      "name": "Flag successful logons that occur outside of normal business hours for that user or system if such baselines exist.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Flag successful logons that occur outside of normal business hours for that user or system if such baselines exist.",
+          "description": ""
+        }
+      ],
+      "on_completion": "end--2bb3742a-adb5-48bf-8bdb-986095199b8f"
+    },
+    "action--6557a633-1a1b-44a4-84cf-d6b0050e49c8": {
+      "name": "Configure log collection to ensure relevant events (Event IDs 4624, 4625) are being ingested into your SIEM or log analysis platform from all domain-joined Windows systems, especially critical servers and domain controllers.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Configure log collection to ensure relevant events (Event IDs 4624, 4625) are being ingested into your SIEM or log analysis platform from all domain-joined Windows systems, especially critical servers and domain controllers.",
+          "description": "Configure log collection to ensure relevant events (Event IDs 4624, 4625) are being ingested into your SIEM or log analysis platform from all domain-joined Windows systems, especially critical servers and domain controllers."
+        }
+      ],
+      "on_completion": "action--778d1843-ad42-4c04-b8db-ea313435c6a8"
+    },
+    "action--778d1843-ad42-4c04-b8db-ea313435c6a8": {
+      "name": "Establish a baseline of normal logon activity for your environment, including typical logon volumes, common source IPs, user accounts, and timeframes.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Establish a baseline of normal logon activity for your environment, including typical logon volumes, common source IPs, user accounts, and timeframes.",
+          "description": "Establish a baseline of normal logon activity for your environment, including typical logon volumes, common source IPs, user accounts, and timeframes."
+        }
+      ],
+      "on_completion": "parallel--d91ae169-eac6-4985-8b22-616d81d21cbb"
+    },
+    "action--7a9c5004-f573-4a32-be4b-1a093d73d531": {
+      "name": "If the account is confirmed compromised, follow incident response procedures for account takeover, including revoking active sessions and investigating for further lateral movement.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "If the account is confirmed compromised, follow incident response procedures for account takeover, including revoking active sessions and investigating for further lateral movement.",
+          "description": ""
+        }
+      ],
+      "on_completion": "end--538c0000-405a-4717-a7bc-20cb230a9a95"
+    },
+    "action--90abd5b0-db86-4c20-bd4f-ffc728928380": {
+      "name": "Create a correlation rule that groups failed logon events (4625) by target username and source IP address within a defined time window (e.g., 5-15 minutes).",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Create a correlation rule that groups failed logon events (4625) by target username and source IP address within a defined time window (e.g., 5-15 minutes).",
+          "description": ""
+        }
+      ],
+      "on_completion": "end--f09e9241-f72b-4b17-9da3-11426b5eb88b"
+    },
+    "action--e617d35b-4f5e-435c-b4fa-cd6f1f675efc": {
+      "name": "Continuously review and adjust detection thresholds and time windows based on false positive rates and environmental changes.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Continuously review and adjust detection thresholds and time windows based on false positive rates and environmental changes.",
+          "description": "Continuously review and adjust detection thresholds and time windows based on false positive rates and environmental changes."
+        }
+      ],
+      "on_completion": "action--0a9c2d30-a152-4ea9-b8d2-f6fd9f48ee68"
+    },
+    "action--fd438c20-d6d4-4a74-8b8a-0b5433539569": {
+      "name": "Identify the data sources required for detection: Windows Security Event Logs (Event ID 4625 for failed logons, Event ID 4624 for successful logons), and potentially network logs (e.g., firewall, VPN) for source IP context.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Identify the data sources required for detection: Windows Security Event Logs (Event ID 4625 for failed logons, Event ID 4624 for successful logons), and potentially network logs (e.g., firewall, VPN) for source IP context.",
+          "description": "Identify the data sources required for detection: Windows Security Event Logs (Event ID 4625 for failed logons, Event ID 4624 for successful logons), and potentially network logs (e.g., firewall, VPN) for source IP context."
+        }
+      ],
+      "on_completion": "action--6557a633-1a1b-44a4-84cf-d6b0050e49c8"
+    },
+    "parallel--527bc57e-de66-4cd6-b052-47a29b49d15d": {
+      "name": "Implement immediate response actions upon alert generation.",
+      "type": "parallel",
+      "next_steps": [
+        "action--03c2ab06-6cac-4e08-8e68-ff49d29b151a",
+        "action--1b6dc0ec-d8c2-4149-a402-2aa866952556",
+        "action--3462f29c-4093-40b6-978e-8f9b97d33ca8",
+        "action--7a9c5004-f573-4a32-be4b-1a093d73d531"
+      ],
+      "on_completion": "action--e617d35b-4f5e-435c-b4fa-cd6f1f675efc"
+    },
+    "parallel--d91ae169-eac6-4985-8b22-616d81d21cbb": {
+      "name": "Develop and tune detection rules to identify the pattern of a high volume of failed logons followed by a successful logon.",
+      "type": "parallel",
+      "next_steps": [
+        "action--90abd5b0-db86-4c20-bd4f-ffc728928380",
+        "action--3a0c04ef-1728-43bb-81c2-36ccd29cdcbc",
+        "action--3ee04521-0b35-4c9b-8000-86746a320e07",
+        "action--1208dca4-81cb-492a-9d7a-005adf14bff3",
+        "action--407ee9e3-834a-49c5-bdd2-207dc18928ad"
+      ],
+      "on_completion": "parallel--527bc57e-de66-4cd6-b052-47a29b49d15d"
+    }
+  },
+  "created_by": "individual--506bcd7d-f79e-4c2a-acbe-5fdee7552639",
+  "description": "This is an automatically generated playbook based on the question: A detections playbook for T1110 of MITRE ATT&CK Matrix for Enterprise framework is required.The target platform is Windows. You can find more information at https://attack.mitre.org/detectionstrategies/DET0463#AN1275 . The description of the approach follows: High volume of failed logon attempts followed by a successful one from a suspicious user, host, or timeframe",
+  "spec_version": "cacao-2.0",
+  "workflow_start": "start--c37c457d-de03-47e7-a60f-f3a3dad79506",
+  "agent_definitions": {
+    "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81": {
+      "name": "DummyAgent",
+      "type": "individual",
+      "description": "Dummy Agent to be changed"
+    }
+  },
+  "external_references": [
+    {
+      "url": "https://attack.mitre.org/techniques/T1110/",
+      "name": "MITRE ATT&CK Technique T1110: Brute Force"
+    },
+    {
+      "url": "https://attack.mitre.org/detectionstrategies/DET0463#AN1275",
+      "name": "MITRE ATT&CK Detection Strategy DET0463: High Volume of Failed Logon Attempts Followed by a Successful One"
+    }
+  ],
+  "__cymph_metadata": {
+    "mappings": {
+      "MITRE ATT&CK Matrix for Enterprise": [
+        "T1110"
+      ]
+    },
+    "document": {
+      "time": 1773072872834,
+      "blocks": [
+        {
+          "id": "wBwzcSsvS3",
+          "data": {
+            "meta": {
+              "start": 1,
+              "counterType": "numeric"
+            },
+            "items": [
+              {
+                "meta": {},
+                "items": [],
+                "content": "Identify the data sources required for detection: Windows Security Event Logs (Event ID 4625 for failed logons, Event ID 4624 for successful logons), and potentially network logs (e.g., firewall, VPN) for source IP context."
+              },
+              {
+                "meta": {},
+                "items": [],
+                "content": "Configure log collection to ensure relevant events (Event IDs 4624, 4625) are being ingested into your SIEM or log analysis platform from all domain-joined Windows systems, especially critical servers and domain controllers."
+              },
+              {
+                "meta": {},
+                "items": [],
+                "content": "Establish a baseline of normal logon activity for your environment, including typical logon volumes, common source IPs, user accounts, and timeframes."
+              },
+              {
+                "meta": {},
+                "items": [
+                  {
+                    "meta": {},
+                    "items": [],
+                    "content": "Create a correlation rule that groups failed logon events (4625) by target username and source IP address within a defined time window (e.g., 5-15 minutes)."
+                  },
+                  {
+                    "meta": {},
+                    "items": [],
+                    "content": "The rule should trigger when the number of failed logons for a user:IP pair exceeds a threshold (e.g., 5-10 failures). This indicates a potential brute-force attempt."
+                  },
+                  {
+                    "meta": {},
+                    "items": [],
+                    "content": "Correlate this alert with any subsequent successful logon event (4624) for the same username from the same source IP address within a short time frame (e.g., 1 hour) after the failed attempt series."
+                  },
+                  {
+                    "meta": {},
+                    "items": [],
+                    "content": "Incorporate logic to flag successful logons that occur from IP addresses not typically associated with the user or from geographic locations outside the norm."
+                  },
+                  {
+                    "meta": {},
+                    "items": [],
+                    "content": "Flag successful logons that occur outside of normal business hours for that user or system if such baselines exist."
+                  }
+                ],
+                "content": "<b>Develop and tune detection rules to identify the pattern of a high volume of failed logons followed by a successful logon.</b>"
+              },
+              {
+                "meta": {},
+                "items": [
+                  {
+                    "meta": {},
+                    "items": [],
+                    "content": "Immediately investigate the alert to confirm potential compromise. Check the user account's recent activity and group memberships."
+                  },
+                  {
+                    "meta": {},
+                    "items": [],
+                    "content": "If a compromise is suspected, immediately initiate password reset procedures for the affected user account."
+                  },
+                  {
+                    "meta": {},
+                    "items": [],
+                    "content": "Temporarily block the source IP address of the attack at the network perimeter (firewall) or VPN concentrator to prevent further attempts."
+                  },
+                  {
+                    "meta": {},
+                    "items": [],
+                    "content": "If the account is confirmed compromised, follow incident response procedures for account takeover, including revoking active sessions and investigating for further lateral movement."
+                  }
+                ],
+                "content": "<b>Implement immediate response actions upon alert generation.</b>"
+              },
+              {
+                "meta": {},
+                "items": [],
+                "content": "Continuously review and adjust detection thresholds and time windows based on false positive rates and environmental changes."
+              },
+              {
+                "meta": {},
+                "items": [],
+                "content": "Consider implementing account lockout policies to automatically slow down brute-force attacks, but be aware of potential denial-of-service implications."
+              }
+            ],
+            "style": "ordered"
+          },
+          "type": "list",
+          "tunes": {
+            "textVariant": ""
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,268 @@
+{
+  "id": "playbook--26445edb-4ac3-4c1e-8ca1-047915db0b77",
+  "name": "Windows Scheduled Task Abuse Detection and Response",
+  "type": "playbook",
+  "labels": [
+    "T1053",
+    "Scheduled Task",
+    "Windows",
+    "Execution",
+    "Persistence",
+    "Lateral Movement",
+    "Privilege Escalation"
+  ],
+  "created": "2026-03-09T16:14:37.998Z",
+  "revoked": false,
+  "modified": "2026-03-09T16:14:37.998Z",
+  "priority": 0,
+  "workflow": {
+    "end--2db7f971-7607-4a5d-801a-040db6c49df8": {
+      "name": "End",
+      "type": "end"
+    },
+    "end--92352741-749c-4b92-b168-3863c44f5ad7": {
+      "name": "End",
+      "type": "end"
+    },
+    "end--cc244380-b2fc-41d6-ad73-9f9ec98a85c2": {
+      "name": "End",
+      "type": "end"
+    },
+    "end--d782bce7-1fa9-45e0-a107-b43fa336455c": {
+      "name": "End",
+      "type": "end"
+    },
+    "start--1b2b0f42-7049-48b5-8a44-c6157e85eafe": {
+      "name": "Start",
+      "type": "start",
+      "on_completion": "action--adad7e9e-f605-4aa0-a06e-44c067b89fa9"
+    },
+    "action--2e739de1-c9c5-4a94-b08a-9e7e56a40d30": {
+      "name": "Establish a baseline of normal scheduled task activity within the environment.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Establish a baseline of normal scheduled task activity within the environment.",
+          "description": ""
+        }
+      ],
+      "on_completion": "end--92352741-749c-4b92-b168-3863c44f5ad7"
+    },
+    "action--4cbdf58c-64e7-4a4d-a389-8b55e1407fb9": {
+      "name": "Correlate scheduled task creation/modification events with subsequent process execution events. Focus on identifying outlier processes that are launched by the newly created or modified task.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Correlate scheduled task creation/modification events with subsequent process execution events. Focus on identifying outlier processes that are launched by the newly created or modified task.",
+          "description": "Correlate scheduled task creation/modification events with subsequent process execution events. Focus on identifying outlier processes that are launched by the newly created or modified task."
+        }
+      ],
+      "on_completion": "parallel--ea7f8bb6-b849-44b6-8821-c6412c572849"
+    },
+    "action--73cf9a79-14dc-4d73-8086-6763b323b449": {
+      "name": "Exclude known legitimate administrative and software management processes (e.g., software deployment tools, patch management systems).",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Exclude known legitimate administrative and software management processes (e.g., software deployment tools, patch management systems).",
+          "description": ""
+        }
+      ],
+      "on_completion": "end--cc244380-b2fc-41d6-ad73-9f9ec98a85c2"
+    },
+    "action--74c6bfcc-f335-4541-ac13-9ef2bf721a77": {
+      "name": "Create detection rules within your SIEM or EDR to identify the creation or modification of scheduled tasks using the following command-line utilities: schtasks.exe, at.exe, and the Task Scheduler COM object (e.g., via PowerShell).",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Create detection rules within your SIEM or EDR to identify the creation or modification of scheduled tasks using the following command-line utilities: schtasks.exe, at.exe, and the Task Scheduler COM object (e.g., via PowerShell).",
+          "description": "Create detection rules within your SIEM or EDR to identify the creation or modification of scheduled tasks using the following command-line utilities: schtasks.exe, at.exe, and the Task Scheduler COM object (e.g., via PowerShell)."
+        }
+      ],
+      "on_completion": "action--4cbdf58c-64e7-4a4d-a389-8b55e1407fb9"
+    },
+    "action--adad7e9e-f605-4aa0-a06e-44c067b89fa9": {
+      "name": "Deploy and configure a SIEM or log management solution to collect and centralize Windows Event Logs, specifically focusing on Security and Microsoft-Windows-TaskScheduler/Operational logs.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Deploy and configure a SIEM or log management solution to collect and centralize Windows Event Logs, specifically focusing on Security and Microsoft-Windows-TaskScheduler/Operational logs.",
+          "description": "Deploy and configure a SIEM or log management solution to collect and centralize Windows Event Logs, specifically focusing on Security and Microsoft-Windows-TaskScheduler/Operational logs."
+        }
+      ],
+      "on_completion": "action--dfb4dce5-d1e1-4377-a4f1-4a217c2fc2ce"
+    },
+    "action--b3296639-42ed-425b-8dea-3c42e9ee2907": {
+      "name": "Integrate the detection playbook with your incident response process to ensure alerts are triaged and investigated promptly.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Integrate the detection playbook with your incident response process to ensure alerts are triaged and investigated promptly.",
+          "description": "Integrate the detection playbook with your incident response process to ensure alerts are triaged and investigated promptly."
+        }
+      ],
+      "on_completion": "end--2db7f971-7607-4a5d-801a-040db6c49df8"
+    },
+    "action--b3946c6c-e038-48ef-baf3-a7753da11527": {
+      "name": "Implement whitelists for common, trusted task names and parent processes.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Implement whitelists for common, trusted task names and parent processes.",
+          "description": ""
+        }
+      ],
+      "on_completion": "end--d782bce7-1fa9-45e0-a107-b43fa336455c"
+    },
+    "action--c4066b60-e553-4df9-b016-ef70337e24ab": {
+      "name": "Configure alerts to trigger when a high-confidence detection is made, ensuring they include relevant context such as the command line, user account, source IP (if applicable), and the resulting process execution.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Configure alerts to trigger when a high-confidence detection is made, ensuring they include relevant context such as the command line, user account, source IP (if applicable), and the resulting process execution.",
+          "description": "Configure alerts to trigger when a high-confidence detection is made, ensuring they include relevant context such as the command line, user account, source IP (if applicable), and the resulting process execution."
+        }
+      ],
+      "on_completion": "action--b3296639-42ed-425b-8dea-3c42e9ee2907"
+    },
+    "action--dfb4dce5-d1e1-4377-a4f1-4a217c2fc2ce": {
+      "name": "Enable detailed auditing for scheduled tasks. Configure Group Policy or local security policy to audit 'Task Scheduler' operations (Audit Policy: Object Access > Audit File System, Audit Policy: Detailed Tracking > Audit Process Creation).",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Enable detailed auditing for scheduled tasks. Configure Group Policy or local security policy to audit 'Task Scheduler' operations (Audit Policy: Object Access > Audit File System, Audit Policy: Detailed Tracking > Audit Process Creation).",
+          "description": "Enable detailed auditing for scheduled tasks. Configure Group Policy or local security policy to audit 'Task Scheduler' operations (Audit Policy: Object Access > Audit File System, Audit Policy: Detailed Tracking > Audit Process Creation)."
+        }
+      ],
+      "on_completion": "action--74c6bfcc-f335-4541-ac13-9ef2bf721a77"
+    },
+    "parallel--ea7f8bb6-b849-44b6-8821-c6412c572849": {
+      "name": "Tune and refine detection rules to reduce false positives.",
+      "type": "parallel",
+      "next_steps": [
+        "action--2e739de1-c9c5-4a94-b08a-9e7e56a40d30",
+        "action--73cf9a79-14dc-4d73-8086-6763b323b449",
+        "action--b3946c6c-e038-48ef-baf3-a7753da11527"
+      ],
+      "on_completion": "action--c4066b60-e553-4df9-b016-ef70337e24ab"
+    }
+  },
+  "created_by": "individual--506bcd7d-f79e-4c2a-acbe-5fdee7552639",
+  "description": "This is an automatically generated playbook based on the question: A detections playbook for T1053 of MITRE ATT&CK Matrix for Enterprise framework is required.The target platform is Windows. You can find more information at https://attack.mitre.org/detectionstrategies/DET0094#AN0258 . The description of the approach follows: Detects creation or modification of scheduled tasks using schtasks.exe, at.exe, or COM objects followed by execution of outlier processes tied to the scheduled job.",
+  "spec_version": "cacao-2.0",
+  "workflow_start": "start--1b2b0f42-7049-48b5-8a44-c6157e85eafe",
+  "agent_definitions": {
+    "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81": {
+      "name": "DummyAgent",
+      "type": "individual",
+      "description": "Dummy Agent to be changed"
+    }
+  },
+  "external_references": [
+    {
+      "url": "https://attack.mitre.org/techniques/T1053/",
+      "name": "MITRE ATT&CK Technique T1053: Scheduled Task/Job"
+    },
+    {
+      "url": "https://attack.mitre.org/detectionstrategies/DET0094#AN0258",
+      "name": "MITRE ATT&CK Detection Strategies: DET0094 - Scheduled Task"
+    }
+  ],
+  "__cymph_metadata": {
+    "mappings": {
+      "MITRE ATT&CK Matrix for Enterprise": [
+        "T1053"
+      ]
+    },
+    "document": {
+      "time": 1773072878010,
+      "blocks": [
+        {
+          "id": "dy7iBjWlcR",
+          "data": {
+            "meta": {
+              "start": 1,
+              "counterType": "numeric"
+            },
+            "items": [
+              {
+                "meta": {},
+                "items": [],
+                "content": "Deploy and configure a SIEM or log management solution to collect and centralize Windows Event Logs, specifically focusing on Security and Microsoft-Windows-TaskScheduler/Operational logs."
+              },
+              {
+                "meta": {},
+                "items": [],
+                "content": "Enable detailed auditing for scheduled tasks. Configure Group Policy or local security policy to audit 'Task Scheduler' operations (Audit Policy: Object Access > Audit File System, Audit Policy: Detailed Tracking > Audit Process Creation)."
+              },
+              {
+                "meta": {},
+                "items": [],
+                "content": "Create detection rules within your SIEM or EDR to identify the creation or modification of scheduled tasks using the following command-line utilities: schtasks.exe, at.exe, and the Task Scheduler COM object (e.g., via PowerShell)."
+              },
+              {
+                "meta": {},
+                "items": [],
+                "content": "Correlate scheduled task creation/modification events with subsequent process execution events. Focus on identifying outlier processes that are launched by the newly created or modified task."
+              },
+              {
+                "meta": {},
+                "items": [
+                  {
+                    "meta": {},
+                    "items": [],
+                    "content": "Establish a baseline of normal scheduled task activity within the environment."
+                  },
+                  {
+                    "meta": {},
+                    "items": [],
+                    "content": "Exclude known legitimate administrative and software management processes (e.g., software deployment tools, patch management systems)."
+                  },
+                  {
+                    "meta": {},
+                    "items": [],
+                    "content": "Implement whitelists for common, trusted task names and parent processes."
+                  }
+                ],
+                "content": "Tune and refine detection rules to reduce false positives."
+              },
+              {
+                "meta": {},
+                "items": [],
+                "content": "Configure alerts to trigger when a high-confidence detection is made, ensuring they include relevant context such as the command line, user account, source IP (if applicable), and the resulting process execution."
+              },
+              {
+                "meta": {},
+                "items": [],
+                "content": "Integrate the detection playbook with your incident response process to ensure alerts are triaged and investigated promptly."
+              }
+            ],
+            "style": "ordered"
+          },
+          "type": "list",
+          "tunes": {
+            "textVariant": ""
+          }
+        }
+      ]
+    }
+  }
+}
