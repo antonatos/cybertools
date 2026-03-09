@@ -1,0 +1,256 @@
+{
+  "id": "playbook--62545f38-4cb1-4b3d-807b-00b18a084b06",
+  "name": "Windows Account Attribute Manipulation Detection and Response",
+  "type": "playbook",
+  "labels": [
+    "Windows",
+    "Account Manipulation",
+    "Privilege Escalation",
+    "Persistence",
+    "MITRE T1098"
+  ],
+  "created": "2026-03-09T13:45:02.187Z",
+  "revoked": false,
+  "modified": "2026-03-09T13:45:02.187Z",
+  "priority": 0,
+  "workflow": {
+    "end--9420d35d-9801-49c8-b739-997a4be3e5f1": {
+      "name": "End",
+      "type": "end"
+    },
+    "start--e2308f3c-2a4c-404b-a939-bcba082cad43": {
+      "name": "Start",
+      "type": "start",
+      "on_completion": "action--2201ce60-20ee-4c84-879f-b6244b2cf3ec"
+    },
+    "action--2201ce60-20ee-4c84-879f-b6244b2cf3ec": {
+      "name": "Deploy and configure Windows Event Logging to capture relevant security events, specifically focusing on account management events (e.g., Event ID 4720 for account creation, 4728 for group membership changes, 4738 for account changes).",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Deploy and configure Windows Event Logging to capture relevant security events, specifically focusing on account management events (e.g., Event ID 4720 for account creation, 4728 for group membership changes, 4738 for account changes).",
+          "description": "Deploy and configure Windows Event Logging to capture relevant security events, specifically focusing on account management events (e.g., Event ID 4720 for account creation, 4728 for group membership changes, 4738 for account changes)."
+        }
+      ],
+      "on_completion": "action--c8b35877-01b0-4684-a08a-dc954ccd3afb"
+    },
+    "action--35b98009-b25a-47af-89aa-7ffc4903c32a": {
+      "name": "Develop detection rules to identify account attribute changes (e.g., password resets, group membership modifications, servicePrincipalName updates, logon hour adjustments) that occur outside of normal business hours or maintenance windows.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Develop detection rules to identify account attribute changes (e.g., password resets, group membership modifications, servicePrincipalName updates, logon hour adjustments) that occur outside of normal business hours or maintenance windows.",
+          "description": "Develop detection rules to identify account attribute changes (e.g., password resets, group membership modifications, servicePrincipalName updates, logon hour adjustments) that occur outside of normal business hours or maintenance windows."
+        }
+      ],
+      "on_completion": "action--c5f55b79-5991-408b-a0be-192d650cdc90"
+    },
+    "action--45cf2580-88b5-42b0-835f-75166423d467": {
+      "name": "Create alerts for account changes that coincide with known malicious processes or execution patterns, such as PowerShell, WMI, or remote service creation.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Create alerts for account changes that coincide with known malicious processes or execution patterns, such as PowerShell, WMI, or remote service creation.",
+          "description": "Create alerts for account changes that coincide with known malicious processes or execution patterns, such as PowerShell, WMI, or remote service creation."
+        }
+      ],
+      "on_completion": "action--a47a46b2-3d22-4d39-8ad6-98d549edcc2c"
+    },
+    "action--83bed892-668f-4605-9c1e-a6fe3b3b407b": {
+      "name": "Establish baselines for normal account modification patterns (e.g., typical times, user roles, and systems involved) to define thresholds for anomalous behavior.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Establish baselines for normal account modification patterns (e.g., typical times, user roles, and systems involved) to define thresholds for anomalous behavior.",
+          "description": "Establish baselines for normal account modification patterns (e.g., typical times, user roles, and systems involved) to define thresholds for anomalous behavior."
+        }
+      ],
+      "on_completion": "action--45cf2580-88b5-42b0-835f-75166423d467"
+    },
+    "action--a47a46b2-3d22-4d39-8ad6-98d549edcc2c": {
+      "name": "Investigate detected anomalies by reviewing the full context of the change, including the user account, source IP address, and any associated network connections.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Investigate detected anomalies by reviewing the full context of the change, including the user account, source IP address, and any associated network connections.",
+          "description": "Investigate detected anomalies by reviewing the full context of the change, including the user account, source IP address, and any associated network connections."
+        }
+      ],
+      "on_completion": "action--a6853bc7-0843-431f-acbe-562fd70bae9c"
+    },
+    "action--a6853bc7-0843-431f-acbe-562fd70bae9c": {
+      "name": "Validate whether the account change was authorized by cross-referencing with change management systems or contacting the responsible IT team.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Validate whether the account change was authorized by cross-referencing with change management systems or contacting the responsible IT team.",
+          "description": "Validate whether the account change was authorized by cross-referencing with change management systems or contacting the responsible IT team."
+        }
+      ],
+      "on_completion": "action--ddb75396-f5a6-4399-ac34-ec9238cea16c"
+    },
+    "action--c1e65b0c-b960-401b-b695-a1f30a3ecfa9": {
+      "name": "Continuously refine detection rules based on investigation outcomes and emerging threat intelligence related to T1098 techniques.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Continuously refine detection rules based on investigation outcomes and emerging threat intelligence related to T1098 techniques.",
+          "description": "Continuously refine detection rules based on investigation outcomes and emerging threat intelligence related to T1098 techniques."
+        }
+      ],
+      "on_completion": "end--9420d35d-9801-49c8-b739-997a4be3e5f1"
+    },
+    "action--c5f55b79-5991-408b-a0be-192d650cdc90": {
+      "name": "Correlate account changes with process creation events (e.g., Event ID 4688) to identify unusual process lineages, such as changes initiated by non-standard processes or user contexts.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Correlate account changes with process creation events (e.g., Event ID 4688) to identify unusual process lineages, such as changes initiated by non-standard processes or user contexts.",
+          "description": "Correlate account changes with process creation events (e.g., Event ID 4688) to identify unusual process lineages, such as changes initiated by non-standard processes or user contexts."
+        }
+      ],
+      "on_completion": "action--83bed892-668f-4605-9c1e-a6fe3b3b407b"
+    },
+    "action--c8b35877-01b0-4684-a08a-dc954ccd3afb": {
+      "name": "Implement a SIEM or log aggregation solution to collect and centralize Windows event logs from all endpoints and domain controllers for analysis.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Implement a SIEM or log aggregation solution to collect and centralize Windows event logs from all endpoints and domain controllers for analysis.",
+          "description": "Implement a SIEM or log aggregation solution to collect and centralize Windows event logs from all endpoints and domain controllers for analysis."
+        }
+      ],
+      "on_completion": "action--35b98009-b25a-47af-89aa-7ffc4903c32a"
+    },
+    "action--ddb75396-f5a6-4399-ac34-ec9238cea16c": {
+      "name": "If unauthorized activity is confirmed, immediately revoke the changes, reset affected account credentials, and initiate incident response procedures.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "If unauthorized activity is confirmed, immediately revoke the changes, reset affected account credentials, and initiate incident response procedures.",
+          "description": "If unauthorized activity is confirmed, immediately revoke the changes, reset affected account credentials, and initiate incident response procedures."
+        }
+      ],
+      "on_completion": "action--c1e65b0c-b960-401b-b695-a1f30a3ecfa9"
+    }
+  },
+  "created_by": "individual--506bcd7d-f79e-4c2a-acbe-5fdee7552639",
+  "description": "This is an automatically generated playbook based on the question: A detections playbook for T1098 of MITRE ATT&CK Matrix for Enterprise framework is required.The target platform is Windows. You can find more information at https://attack.mitre.org/detectionstrategies/DET0096#AN0265 . The description of the approach follows: Account attribute changes (e.g., password set, group membership, servicePrincipalName, logon hours) correlated with unusual process lineage or timing, indicating privilege escalation or persistence via valid accounts.",
+  "spec_version": "cacao-2.0",
+  "workflow_start": "start--e2308f3c-2a4c-404b-a939-bcba082cad43",
+  "agent_definitions": {
+    "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81": {
+      "name": "DummyAgent",
+      "type": "individual",
+      "description": "Dummy Agent to be changed"
+    }
+  },
+  "external_references": [
+    {
+      "url": "https://attack.mitre.org/techniques/T1098/",
+      "name": "MITRE ATT&CK T1098: Account Manipulation"
+    },
+    {
+      "url": "https://attack.mitre.org/detectionstrategies/DET0096#AN0265",
+      "name": "MITRE ATT&CK Detection Strategies: DET0096"
+    }
+  ],
+  "__cymph_metadata": {
+    "mappings": {
+      "MITRE ATT&CK Matrix for Enterprise": [
+        "T1098"
+      ]
+    },
+    "document": {
+      "time": 1773063902194,
+      "blocks": [
+        {
+          "id": "llKe676G5X",
+          "data": {
+            "meta": {
+              "start": 1,
+              "counterType": "numeric"
+            },
+            "items": [
+              {
+                "meta": {},
+                "items": [],
+                "content": "Deploy and configure Windows Event Logging to capture relevant security events, specifically focusing on account management events (e.g., Event ID 4720 for account creation, 4728 for group membership changes, 4738 for account changes)."
+              },
+              {
+                "meta": {},
+                "items": [],
+                "content": "Implement a SIEM or log aggregation solution to collect and centralize Windows event logs from all endpoints and domain controllers for analysis."
+              },
+              {
+                "meta": {},
+                "items": [],
+                "content": "Develop detection rules to identify account attribute changes (e.g., password resets, group membership modifications, servicePrincipalName updates, logon hour adjustments) that occur outside of normal business hours or maintenance windows."
+              },
+              {
+                "meta": {},
+                "items": [],
+                "content": "Correlate account changes with process creation events (e.g., Event ID 4688) to identify unusual process lineages, such as changes initiated by non-standard processes or user contexts."
+              },
+              {
+                "meta": {},
+                "items": [],
+                "content": "Establish baselines for normal account modification patterns (e.g., typical times, user roles, and systems involved) to define thresholds for anomalous behavior."
+              },
+              {
+                "meta": {},
+                "items": [],
+                "content": "Create alerts for account changes that coincide with known malicious processes or execution patterns, such as PowerShell, WMI, or remote service creation."
+              },
+              {
+                "meta": {},
+                "items": [],
+                "content": "Investigate detected anomalies by reviewing the full context of the change, including the user account, source IP address, and any associated network connections."
+              },
+              {
+                "meta": {},
+                "items": [],
+                "content": "Validate whether the account change was authorized by cross-referencing with change management systems or contacting the responsible IT team."
+              },
+              {
+                "meta": {},
+                "items": [],
+                "content": "If unauthorized activity is confirmed, immediately revoke the changes, reset affected account credentials, and initiate incident response procedures."
+              },
+              {
+                "meta": {},
+                "items": [],
+                "content": "Continuously refine detection rules based on investigation outcomes and emerging threat intelligence related to T1098 techniques."
+              }
+            ],
+            "style": "ordered"
+          },
+          "type": "list",
+          "tunes": {
+            "textVariant": ""
+          }
+        }
+      ]
+    }
+  }
+}

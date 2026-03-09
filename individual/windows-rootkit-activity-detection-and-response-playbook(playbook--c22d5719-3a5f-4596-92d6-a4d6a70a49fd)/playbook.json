@@ -1,0 +1,403 @@
+{
+  "id": "playbook--c22d5719-3a5f-4596-92d6-a4d6a70a49fd",
+  "name": "Windows Rootkit Activity Detection and Response Playbook",
+  "type": "playbook",
+  "labels": [
+    "T1014",
+    "Rootkit",
+    "Windows",
+    "Kernel",
+    "Driver",
+    "Persistence"
+  ],
+  "created": "2026-03-09T13:41:53.022Z",
+  "revoked": false,
+  "modified": "2026-03-09T13:41:53.022Z",
+  "priority": 0,
+  "workflow": {
+    "end--0b99fe4c-8599-4158-b549-5987cf3ad1d6": {
+      "name": "End",
+      "type": "end"
+    },
+    "end--12a2f9a7-38ea-4dde-89f1-ed97ff88488f": {
+      "name": "End",
+      "type": "end"
+    },
+    "end--1d84b592-4cf5-45d5-af8a-eb6ad72d27c1": {
+      "name": "End",
+      "type": "end"
+    },
+    "end--721cae39-6a61-45ad-80b4-a0fae131b0e1": {
+      "name": "End",
+      "type": "end"
+    },
+    "end--ae8a395c-2ca6-4c4f-8d54-199b02aa6b4f": {
+      "name": "End",
+      "type": "end"
+    },
+    "end--afaa38e4-c54b-4804-8946-3cf2296d496e": {
+      "name": "End",
+      "type": "end"
+    },
+    "end--b0371b4b-a8b2-4ac8-a8bd-c0c20c9a7e3d": {
+      "name": "End",
+      "type": "end"
+    },
+    "end--d1bbdd67-c506-4f67-8d69-b13ddd604274": {
+      "name": "End",
+      "type": "end"
+    },
+    "end--e1747a74-b615-45f5-89e5-660680004f6b": {
+      "name": "End",
+      "type": "end"
+    },
+    "start--adaa32c9-2ac2-4268-b2d9-9f6da3673968": {
+      "name": "Start",
+      "type": "start",
+      "on_completion": "action--10d55299-6430-4cfa-bc42-3f7f95e06700"
+    },
+    "action--0ca8b739-f34d-487a-898b-4889052dc778": {
+      "name": "Profile typical driver loads, service installations, and boot configuration changes during normal operations.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Profile typical driver loads, service installations, and boot configuration changes during normal operations.",
+          "description": ""
+        }
+      ],
+      "on_completion": "end--721cae39-6a61-45ad-80b4-a0fae131b0e1"
+    },
+    "action--10d55299-6430-4cfa-bc42-3f7f95e06700": {
+      "name": "Deploy and configure a Security Information and Event Management (SIEM) system to aggregate logs from Windows endpoints, domain controllers, and network devices.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Deploy and configure a Security Information and Event Management (SIEM) system to aggregate logs from Windows endpoints, domain controllers, and network devices.",
+          "description": "Deploy and configure a Security Information and Event Management (SIEM) system to aggregate logs from Windows endpoints, domain controllers, and network devices."
+        }
+      ],
+      "on_completion": "action--ab9e4dcc-60b2-4f99-94fa-3879363f75f1"
+    },
+    "action--1199c4b5-bbdb-4055-98a1-772d4b298391": {
+      "name": "Utilize Windows Defender Antivirus or a compatible EDR solution to monitor and alert on known rootkit signatures and behaviors.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Utilize Windows Defender Antivirus or a compatible EDR solution to monitor and alert on known rootkit signatures and behaviors.",
+          "description": "Utilize Windows Defender Antivirus or a compatible EDR solution to monitor and alert on known rootkit signatures and behaviors."
+        }
+      ],
+      "on_completion": "parallel--944c6b0c-9668-4af4-a848-90e46898a7a5"
+    },
+    "action--16365a2d-41e7-4516-8995-c0f86bdb59d1": {
+      "name": "Isolate affected systems from the network to prevent lateral movement or data exfiltration.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Isolate affected systems from the network to prevent lateral movement or data exfiltration.",
+          "description": ""
+        }
+      ],
+      "on_completion": "end--1d84b592-4cf5-45d5-af8a-eb6ad72d27c1"
+    },
+    "action--4279fa94-0e35-40cb-9613-7746c4a345d4": {
+      "name": "Remove malicious components, restore systems from clean backups, and patch vulnerabilities.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Remove malicious components, restore systems from clean backups, and patch vulnerabilities.",
+          "description": ""
+        }
+      ],
+      "on_completion": "end--afaa38e4-c54b-4804-8946-3cf2296d496e"
+    },
+    "action--48afccea-def1-4614-9f67-83f8d3f32946": {
+      "name": "Conduct regular integrity checks on critical system files and boot sectors using tools like Windows File Integrity Checker (sfc) or third-party solutions.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Conduct regular integrity checks on critical system files and boot sectors using tools like Windows File Integrity Checker (sfc) or third-party solutions.",
+          "description": "Conduct regular integrity checks on critical system files and boot sectors using tools like Windows File Integrity Checker (sfc) or third-party solutions."
+        }
+      ],
+      "on_completion": "parallel--559e7c08-7900-4249-b8ee-c5e95c8a87bf"
+    },
+    "action--54fcfbee-75a2-4de6-978f-612df7a70edc": {
+      "name": "Implement Sysmon with a configuration that logs driver loads (Event ID 6), image loads (Event ID 7), and file creation (Event ID 11) with enhanced detail.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Implement Sysmon with a configuration that logs driver loads (Event ID 6), image loads (Event ID 7), and file creation (Event ID 11) with enhanced detail.",
+          "description": "Implement Sysmon with a configuration that logs driver loads (Event ID 6), image loads (Event ID 7), and file creation (Event ID 11) with enhanced detail."
+        }
+      ],
+      "on_completion": "action--1199c4b5-bbdb-4055-98a1-772d4b298391"
+    },
+    "action--7e6440f9-1701-4748-8d09-a06d6191fa48": {
+      "name": "Collect and analyze memory dumps, disk images, and relevant logs for forensic evidence.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Collect and analyze memory dumps, disk images, and relevant logs for forensic evidence.",
+          "description": ""
+        }
+      ],
+      "on_completion": "end--12a2f9a7-38ea-4dde-89f1-ed97ff88488f"
+    },
+    "action--a5636b1c-c950-4db4-bfeb-00ec865f527e": {
+      "name": "Use specialized rootkit detection tools (e.g., GMER, RootkitRevealer) for deep analysis.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Use specialized rootkit detection tools (e.g., GMER, RootkitRevealer) for deep analysis.",
+          "description": ""
+        }
+      ],
+      "on_completion": "end--b0371b4b-a8b2-4ac8-a8bd-c0c20c9a7e3d"
+    },
+    "action--ab9e4dcc-60b2-4f99-94fa-3879363f75f1": {
+      "name": "Enable and configure Windows Event Logging to capture Security, System, and Application logs with a focus on Event ID 7045 (Service Installation) and Event ID 4697 (Service Creation).",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Enable and configure Windows Event Logging to capture Security, System, and Application logs with a focus on Event ID 7045 (Service Installation) and Event ID 4697 (Service Creation).",
+          "description": "Enable and configure Windows Event Logging to capture Security, System, and Application logs with a focus on Event ID 7045 (Service Installation) and Event ID 4697 (Service Creation)."
+        }
+      ],
+      "on_completion": "action--54fcfbee-75a2-4de6-978f-612df7a70edc"
+    },
+    "action--b632cc19-d2e2-4a90-8463-8e68ed07f739": {
+      "name": "Create whitelists of authorized kernel drivers, services, and boot components.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Create whitelists of authorized kernel drivers, services, and boot components.",
+          "description": ""
+        }
+      ],
+      "on_completion": "end--0b99fe4c-8599-4158-b549-5987cf3ad1d6"
+    },
+    "action--bedb25bf-d4c4-4768-bcdf-ca7ba560c281": {
+      "name": "Correlate alerts from multiple sources (SIEM, EDR, AV) to confirm rootkit activity.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Correlate alerts from multiple sources (SIEM, EDR, AV) to confirm rootkit activity.",
+          "description": ""
+        }
+      ],
+      "on_completion": "end--e1747a74-b615-45f5-89e5-660680004f6b"
+    },
+    "action--f157998e-038f-4ecb-a04c-9b1673a7189f": {
+      "name": "Monitor for attempts to disable or tamper with security logging, antivirus, or EDR services, which may precede rootkit installation.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Monitor for attempts to disable or tamper with security logging, antivirus, or EDR services, which may precede rootkit installation.",
+          "description": "Monitor for attempts to disable or tamper with security logging, antivirus, or EDR services, which may precede rootkit installation."
+        }
+      ],
+      "on_completion": "action--48afccea-def1-4614-9f67-83f8d3f32946"
+    },
+    "action--f43736c4-37e7-48ce-ab6e-4120302f391f": {
+      "name": "Configure alerts for deviations from the established baseline, such as unsigned drivers or services with concealed attributes.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Configure alerts for deviations from the established baseline, such as unsigned drivers or services with concealed attributes.",
+          "description": ""
+        }
+      ],
+      "on_completion": "end--d1bbdd67-c506-4f67-8d69-b13ddd604274"
+    },
+    "parallel--559e7c08-7900-4249-b8ee-c5e95c8a87bf": {
+      "name": "Investigate and respond to detected anomalies.",
+      "type": "parallel",
+      "next_steps": [
+        "action--bedb25bf-d4c4-4768-bcdf-ca7ba560c281",
+        "action--16365a2d-41e7-4516-8995-c0f86bdb59d1",
+        "action--7e6440f9-1701-4748-8d09-a06d6191fa48",
+        "action--a5636b1c-c950-4db4-bfeb-00ec865f527e",
+        "action--4279fa94-0e35-40cb-9613-7746c4a345d4"
+      ],
+      "on_completion": "end--ae8a395c-2ca6-4c4f-8d54-199b02aa6b4f"
+    },
+    "parallel--944c6b0c-9668-4af4-a848-90e46898a7a5": {
+      "name": "Establish baseline monitoring for normal system activity to identify anomalies.",
+      "type": "parallel",
+      "next_steps": [
+        "action--0ca8b739-f34d-487a-898b-4889052dc778",
+        "action--b632cc19-d2e2-4a90-8463-8e68ed07f739",
+        "action--f43736c4-37e7-48ce-ab6e-4120302f391f"
+      ],
+      "on_completion": "action--f157998e-038f-4ecb-a04c-9b1673a7189f"
+    }
+  },
+  "created_by": "individual--506bcd7d-f79e-4c2a-acbe-5fdee7552639",
+  "description": "This is an automatically generated playbook based on the question: A detections playbook for T1014 of MITRE ATT&CK Matrix for Enterprise framework is required.The target platform is Windows. You can find more information at https://attack.mitre.org/detectionstrategies/DET0377#AN1061 . The description of the approach follows: Unauthorized or anomalous loading of kernel-mode drivers or DLLs, concealed services, or abnormal modification of boot components indicative of rootkit activity.",
+  "spec_version": "cacao-2.0",
+  "workflow_start": "start--adaa32c9-2ac2-4268-b2d9-9f6da3673968",
+  "agent_definitions": {
+    "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81": {
+      "name": "DummyAgent",
+      "type": "individual",
+      "description": "Dummy Agent to be changed"
+    }
+  },
+  "external_references": [
+    {
+      "url": "https://attack.mitre.org/techniques/T1014/",
+      "name": "MITRE ATT&CK Technique T1014: Rootkit"
+    },
+    {
+      "url": "https://attack.mitre.org/detectionstrategies/DET0377#AN1061",
+      "name": "MITRE ATT&CK Detection Strategy DET0377: Rootkit Activity"
+    },
+    {
+      "url": "https://docs.microsoft.com/en-us/windows/security/threat-protection/auditing/audit-driver-loading",
+      "name": "Microsoft Docs: Monitor driver loading"
+    },
+    {
+      "url": "https://docs.microsoft.com/en-us/sysinternals/downloads/sysmon",
+      "name": "Sysmon Documentation"
+    }
+  ],
+  "__cymph_metadata": {
+    "mappings": {
+      "MITRE ATT&CK Matrix for Enterprise": [
+        "T1014"
+      ]
+    },
+    "document": {
+      "time": 1773063713036,
+      "blocks": [
+        {
+          "id": "uwfIbgc5le",
+          "data": {
+            "meta": {
+              "start": 1,
+              "counterType": "numeric"
+            },
+            "items": [
+              {
+                "meta": {},
+                "items": [],
+                "content": "Deploy and configure a Security Information and Event Management (SIEM) system to aggregate logs from Windows endpoints, domain controllers, and network devices."
+              },
+              {
+                "meta": {},
+                "items": [],
+                "content": "Enable and configure Windows Event Logging to capture Security, System, and Application logs with a focus on Event ID 7045 (Service Installation) and Event ID 4697 (Service Creation)."
+              },
+              {
+                "meta": {},
+                "items": [],
+                "content": "Implement Sysmon with a configuration that logs driver loads (Event ID 6), image loads (Event ID 7), and file creation (Event ID 11) with enhanced detail."
+              },
+              {
+                "meta": {},
+                "items": [],
+                "content": "Utilize Windows Defender Antivirus or a compatible EDR solution to monitor and alert on known rootkit signatures and behaviors."
+              },
+              {
+                "meta": {},
+                "items": [
+                  {
+                    "meta": {},
+                    "items": [],
+                    "content": "Profile typical driver loads, service installations, and boot configuration changes during normal operations."
+                  },
+                  {
+                    "meta": {},
+                    "items": [],
+                    "content": "Create whitelists of authorized kernel drivers, services, and boot components."
+                  },
+                  {
+                    "meta": {},
+                    "items": [],
+                    "content": "Configure alerts for deviations from the established baseline, such as unsigned drivers or services with concealed attributes."
+                  }
+                ],
+                "content": "Establish baseline monitoring for normal system activity to identify anomalies."
+              },
+              {
+                "meta": {},
+                "items": [],
+                "content": "Monitor for attempts to disable or tamper with security logging, antivirus, or EDR services, which may precede rootkit installation."
+              },
+              {
+                "meta": {},
+                "items": [],
+                "content": "Conduct regular integrity checks on critical system files and boot sectors using tools like Windows File Integrity Checker (sfc) or third-party solutions."
+              },
+              {
+                "meta": {},
+                "items": [
+                  {
+                    "meta": {},
+                    "items": [],
+                    "content": "Correlate alerts from multiple sources (SIEM, EDR, AV) to confirm rootkit activity."
+                  },
+                  {
+                    "meta": {},
+                    "items": [],
+                    "content": "Isolate affected systems from the network to prevent lateral movement or data exfiltration."
+                  },
+                  {
+                    "meta": {},
+                    "items": [],
+                    "content": "Collect and analyze memory dumps, disk images, and relevant logs for forensic evidence."
+                  },
+                  {
+                    "meta": {},
+                    "items": [],
+                    "content": "Use specialized rootkit detection tools (e.g., GMER, RootkitRevealer) for deep analysis."
+                  },
+                  {
+                    "meta": {},
+                    "items": [],
+                    "content": "Remove malicious components, restore systems from clean backups, and patch vulnerabilities."
+                  }
+                ],
+                "content": "Investigate and respond to detected anomalies."
+              }
+            ],
+            "style": "ordered"
+          },
+          "type": "list",
+          "tunes": {
+            "textVariant": ""
+          }
+        }
+      ]
+    }
+  }
+}

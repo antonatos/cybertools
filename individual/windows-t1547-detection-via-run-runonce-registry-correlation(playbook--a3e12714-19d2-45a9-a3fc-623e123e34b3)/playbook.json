@@ -1,0 +1,265 @@
+{
+  "id": "playbook--a3e12714-19d2-45a9-a3fc-623e123e34b3",
+  "name": "Windows T1547 Detection via Run/RunOnce Registry Correlation",
+  "type": "playbook",
+  "labels": [
+    "T1547",
+    "Persistence",
+    "Windows",
+    "Registry",
+    "Detection",
+    "MITRE ATT&CK"
+  ],
+  "created": "2026-03-09T13:35:43.118Z",
+  "revoked": false,
+  "modified": "2026-03-09T13:35:43.118Z",
+  "priority": 0,
+  "workflow": {
+    "end--b873d332-234b-477f-a64b-58e4a0150eaf": {
+      "name": "End",
+      "type": "end"
+    },
+    "start--cbfdbd84-1289-4c5d-b882-13d3c408dfc4": {
+      "name": "Start",
+      "type": "start",
+      "on_completion": "action--a7fc1bf2-cf84-49e2-a6be-a1781e18532d"
+    },
+    "action--100c05a7-63e8-45c2-a40c-e51dc44e55e9": {
+      "name": "Configure Sysmon (if available) with a configuration that includes logging of registry events for Run and RunOnce keys (e.g., using the Sysmon configuration from SwiftOnSecurity or Olaf Hartong).",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Configure Sysmon (if available) with a configuration that includes logging of registry events for Run and RunOnce keys (e.g., using the Sysmon configuration from SwiftOnSecurity or Olaf Hartong).",
+          "description": "Configure Sysmon (if available) with a configuration that includes logging of registry events for Run and RunOnce keys (e.g., using the Sysmon configuration from SwiftOnSecurity or Olaf Hartong)."
+        }
+      ],
+      "on_completion": "action--61ba0d43-a3f4-4edc-9943-18f89525bdb6"
+    },
+    "action--1c7cdbca-4ce3-404d-97d7-ba4f3390058f": {
+      "name": "Establish a baseline of normal execution times for processes launched at logon/startup. Use statistical analysis or machine learning to identify outliers (e.g., processes executing at unusual times relative to user logon or system boot).",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Establish a baseline of normal execution times for processes launched at logon/startup. Use statistical analysis or machine learning to identify outliers (e.g., processes executing at unusual times relative to user logon or system boot).",
+          "description": "Establish a baseline of normal execution times for processes launched at logon/startup. Use statistical analysis or machine learning to identify outliers (e.g., processes executing at unusual times relative to user logon or system boot)."
+        }
+      ],
+      "on_completion": "action--21211198-05ed-46ed-b7df-f8a83aeb7888"
+    },
+    "action--21211198-05ed-46ed-b7df-f8a83aeb7888": {
+      "name": "Create alerts that trigger when a registry modification to a Run/RunOnce key is followed by the execution of a process with an abnormal parent-child relationship (e.g., a process spawned by an unknown or suspicious parent) and that occurs at an anomalous time during logon/startup.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Create alerts that trigger when a registry modification to a Run/RunOnce key is followed by the execution of a process with an abnormal parent-child relationship (e.g., a process spawned by an unknown or suspicious parent) and that occurs at an anomalous time during logon/startup.",
+          "description": "Create alerts that trigger when a registry modification to a Run/RunOnce key is followed by the execution of a process with an abnormal parent-child relationship (e.g., a process spawned by an unknown or suspicious parent) and that occurs at an anomalous time during logon/startup."
+        }
+      ],
+      "on_completion": "action--5769839c-cd72-4912-8285-985dd65b6a25"
+    },
+    "action--28b3d979-a33f-47d0-882e-dfa43a7a2346": {
+      "name": "Enable auditing for registry modifications. Specifically, enable 'Audit registry' in Advanced Audit Policy Configuration under Object Access.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Enable auditing for registry modifications. Specifically, enable 'Audit registry' in Advanced Audit Policy Configuration under Object Access.",
+          "description": "Enable auditing for registry modifications. Specifically, enable 'Audit registry' in Advanced Audit Policy Configuration under Object Access."
+        }
+      ],
+      "on_completion": "action--100c05a7-63e8-45c2-a40c-e51dc44e55e9"
+    },
+    "action--3a558618-2bc6-4f31-9bb2-f75157087f2d": {
+      "name": "Update detection rules and baselines based on findings to improve future detection capabilities.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Update detection rules and baselines based on findings to improve future detection capabilities.",
+          "description": "Update detection rules and baselines based on findings to improve future detection capabilities."
+        }
+      ],
+      "on_completion": "end--b873d332-234b-477f-a64b-58e4a0150eaf"
+    },
+    "action--5769839c-cd72-4912-8285-985dd65b6a25": {
+      "name": "Investigate alerts by reviewing the full process tree, user context, command-line arguments, and file metadata (e.g., digital signatures) of the involved processes.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Investigate alerts by reviewing the full process tree, user context, command-line arguments, and file metadata (e.g., digital signatures) of the involved processes.",
+          "description": "Investigate alerts by reviewing the full process tree, user context, command-line arguments, and file metadata (e.g., digital signatures) of the involved processes."
+        }
+      ],
+      "on_completion": "action--d9acbd66-ad63-498d-b008-d03a83041d32"
+    },
+    "action--61ba0d43-a3f4-4edc-9943-18f89525bdb6": {
+      "name": "Create detection rules to identify modifications to the following registry keys: HKEY_LOCAL_MACHINE\\Software\\Microsoft\\Windows\\CurrentVersion\\Run, HKEY_LOCAL_MACHINE\\Software\\Microsoft\\Windows\\CurrentVersion\\RunOnce, HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run, HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\RunOnce.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Create detection rules to identify modifications to the following registry keys: HKEY_LOCAL_MACHINE\\Software\\Microsoft\\Windows\\CurrentVersion\\Run, HKEY_LOCAL_MACHINE\\Software\\Microsoft\\Windows\\CurrentVersion\\RunOnce, HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run, HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\RunOnce.",
+          "description": "Create detection rules to identify modifications to the following registry keys: HKEY_LOCAL_MACHINE\\Software\\Microsoft\\Windows\\CurrentVersion\\Run, HKEY_LOCAL_MACHINE\\Software\\Microsoft\\Windows\\CurrentVersion\\RunOnce, HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run, HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\RunOnce."
+        }
+      ],
+      "on_completion": "action--7f8fe539-dd43-41e8-907f-1720f7292651"
+    },
+    "action--7f8fe539-dd43-41e8-907f-1720f7292651": {
+      "name": "Correlate registry modification events with process creation events (Event ID 4688 or Sysmon Event ID 1) to establish parent-child process relationships. Focus on processes that are not typical parents for Run/RunOnce modifications (e.g., not explorer.exe, userinit.exe, or common installers).",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Correlate registry modification events with process creation events (Event ID 4688 or Sysmon Event ID 1) to establish parent-child process relationships. Focus on processes that are not typical parents for Run/RunOnce modifications (e.g., not explorer.exe, userinit.exe, or common installers).",
+          "description": "Correlate registry modification events with process creation events (Event ID 4688 or Sysmon Event ID 1) to establish parent-child process relationships. Focus on processes that are not typical parents for Run/RunOnce modifications (e.g., not explorer.exe, userinit.exe, or common installers)."
+        }
+      ],
+      "on_completion": "action--1c7cdbca-4ce3-404d-97d7-ba4f3390058f"
+    },
+    "action--a7fc1bf2-cf84-49e2-a6be-a1781e18532d": {
+      "name": "Deploy and configure a SIEM or log aggregation tool to collect Windows Event Logs (specifically Security, System, and Microsoft-Windows-Sysmon/Operational if available).",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Deploy and configure a SIEM or log aggregation tool to collect Windows Event Logs (specifically Security, System, and Microsoft-Windows-Sysmon/Operational if available).",
+          "description": "Deploy and configure a SIEM or log aggregation tool to collect Windows Event Logs (specifically Security, System, and Microsoft-Windows-Sysmon/Operational if available)."
+        }
+      ],
+      "on_completion": "action--28b3d979-a33f-47d0-882e-dfa43a7a2346"
+    },
+    "action--d9acbd66-ad63-498d-b008-d03a83041d32": {
+      "name": "If malicious activity is confirmed, isolate the affected endpoint, collect forensic artifacts (e.g., memory dump, registry hives, and disk image), and eradicate the threat by removing persistence mechanisms and malicious files.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "If malicious activity is confirmed, isolate the affected endpoint, collect forensic artifacts (e.g., memory dump, registry hives, and disk image), and eradicate the threat by removing persistence mechanisms and malicious files.",
+          "description": "If malicious activity is confirmed, isolate the affected endpoint, collect forensic artifacts (e.g., memory dump, registry hives, and disk image), and eradicate the threat by removing persistence mechanisms and malicious files."
+        }
+      ],
+      "on_completion": "action--3a558618-2bc6-4f31-9bb2-f75157087f2d"
+    }
+  },
+  "created_by": "individual--506bcd7d-f79e-4c2a-acbe-5fdee7552639",
+  "description": "This is an automatically generated playbook based on the question: A detections playbook for T1547 of MITRE ATT&CK Matrix for Enterprise framework is required.The target platform is Windows. You can find more information at https://attack.mitre.org/detectionstrategies/DET0274#AN0764 . The description of the approach follows: Correlation of registry key modification for Run/RunOnce with abnormal parent-child process relationships and outlier execution at user logon or system startup",
+  "spec_version": "cacao-2.0",
+  "workflow_start": "start--cbfdbd84-1289-4c5d-b882-13d3c408dfc4",
+  "agent_definitions": {
+    "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81": {
+      "name": "DummyAgent",
+      "type": "individual",
+      "description": "Dummy Agent to be changed"
+    }
+  },
+  "external_references": [
+    {
+      "url": "https://attack.mitre.org/techniques/T1547/",
+      "name": "MITRE ATT&CK Technique T1547: Boot or Logon Autostart Execution"
+    },
+    {
+      "url": "https://attack.mitre.org/detectionstrategies/DET0274#AN0764",
+      "name": "MITRE ATT&CK Detection Strategies: DET0274"
+    },
+    {
+      "url": "https://github.com/SwiftOnSecurity/sysmon-config",
+      "name": "Sysmon Configuration by SwiftOnSecurity"
+    },
+    {
+      "url": "https://github.com/olafhartong/sysmon-modular",
+      "name": "Sysmon Modular by Olaf Hartong"
+    }
+  ],
+  "__cymph_metadata": {
+    "mappings": {
+      "MITRE ATT&CK Matrix for Enterprise": [
+        "T1547"
+      ]
+    },
+    "document": {
+      "time": 1773063343136,
+      "blocks": [
+        {
+          "id": "ROY1wtZnKu",
+          "data": {
+            "meta": {
+              "start": 1,
+              "counterType": "numeric"
+            },
+            "items": [
+              {
+                "meta": {},
+                "items": [],
+                "content": "Deploy and configure a SIEM or log aggregation tool to collect Windows Event Logs (specifically Security, System, and Microsoft-Windows-Sysmon/Operational if available)."
+              },
+              {
+                "meta": {},
+                "items": [],
+                "content": "Enable auditing for registry modifications. Specifically, enable 'Audit registry' in Advanced Audit Policy Configuration under Object Access."
+              },
+              {
+                "meta": {},
+                "items": [],
+                "content": "Configure Sysmon (if available) with a configuration that includes logging of registry events for Run and RunOnce keys (e.g., using the Sysmon configuration from SwiftOnSecurity or Olaf Hartong)."
+              },
+              {
+                "meta": {},
+                "items": [],
+                "content": "Create detection rules to identify modifications to the following registry keys: HKEY_LOCAL_MACHINE\\Software\\Microsoft\\Windows\\CurrentVersion\\Run, HKEY_LOCAL_MACHINE\\Software\\Microsoft\\Windows\\CurrentVersion\\RunOnce, HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run, HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\RunOnce."
+              },
+              {
+                "meta": {},
+                "items": [],
+                "content": "Correlate registry modification events with process creation events (Event ID 4688 or Sysmon Event ID 1) to establish parent-child process relationships. Focus on processes that are not typical parents for Run/RunOnce modifications (e.g., not explorer.exe, userinit.exe, or common installers)."
+              },
+              {
+                "meta": {},
+                "items": [],
+                "content": "Establish a baseline of normal execution times for processes launched at logon/startup. Use statistical analysis or machine learning to identify outliers (e.g., processes executing at unusual times relative to user logon or system boot)."
+              },
+              {
+                "meta": {},
+                "items": [],
+                "content": "Create alerts that trigger when a registry modification to a Run/RunOnce key is followed by the execution of a process with an abnormal parent-child relationship (e.g., a process spawned by an unknown or suspicious parent) and that occurs at an anomalous time during logon/startup."
+              },
+              {
+                "meta": {},
+                "items": [],
+                "content": "Investigate alerts by reviewing the full process tree, user context, command-line arguments, and file metadata (e.g., digital signatures) of the involved processes."
+              },
+              {
+                "meta": {},
+                "items": [],
+                "content": "If malicious activity is confirmed, isolate the affected endpoint, collect forensic artifacts (e.g., memory dump, registry hives, and disk image), and eradicate the threat by removing persistence mechanisms and malicious files."
+              },
+              {
+                "meta": {},
+                "items": [],
+                "content": "Update detection rules and baselines based on findings to improve future detection capabilities."
+              }
+            ],
+            "style": "ordered"
+          },
+          "type": "list",
+          "tunes": {
+            "textVariant": ""
+          }
+        }
+      ]
+    }
+  }
+}

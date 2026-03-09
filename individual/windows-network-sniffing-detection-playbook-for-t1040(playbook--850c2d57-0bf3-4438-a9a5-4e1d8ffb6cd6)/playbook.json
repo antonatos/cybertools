@@ -1,0 +1,302 @@
+{
+  "id": "playbook--850c2d57-0bf3-4438-a9a5-4e1d8ffb6cd6",
+  "name": "Windows Network Sniffing Detection Playbook for T1040",
+  "type": "playbook",
+  "labels": [
+    "T1040",
+    "Network Sniffing",
+    "Windows",
+    "Detection",
+    "MITRE ATT&CK"
+  ],
+  "created": "2026-03-09T13:42:26.762Z",
+  "revoked": false,
+  "modified": "2026-03-09T13:42:26.762Z",
+  "priority": 0,
+  "workflow": {
+    "end--3fd5831d-7aab-4446-9f6c-6f1594d014f6": {
+      "name": "End",
+      "type": "end"
+    },
+    "end--453782c2-7a08-47ea-b5d6-e6c080fe0035": {
+      "name": "End",
+      "type": "end"
+    },
+    "end--a42449ef-ae41-4900-ad09-c190857159ae": {
+      "name": "End",
+      "type": "end"
+    },
+    "end--efa595db-896b-411e-b700-81069c7a1d4f": {
+      "name": "End",
+      "type": "end"
+    },
+    "start--f327e888-04af-4c16-9927-5be9ee96d014": {
+      "name": "Start",
+      "type": "start",
+      "on_completion": "action--23296a0f-5935-4b32-ab7e-ff8618806fce"
+    },
+    "action--1c41a00c-6411-457f-bb18-c5654e5002b0": {
+      "name": "Establish baselines of normal administrative use of network tools to reduce false positives.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Establish baselines of normal administrative use of network tools to reduce false positives.",
+          "description": "Establish baselines of normal administrative use of network tools to reduce false positives."
+        }
+      ],
+      "on_completion": "end--3fd5831d-7aab-4446-9f6c-6f1594d014f6"
+    },
+    "action--1e5df3ed-41dd-425c-8da9-b6b2be7963a4": {
+      "name": "System event ID 6: Driver loaded events",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "System event ID 6: Driver loaded events",
+          "description": ""
+        }
+      ],
+      "on_completion": "end--efa595db-896b-411e-b700-81069c7a1d4f"
+    },
+    "action--23296a0f-5935-4b32-ab7e-ff8618806fce": {
+      "name": "Monitor process creation events for known network monitoring tools (e.g., Wireshark, tshark, Microsoft Message Analyzer, tcpdump, WinDump).",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Monitor process creation events for known network monitoring tools (e.g., Wireshark, tshark, Microsoft Message Analyzer, tcpdump, WinDump).",
+          "description": "Monitor process creation events for known network monitoring tools (e.g., Wireshark, tshark, Microsoft Message Analyzer, tcpdump, WinDump)."
+        }
+      ],
+      "on_completion": "action--72455c0e-038f-49da-ae88-88b271ac3b44"
+    },
+    "action--49faa38e-0f3f-4efb-a126-ee66f7f4c128": {
+      "name": "Security event ID 4673: Privilege escalation or sensitive privilege use",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Security event ID 4673: Privilege escalation or sensitive privilege use",
+          "description": ""
+        }
+      ],
+      "on_completion": "end--453782c2-7a08-47ea-b5d6-e6c080fe0035"
+    },
+    "action--5d00a62a-d46e-4c23-8134-bce2e868f901": {
+      "name": "Audit for privilege escalation events where non-admin users gain elevated permissions to access network interfaces or install drivers.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Audit for privilege escalation events where non-admin users gain elevated permissions to access network interfaces or install drivers.",
+          "description": "Audit for privilege escalation events where non-admin users gain elevated permissions to access network interfaces or install drivers."
+        }
+      ],
+      "on_completion": "action--80873754-3472-44a9-9574-a0c23fcdc9b7"
+    },
+    "action--653bd82d-1971-41b8-9aa4-b097b33eab57": {
+      "name": "Detect attempts to enable promiscuous mode on network interfaces via system calls or PowerShell commands.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Detect attempts to enable promiscuous mode on network interfaces via system calls or PowerShell commands.",
+          "description": "Detect attempts to enable promiscuous mode on network interfaces via system calls or PowerShell commands."
+        }
+      ],
+      "on_completion": "action--5d00a62a-d46e-4c23-8134-bce2e868f901"
+    },
+    "action--72455c0e-038f-49da-ae88-88b271ac3b44": {
+      "name": "Inspect command-line arguments of network monitoring processes for suspicious flags (e.g., promiscuous mode, output redirection, interface selection).",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Inspect command-line arguments of network monitoring processes for suspicious flags (e.g., promiscuous mode, output redirection, interface selection).",
+          "description": "Inspect command-line arguments of network monitoring processes for suspicious flags (e.g., promiscuous mode, output redirection, interface selection)."
+        }
+      ],
+      "on_completion": "action--d0ee27ce-f3a2-4aed-8ab2-4fe1a8d0dd3e"
+    },
+    "action--72ef1572-d6d3-4ea8-831d-5aadc9473824": {
+      "name": "Security event ID 4688: Monitor process creation with detailed command-line logging enabled",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Security event ID 4688: Monitor process creation with detailed command-line logging enabled",
+          "description": ""
+        }
+      ],
+      "on_completion": "end--a42449ef-ae41-4900-ad09-c190857159ae"
+    },
+    "action--80873754-3472-44a9-9574-a0c23fcdc9b7": {
+      "name": "Correlate network monitoring tool execution with unusual network traffic patterns or data exfiltration attempts.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Correlate network monitoring tool execution with unusual network traffic patterns or data exfiltration attempts.",
+          "description": "Correlate network monitoring tool execution with unusual network traffic patterns or data exfiltration attempts."
+        }
+      ],
+      "on_completion": "parallel--e4278597-a92d-45a0-b28a-9267bf6fd081"
+    },
+    "action--d0ee27ce-f3a2-4aed-8ab2-4fe1a8d0dd3e": {
+      "name": "Monitor for driver loads associated with network monitoring or promiscuous mode (e.g., npf.sys for WinPcap/Npcap).",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Monitor for driver loads associated with network monitoring or promiscuous mode (e.g., npf.sys for WinPcap/Npcap).",
+          "description": "Monitor for driver loads associated with network monitoring or promiscuous mode (e.g., npf.sys for WinPcap/Npcap)."
+        }
+      ],
+      "on_completion": "action--653bd82d-1971-41b8-9aa4-b097b33eab57"
+    },
+    "action--e54b75a0-d0cd-4831-a36a-c7938cd00d0c": {
+      "name": "Deploy and tune EDR or SIEM rules to alert on suspicious combinations of the above activities.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Deploy and tune EDR or SIEM rules to alert on suspicious combinations of the above activities.",
+          "description": "Deploy and tune EDR or SIEM rules to alert on suspicious combinations of the above activities."
+        }
+      ],
+      "on_completion": "action--1c41a00c-6411-457f-bb18-c5654e5002b0"
+    },
+    "parallel--e4278597-a92d-45a0-b28a-9267bf6fd081": {
+      "name": "Implement and review Windows Event Logs for relevant indicators",
+      "type": "parallel",
+      "next_steps": [
+        "action--72ef1572-d6d3-4ea8-831d-5aadc9473824",
+        "action--1e5df3ed-41dd-425c-8da9-b6b2be7963a4",
+        "action--49faa38e-0f3f-4efb-a126-ee66f7f4c128"
+      ],
+      "on_completion": "action--e54b75a0-d0cd-4831-a36a-c7938cd00d0c"
+    }
+  },
+  "created_by": "individual--506bcd7d-f79e-4c2a-acbe-5fdee7552639",
+  "description": "This is an automatically generated playbook based on the question: A detections playbook for T1040 of MITRE ATT&CK Matrix for Enterprise framework is required.The target platform is Windows. You can find more information at https://attack.mitre.org/detectionstrategies/DET0314#AN0875 . The description of the approach follows: Detects suspicious execution of network monitoring tools (e.g., Wireshark, tshark, Microsoft Message Analyzer), driver loading indicative of promiscuous mode, or non-admin user privilege escalation to access NICs for capture.",
+  "spec_version": "cacao-2.0",
+  "workflow_start": "start--f327e888-04af-4c16-9927-5be9ee96d014",
+  "agent_definitions": {
+    "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81": {
+      "name": "DummyAgent",
+      "type": "individual",
+      "description": "Dummy Agent to be changed"
+    }
+  },
+  "external_references": [
+    {
+      "url": "https://attack.mitre.org/techniques/T1040/",
+      "name": "MITRE ATT&CK T1040: Network Sniffing"
+    },
+    {
+      "url": "https://attack.mitre.org/detectionstrategies/DET0314#AN0875",
+      "name": "MITRE ATT&CK Detection Strategy DET0314#AN0875"
+    }
+  ],
+  "__cymph_metadata": {
+    "mappings": {
+      "MITRE ATT&CK Matrix for Enterprise": [
+        "T1040"
+      ]
+    },
+    "document": {
+      "time": 1773063746770,
+      "blocks": [
+        {
+          "id": "eoIzCLhcKt",
+          "data": {
+            "meta": {
+              "start": 1,
+              "counterType": "numeric"
+            },
+            "items": [
+              {
+                "meta": {},
+                "items": [],
+                "content": "Monitor process creation events for known network monitoring tools (e.g., Wireshark, tshark, Microsoft Message Analyzer, tcpdump, WinDump)."
+              },
+              {
+                "meta": {},
+                "items": [],
+                "content": "Inspect command-line arguments of network monitoring processes for suspicious flags (e.g., promiscuous mode, output redirection, interface selection)."
+              },
+              {
+                "meta": {},
+                "items": [],
+                "content": "Monitor for driver loads associated with network monitoring or promiscuous mode (e.g., npf.sys for WinPcap/Npcap)."
+              },
+              {
+                "meta": {},
+                "items": [],
+                "content": "Detect attempts to enable promiscuous mode on network interfaces via system calls or PowerShell commands."
+              },
+              {
+                "meta": {},
+                "items": [],
+                "content": "Audit for privilege escalation events where non-admin users gain elevated permissions to access network interfaces or install drivers."
+              },
+              {
+                "meta": {},
+                "items": [],
+                "content": "Correlate network monitoring tool execution with unusual network traffic patterns or data exfiltration attempts."
+              },
+              {
+                "meta": {},
+                "items": [
+                  {
+                    "meta": {},
+                    "items": [],
+                    "content": "Security event ID 4688: Monitor process creation with detailed command-line logging enabled"
+                  },
+                  {
+                    "meta": {},
+                    "items": [],
+                    "content": "System event ID 6: Driver loaded events"
+                  },
+                  {
+                    "meta": {},
+                    "items": [],
+                    "content": "Security event ID 4673: Privilege escalation or sensitive privilege use"
+                  }
+                ],
+                "content": "Implement and review Windows Event Logs for relevant indicators"
+              },
+              {
+                "meta": {},
+                "items": [],
+                "content": "Deploy and tune EDR or SIEM rules to alert on suspicious combinations of the above activities."
+              },
+              {
+                "meta": {},
+                "items": [],
+                "content": "Establish baselines of normal administrative use of network tools to reduce false positives."
+              }
+            ],
+            "style": "ordered"
+          },
+          "type": "list",
+          "tunes": {
+            "textVariant": ""
+          }
+        }
+      ]
+    }
+  }
+}

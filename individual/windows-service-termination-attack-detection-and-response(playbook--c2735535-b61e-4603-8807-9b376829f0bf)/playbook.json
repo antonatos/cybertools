@@ -1,0 +1,289 @@
+{
+  "id": "playbook--c2735535-b61e-4603-8807-9b376829f0bf",
+  "name": "Windows Service Termination Attack Detection and Response",
+  "type": "playbook",
+  "labels": [
+    "T1489",
+    "Service Stop",
+    "Destructive Attack",
+    "Windows",
+    "MITRE ATT&CK"
+  ],
+  "created": "2026-03-09T13:43:01.579Z",
+  "revoked": false,
+  "modified": "2026-03-09T13:43:01.579Z",
+  "priority": 0,
+  "workflow": {
+    "end--11990992-7e70-464c-9bff-df76eeb52436": {
+      "name": "End",
+      "type": "end"
+    },
+    "end--12275c31-77ec-440f-91d0-9e089e79815c": {
+      "name": "End",
+      "type": "end"
+    },
+    "end--612d5c9d-c03a-48cf-8650-57b9a22f9f6d": {
+      "name": "End",
+      "type": "end"
+    },
+    "end--82afd60b-7c1d-4d4f-b316-468afe8dabdb": {
+      "name": "End",
+      "type": "end"
+    },
+    "end--aa4d82d2-3e21-4f8a-bb21-6e14b917f0cd": {
+      "name": "End",
+      "type": "end"
+    },
+    "start--d5f6baf1-ca69-4990-aa64-0cd4ed3e0f74": {
+      "name": "Start",
+      "type": "start",
+      "on_completion": "action--597c10f4-f90b-4d26-b880-d3393c765e0e"
+    },
+    "action--088e887a-8981-4a7c-a275-18ce2c34e5d0": {
+      "name": "Collect forensic artifacts (process trees, command history, service logs) for analysis",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Collect forensic artifacts (process trees, command history, service logs) for analysis",
+          "description": ""
+        }
+      ],
+      "on_completion": "end--11990992-7e70-464c-9bff-df76eeb52436"
+    },
+    "action--0fe7613c-ee6a-4b3c-a176-6cd982e832a9": {
+      "name": "Monitor for subsequent destructive actions (T1485, T1486) such as file deletion, encryption, or overwriting following service disruption.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Monitor for subsequent destructive actions (T1485, T1486) such as file deletion, encryption, or overwriting following service disruption.",
+          "description": "Monitor for subsequent destructive actions (T1485, T1486) such as file deletion, encryption, or overwriting following service disruption."
+        }
+      ],
+      "on_completion": "parallel--5fdb90da-056a-4c73-909a-09efba240bde"
+    },
+    "action--179035fa-e15f-4005-9efc-bfb2f3b85aba": {
+      "name": "Correlate service termination events with process execution context to identify elevated privileges (e.g., SYSTEM, local admin).",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Correlate service termination events with process execution context to identify elevated privileges (e.g., SYSTEM, local admin).",
+          "description": "Correlate service termination events with process execution context to identify elevated privileges (e.g., SYSTEM, local admin)."
+        }
+      ],
+      "on_completion": "action--d649c889-7103-41f6-a33f-7e5a9010c060"
+    },
+    "action--28a0ef59-fb90-4a94-897f-b9d50922fc94": {
+      "name": "Isolate affected endpoints from the network to prevent lateral movement",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Isolate affected endpoints from the network to prevent lateral movement",
+          "description": ""
+        }
+      ],
+      "on_completion": "end--82afd60b-7c1d-4d4f-b316-468afe8dabdb"
+    },
+    "action--3517af64-9df4-47a3-82c5-3939562a7285": {
+      "name": "Restore critical services to normal operation state",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Restore critical services to normal operation state",
+          "description": ""
+        }
+      ],
+      "on_completion": "end--612d5c9d-c03a-48cf-8650-57b9a22f9f6d"
+    },
+    "action--597c10f4-f90b-4d26-b880-d3393c765e0e": {
+      "name": "Establish continuous monitoring for service state changes on critical Windows services (e.g., Exchange, SQL Server, Antivirus, EDR agents).",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Establish continuous monitoring for service state changes on critical Windows services (e.g., Exchange, SQL Server, Antivirus, EDR agents).",
+          "description": "Establish continuous monitoring for service state changes on critical Windows services (e.g., Exchange, SQL Server, Antivirus, EDR agents)."
+        }
+      ],
+      "on_completion": "action--e93fef07-d1fd-4fcc-a387-4ecbf4aa133b"
+    },
+    "action--a0b08647-df69-4166-aeea-45951cbb4bf6": {
+      "name": "Review and update detection rules based on investigation findings to improve future coverage.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Review and update detection rules based on investigation findings to improve future coverage.",
+          "description": "Review and update detection rules based on investigation findings to improve future coverage."
+        }
+      ],
+      "on_completion": "end--12275c31-77ec-440f-91d0-9e089e79815c"
+    },
+    "action--d649c889-7103-41f6-a33f-7e5a9010c060": {
+      "name": "Investigate the parent process chain and command-line arguments for suspicious patterns (e.g., mass service termination, use of automation scripts).",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Investigate the parent process chain and command-line arguments for suspicious patterns (e.g., mass service termination, use of automation scripts).",
+          "description": "Investigate the parent process chain and command-line arguments for suspicious patterns (e.g., mass service termination, use of automation scripts)."
+        }
+      ],
+      "on_completion": "action--0fe7613c-ee6a-4b3c-a176-6cd982e832a9"
+    },
+    "action--e62ef2d7-7db2-42dc-9d83-fe9b412ecce5": {
+      "name": "Initiate incident response procedures for potential destructive attack",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Initiate incident response procedures for potential destructive attack",
+          "description": ""
+        }
+      ],
+      "on_completion": "end--aa4d82d2-3e21-4f8a-bb21-6e14b917f0cd"
+    },
+    "action--e93fef07-d1fd-4fcc-a387-4ecbf4aa133b": {
+      "name": "Configure alerts for any service stop or disable commands issued via native utilities (sc.exe, net stop, Stop-Service) or direct API calls (ChangeServiceConfigW).",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Configure alerts for any service stop or disable commands issued via native utilities (sc.exe, net stop, Stop-Service) or direct API calls (ChangeServiceConfigW).",
+          "description": "Configure alerts for any service stop or disable commands issued via native utilities (sc.exe, net stop, Stop-Service) or direct API calls (ChangeServiceConfigW)."
+        }
+      ],
+      "on_completion": "action--179035fa-e15f-4005-9efc-bfb2f3b85aba"
+    },
+    "parallel--5fdb90da-056a-4c73-909a-09efba240bde": {
+      "name": "Implement response actions upon detection",
+      "type": "parallel",
+      "next_steps": [
+        "action--28a0ef59-fb90-4a94-897f-b9d50922fc94",
+        "action--3517af64-9df4-47a3-82c5-3939562a7285",
+        "action--088e887a-8981-4a7c-a275-18ce2c34e5d0",
+        "action--e62ef2d7-7db2-42dc-9d83-fe9b412ecce5"
+      ],
+      "on_completion": "action--a0b08647-df69-4166-aeea-45951cbb4bf6"
+    }
+  },
+  "created_by": "individual--506bcd7d-f79e-4c2a-acbe-5fdee7552639",
+  "description": "This is an automatically generated playbook based on the question: A detections playbook for T1489 of MITRE ATT&CK Matrix for Enterprise framework is required.The target platform is Windows. You can find more information at https://attack.mitre.org/detectionstrategies/DET0021#AN0061 . The description of the approach follows: Adversary disables or stops critical services (e.g., Exchange, SQL, AV, endpoint monitoring) using native utilities or API calls, often preceding destructive actions (T1485, T1486). Behavioral chain: Elevated execution context + stop-service or sc.exe or ChangeServiceConfigW + terminated or disabled service + possible follow-up file manipulation.",
+  "spec_version": "cacao-2.0",
+  "workflow_start": "start--d5f6baf1-ca69-4990-aa64-0cd4ed3e0f74",
+  "agent_definitions": {
+    "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81": {
+      "name": "DummyAgent",
+      "type": "individual",
+      "description": "Dummy Agent to be changed"
+    }
+  },
+  "external_references": [
+    {
+      "url": "https://attack.mitre.org/techniques/T1489/",
+      "name": "MITRE ATT&CK Technique T1489: Service Stop"
+    },
+    {
+      "url": "https://attack.mitre.org/detectionstrategies/DET0021#AN0061",
+      "name": "MITRE ATT&CK Detection Strategies DET0021#AN0061"
+    }
+  ],
+  "__cymph_metadata": {
+    "mappings": {
+      "MITRE ATT&CK Matrix for Enterprise": [
+        "T1489"
+      ]
+    },
+    "document": {
+      "time": 1773063781587,
+      "blocks": [
+        {
+          "id": "mgF6Kk1VAu",
+          "data": {
+            "meta": {
+              "start": 1,
+              "counterType": "numeric"
+            },
+            "items": [
+              {
+                "meta": {},
+                "items": [],
+                "content": "Establish continuous monitoring for service state changes on critical Windows services (e.g., Exchange, SQL Server, Antivirus, EDR agents)."
+              },
+              {
+                "meta": {},
+                "items": [],
+                "content": "Configure alerts for any service stop or disable commands issued via native utilities (sc.exe, net stop, Stop-Service) or direct API calls (ChangeServiceConfigW)."
+              },
+              {
+                "meta": {},
+                "items": [],
+                "content": "Correlate service termination events with process execution context to identify elevated privileges (e.g., SYSTEM, local admin)."
+              },
+              {
+                "meta": {},
+                "items": [],
+                "content": "Investigate the parent process chain and command-line arguments for suspicious patterns (e.g., mass service termination, use of automation scripts)."
+              },
+              {
+                "meta": {},
+                "items": [],
+                "content": "Monitor for subsequent destructive actions (T1485, T1486) such as file deletion, encryption, or overwriting following service disruption."
+              },
+              {
+                "meta": {},
+                "items": [
+                  {
+                    "meta": {},
+                    "items": [],
+                    "content": "Isolate affected endpoints from the network to prevent lateral movement"
+                  },
+                  {
+                    "meta": {},
+                    "items": [],
+                    "content": "Restore critical services to normal operation state"
+                  },
+                  {
+                    "meta": {},
+                    "items": [],
+                    "content": "Collect forensic artifacts (process trees, command history, service logs) for analysis"
+                  },
+                  {
+                    "meta": {},
+                    "items": [],
+                    "content": "Initiate incident response procedures for potential destructive attack"
+                  }
+                ],
+                "content": "Implement response actions upon detection"
+              },
+              {
+                "meta": {},
+                "items": [],
+                "content": "Review and update detection rules based on investigation findings to improve future coverage."
+              }
+            ],
+            "style": "ordered"
+          },
+          "type": "list",
+          "tunes": {
+            "textVariant": ""
+          }
+        }
+      ]
+    }
+  }
+}

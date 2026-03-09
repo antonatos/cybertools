@@ -1,0 +1,348 @@
+{
+  "id": "playbook--9bcb6170-4928-4c71-912c-5ce102a2beaf",
+  "name": "Windows T1548 Abuse of Elevation Control Mechanism Detection Playbook",
+  "type": "playbook",
+  "labels": [
+    "Windows",
+    "Privilege Escalation",
+    "MITRE ATT&CK T1548",
+    "Detection",
+    "UAC Bypass"
+  ],
+  "created": "2026-03-09T13:34:05.022Z",
+  "revoked": false,
+  "modified": "2026-03-09T13:34:05.022Z",
+  "priority": 0,
+  "workflow": {
+    "end--171f5b72-695e-4af0-9b68-301a31dfbfc5": {
+      "name": "End",
+      "type": "end"
+    },
+    "end--516d29fa-e67b-4e16-b78a-7a82cde97c43": {
+      "name": "End",
+      "type": "end"
+    },
+    "end--b1b7eaaa-7fd2-4d91-998e-7fff3bf600dd": {
+      "name": "End",
+      "type": "end"
+    },
+    "end--d116783b-871e-462b-91ab-d972559c127c": {
+      "name": "End",
+      "type": "end"
+    },
+    "end--dc81aa09-fd34-4fa4-b4ea-00208503278a": {
+      "name": "End",
+      "type": "end"
+    },
+    "end--e19c7c48-c019-4414-bbb7-6db34eaffcfe": {
+      "name": "End",
+      "type": "end"
+    },
+    "end--ed388fcf-b164-4b0b-94c1-772353b7560d": {
+      "name": "End",
+      "type": "end"
+    },
+    "start--b2f6d995-1e79-48ae-a9fc-5344ea3f5924": {
+      "name": "Start",
+      "type": "start",
+      "on_completion": "action--48fe3bd4-765f-4c6e-83a6-6ca3a96baa04"
+    },
+    "action--1764a275-f271-4ea6-a87d-f4e96317ce01": {
+      "name": "Enable and configure Windows Event Logging to capture the necessary events: Security, System, and Microsoft-Windows-Windows Defender/Operational logs.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Enable and configure Windows Event Logging to capture the necessary events: Security, System, and Microsoft-Windows-Windows Defender/Operational logs.",
+          "description": "Enable and configure Windows Event Logging to capture the necessary events: Security, System, and Microsoft-Windows-Windows Defender/Operational logs."
+        }
+      ],
+      "on_completion": "action--edc56555-538d-4828-9e77-55cd2a19cbd9"
+    },
+    "action--20b8290a-0ad5-4cc0-a8a7-4fe07494dbb9": {
+      "name": "Monitor for process creation events where the integrity level or token elevation type is unusual (e.g., high integrity from a non-administrative parent).",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Monitor for process creation events where the integrity level or token elevation type is unusual (e.g., high integrity from a non-administrative parent).",
+          "description": ""
+        }
+      ],
+      "on_completion": "end--516d29fa-e67b-4e16-b78a-7a82cde97c43"
+    },
+    "action--2155a772-504a-4639-a90b-b1b98852f56a": {
+      "name": "Monitor process creation events (Event ID 4688 or Sysmon Event ID 1) for known suspicious parent-child pairs (e.g., control.exe spawning cmd.exe).",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Monitor process creation events (Event ID 4688 or Sysmon Event ID 1) for known suspicious parent-child pairs (e.g., control.exe spawning cmd.exe).",
+          "description": ""
+        }
+      ],
+      "on_completion": "end--d116783b-871e-462b-91ab-d972559c127c"
+    },
+    "action--256df0c0-1641-4ed5-bbea-72c822562107": {
+      "name": "If malicious activity is confirmed, initiate incident response procedures to contain and eradicate the threat.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "If malicious activity is confirmed, initiate incident response procedures to contain and eradicate the threat.",
+          "description": "If malicious activity is confirmed, initiate incident response procedures to contain and eradicate the threat."
+        }
+      ],
+      "on_completion": "end--b1b7eaaa-7fd2-4d91-998e-7fff3bf600dd"
+    },
+    "action--2ff8dba0-425b-47d2-9de6-d7653cfb35a7": {
+      "name": "Investigate correlated alerts to determine if they indicate malicious activity or false positives.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Investigate correlated alerts to determine if they indicate malicious activity or false positives.",
+          "description": "Investigate correlated alerts to determine if they indicate malicious activity or false positives."
+        }
+      ],
+      "on_completion": "action--256df0c0-1641-4ed5-bbea-72c822562107"
+    },
+    "action--44ca5996-ec77-413f-99a4-81bccccedc80": {
+      "name": "Correlate alerts from registry modifications, unusual process relationships, and elevated process executions to identify potential T1548 abuse.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Correlate alerts from registry modifications, unusual process relationships, and elevated process executions to identify potential T1548 abuse.",
+          "description": "Correlate alerts from registry modifications, unusual process relationships, and elevated process executions to identify potential T1548 abuse."
+        }
+      ],
+      "on_completion": "action--2ff8dba0-425b-47d2-9de6-d7653cfb35a7"
+    },
+    "action--45a6fc7f-6c4e-450e-97df-974260cb6ab9": {
+      "name": "Correlate with events indicating UAC bypass or privilege escalation attempts.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Correlate with events indicating UAC bypass or privilege escalation attempts.",
+          "description": ""
+        }
+      ],
+      "on_completion": "end--171f5b72-695e-4af0-9b68-301a31dfbfc5"
+    },
+    "action--48fe3bd4-765f-4c6e-83a6-6ca3a96baa04": {
+      "name": "Deploy and configure a SIEM or log aggregation tool to collect and correlate events from Windows endpoints.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Deploy and configure a SIEM or log aggregation tool to collect and correlate events from Windows endpoints.",
+          "description": "Deploy and configure a SIEM or log aggregation tool to collect and correlate events from Windows endpoints."
+        }
+      ],
+      "on_completion": "action--1764a275-f271-4ea6-a87d-f4e96317ce01"
+    },
+    "action--6046546b-c578-49d0-8371-d4b7c705c0e5": {
+      "name": "Check for processes running with elevated privileges (e.g., via Token Elevation Type) that are unsigned or from untrusted locations.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Check for processes running with elevated privileges (e.g., via Token Elevation Type) that are unsigned or from untrusted locations.",
+          "description": ""
+        }
+      ],
+      "on_completion": "end--e19c7c48-c019-4414-bbb7-6db34eaffcfe"
+    },
+    "action--6453eb84-feab-4b25-89d6-f0cf32011efa": {
+      "name": "Establish a baseline of normal parent-child process relationships for the environment.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Establish a baseline of normal parent-child process relationships for the environment.",
+          "description": ""
+        }
+      ],
+      "on_completion": "end--ed388fcf-b164-4b0b-94c1-772353b7560d"
+    },
+    "action--82e25695-aa8f-4e6e-8556-91868890a0a9": {
+      "name": "Alert on deviations from the baseline or known malicious patterns.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Alert on deviations from the baseline or known malicious patterns.",
+          "description": ""
+        }
+      ],
+      "on_completion": "end--dc81aa09-fd34-4fa4-b4ea-00208503278a"
+    },
+    "action--edc56555-538d-4828-9e77-55cd2a19cbd9": {
+      "name": "Implement a detection rule to monitor for registry modifications related to UAC bypass techniques.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Implement a detection rule to monitor for registry modifications related to UAC bypass techniques.",
+          "description": "Implement a detection rule to monitor for registry modifications related to UAC bypass techniques."
+        }
+      ],
+      "on_completion": "parallel--cb53e994-7051-4e5d-a601-49bdea0e1a82"
+    },
+    "parallel--95daaae5-8d42-40c8-ae72-86809d0f5e50": {
+      "name": "Detect unsigned elevated process executions with non-standard tokens or elevation flags",
+      "type": "parallel",
+      "next_steps": [
+        "action--20b8290a-0ad5-4cc0-a8a7-4fe07494dbb9",
+        "action--6046546b-c578-49d0-8371-d4b7c705c0e5",
+        "action--45a6fc7f-6c4e-450e-97df-974260cb6ab9"
+      ],
+      "on_completion": "action--44ca5996-ec77-413f-99a4-81bccccedc80"
+    },
+    "parallel--cb53e994-7051-4e5d-a601-49bdea0e1a82": {
+      "name": "Create a detection rule for unusual parent-child process relationships",
+      "type": "parallel",
+      "next_steps": [
+        "action--2155a772-504a-4639-a90b-b1b98852f56a",
+        "action--6453eb84-feab-4b25-89d6-f0cf32011efa",
+        "action--82e25695-aa8f-4e6e-8556-91868890a0a9"
+      ],
+      "on_completion": "parallel--95daaae5-8d42-40c8-ae72-86809d0f5e50"
+    }
+  },
+  "created_by": "individual--506bcd7d-f79e-4c2a-acbe-5fdee7552639",
+  "description": "This is an automatically generated playbook based on the question: A detections playbook for T1548 of MITRE ATT&CK Matrix for Enterprise framework is required.The target platform is Windows. You can find more information at https://attack.mitre.org/detectionstrategies/DET0345#AN0975 . The description of the approach follows: Correlate registry modifications (e.g., UAC bypass registry keys), unusual parent-child process relationships (e.g., control.exe spawning cmd.exe), and unsigned elevated process executions with non-standard tokens or elevation flags.",
+  "spec_version": "cacao-2.0",
+  "workflow_start": "start--b2f6d995-1e79-48ae-a9fc-5344ea3f5924",
+  "agent_definitions": {
+    "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81": {
+      "name": "DummyAgent",
+      "type": "individual",
+      "description": "Dummy Agent to be changed"
+    }
+  },
+  "external_references": [
+    {
+      "url": "https://attack.mitre.org/techniques/T1548/",
+      "name": "MITRE ATT&CK Technique T1548: Abuse Elevation Control Mechanism"
+    },
+    {
+      "url": "https://attack.mitre.org/detectionstrategies/DET0345#AN0975",
+      "name": "MITRE ATT&CK Detection Strategies DET0345#AN0975"
+    }
+  ],
+  "__cymph_metadata": {
+    "mappings": {
+      "MITRE ATT&CK Matrix for Enterprise": [
+        "T1548"
+      ]
+    },
+    "document": {
+      "time": 1773063245052,
+      "blocks": [
+        {
+          "id": "dbxjzh3dao",
+          "data": {
+            "meta": {
+              "start": 1,
+              "counterType": "numeric"
+            },
+            "items": [
+              {
+                "meta": {},
+                "items": [],
+                "content": "Deploy and configure a SIEM or log aggregation tool to collect and correlate events from Windows endpoints."
+              },
+              {
+                "meta": {},
+                "items": [],
+                "content": "Enable and configure Windows Event Logging to capture the necessary events: Security, System, and Microsoft-Windows-Windows Defender/Operational logs."
+              },
+              {
+                "meta": {},
+                "items": [],
+                "content": "Implement a detection rule to monitor for registry modifications related to UAC bypass techniques."
+              },
+              {
+                "meta": {},
+                "items": [
+                  {
+                    "meta": {},
+                    "items": [],
+                    "content": "Monitor process creation events (Event ID 4688 or Sysmon Event ID 1) for known suspicious parent-child pairs (e.g., control.exe spawning cmd.exe)."
+                  },
+                  {
+                    "meta": {},
+                    "items": [],
+                    "content": "Establish a baseline of normal parent-child process relationships for the environment."
+                  },
+                  {
+                    "meta": {},
+                    "items": [],
+                    "content": "Alert on deviations from the baseline or known malicious patterns."
+                  }
+                ],
+                "content": "<b>Create a detection rule for unusual parent-child process relationships</b>"
+              },
+              {
+                "meta": {},
+                "items": [
+                  {
+                    "meta": {},
+                    "items": [],
+                    "content": "Monitor for process creation events where the integrity level or token elevation type is unusual (e.g., high integrity from a non-administrative parent)."
+                  },
+                  {
+                    "meta": {},
+                    "items": [],
+                    "content": "Check for processes running with elevated privileges (e.g., via Token Elevation Type) that are unsigned or from untrusted locations."
+                  },
+                  {
+                    "meta": {},
+                    "items": [],
+                    "content": "Correlate with events indicating UAC bypass or privilege escalation attempts."
+                  }
+                ],
+                "content": "<b>Detect unsigned elevated process executions with non-standard tokens or elevation flags</b>"
+              },
+              {
+                "meta": {},
+                "items": [],
+                "content": "Correlate alerts from registry modifications, unusual process relationships, and elevated process executions to identify potential T1548 abuse."
+              },
+              {
+                "meta": {},
+                "items": [],
+                "content": "Investigate correlated alerts to determine if they indicate malicious activity or false positives."
+              },
+              {
+                "meta": {},
+                "items": [],
+                "content": "If malicious activity is confirmed, initiate incident response procedures to contain and eradicate the threat."
+              }
+            ],
+            "style": "ordered"
+          },
+          "type": "list",
+          "tunes": {
+            "textVariant": ""
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,354 @@
+{
+  "id": "playbook--caf8127b-b6d9-4c1c-9afb-04ce2b78f033",
+  "name": "Detect T1072: Software Deployment Tools Misuse on Windows",
+  "type": "playbook",
+  "labels": [
+    "T1072",
+    "Windows",
+    "SCCM",
+    "Intune",
+    "Lateral Movement",
+    "Execution"
+  ],
+  "created": "2026-03-09T13:46:37.086Z",
+  "revoked": false,
+  "modified": "2026-03-09T13:46:37.086Z",
+  "priority": 0,
+  "workflow": {
+    "end--171277e1-4cf5-4175-94a8-2a465e5cac4d": {
+      "name": "End",
+      "type": "end"
+    },
+    "end--3c3ce6bf-f98f-486d-bf50-efa4bb0fdd7e": {
+      "name": "End",
+      "type": "end"
+    },
+    "end--50e52eb9-db3c-4564-ad8b-fdec26b01158": {
+      "name": "End",
+      "type": "end"
+    },
+    "end--6af91098-13da-41eb-bac2-f76fc54af1dd": {
+      "name": "End",
+      "type": "end"
+    },
+    "end--76525a9f-87ed-486b-9ccd-31ff205f620d": {
+      "name": "End",
+      "type": "end"
+    },
+    "end--7b80a3a8-5b61-41aa-885b-0749ecf91381": {
+      "name": "End",
+      "type": "end"
+    },
+    "end--ac7aa7f5-caf8-4f23-8a5b-ba0741ae54e6": {
+      "name": "End",
+      "type": "end"
+    },
+    "end--e4a128b7-b603-4a47-a5fd-735196f29b69": {
+      "name": "End",
+      "type": "end"
+    },
+    "start--d35759b3-8973-4dea-b9c2-a9ec4547153a": {
+      "name": "Start",
+      "type": "start",
+      "on_completion": "action--57f73316-7719-4e30-813e-f0d3e6663596"
+    },
+    "action--2153426d-aff3-43cf-ae48-720ee29b7cf3": {
+      "name": "Use SIEM or EDR tools to alert on deviations from the baseline, such as unusual execution chains or timing (e.g., executions outside of maintenance windows).",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Use SIEM or EDR tools to alert on deviations from the baseline, such as unusual execution chains or timing (e.g., executions outside of maintenance windows).",
+          "description": ""
+        }
+      ],
+      "on_completion": "end--7b80a3a8-5b61-41aa-885b-0749ecf91381"
+    },
+    "action--2465dab0-0c96-4937-beee-48773f1cb3b2": {
+      "name": "Monitor for processes spawned by Intune management components, such as the Intune Management Extension agent, when they initiate scripts or binaries.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Monitor for processes spawned by Intune management components, such as the Intune Management Extension agent, when they initiate scripts or binaries.",
+          "description": "Monitor for processes spawned by Intune management components, such as the Intune Management Extension agent, when they initiate scripts or binaries."
+        }
+      ],
+      "on_completion": "action--721336d7-0bf1-403d-befd-8ba08cbf0702"
+    },
+    "action--3100191b-e2e0-4684-a9ed-3821b58b03e5": {
+      "name": "Review and investigate alerts for false positives, ensuring legitimate administrative actions are whitelisted or tuned out.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Review and investigate alerts for false positives, ensuring legitimate administrative actions are whitelisted or tuned out.",
+          "description": "Review and investigate alerts for false positives, ensuring legitimate administrative actions are whitelisted or tuned out."
+        }
+      ],
+      "on_completion": "action--abc85807-05bb-4421-a67c-66933e3489b1"
+    },
+    "action--57f73316-7719-4e30-813e-f0d3e6663596": {
+      "name": "Identify and monitor processes spawned by SCCM (System Center Configuration Manager) components, such as CcmExec.exe or Smsexec.exe, especially when they launch scripting engines like PowerShell or cmd.exe.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Identify and monitor processes spawned by SCCM (System Center Configuration Manager) components, such as CcmExec.exe or Smsexec.exe, especially when they launch scripting engines like PowerShell or cmd.exe.",
+          "description": "Identify and monitor processes spawned by SCCM (System Center Configuration Manager) components, such as CcmExec.exe or Smsexec.exe, especially when they launch scripting engines like PowerShell or cmd.exe."
+        }
+      ],
+      "on_completion": "action--2465dab0-0c96-4937-beee-48773f1cb3b2"
+    },
+    "action--721336d7-0bf1-403d-befd-8ba08cbf0702": {
+      "name": "Detect execution of scripts or binaries from unusual console applications, such as cmtrace.exe (a log viewer tool) launching PowerShell or cmd.exe, which may indicate abuse.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Detect execution of scripts or binaries from unusual console applications, such as cmtrace.exe (a log viewer tool) launching PowerShell or cmd.exe, which may indicate abuse.",
+          "description": "Detect execution of scripts or binaries from unusual console applications, such as cmtrace.exe (a log viewer tool) launching PowerShell or cmd.exe, which may indicate abuse."
+        }
+      ],
+      "on_completion": "parallel--8ef42baa-8d75-487e-930b-a9f1fb780b10"
+    },
+    "action--a688d8c7-5697-4545-b654-d32d4bb5d086": {
+      "name": "Filter events where the parent process is a known management tool (e.g., CcmExec.exe, Smsexec.exe, IntuneManagementExtension.exe, cmtrace.exe).",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Filter events where the parent process is a known management tool (e.g., CcmExec.exe, Smsexec.exe, IntuneManagementExtension.exe, cmtrace.exe).",
+          "description": ""
+        }
+      ],
+      "on_completion": "end--ac7aa7f5-caf8-4f23-8a5b-ba0741ae54e6"
+    },
+    "action--abc85807-05bb-4421-a67c-66933e3489b1": {
+      "name": "If malicious activity is confirmed, isolate affected systems, terminate malicious processes, and initiate incident response procedures.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "If malicious activity is confirmed, isolate affected systems, terminate malicious processes, and initiate incident response procedures.",
+          "description": "If malicious activity is confirmed, isolate affected systems, terminate malicious processes, and initiate incident response procedures."
+        }
+      ],
+      "on_completion": "end--6af91098-13da-41eb-bac2-f76fc54af1dd"
+    },
+    "action--ca1c6d4b-ae15-4335-9551-7db8095000d3": {
+      "name": "Correlate with network connections to detect if spawned processes initiate connections to suspicious or external IP addresses.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Correlate with network connections to detect if spawned processes initiate connections to suspicious or external IP addresses.",
+          "description": ""
+        }
+      ],
+      "on_completion": "end--50e52eb9-db3c-4564-ad8b-fdec26b01158"
+    },
+    "action--d637ec28-e872-42f3-9604-bd9ff3815045": {
+      "name": "Correlate with user context; note instances where SYSTEM or a service account is the parent process user, as this is common for legitimate management but may be abused.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Correlate with user context; note instances where SYSTEM or a service account is the parent process user, as this is common for legitimate management but may be abused.",
+          "description": ""
+        }
+      ],
+      "on_completion": "end--171277e1-4cf5-4175-94a8-2a465e5cac4d"
+    },
+    "action--db51e7bc-83b4-4c4f-a853-126816bfc1b3": {
+      "name": "Enable and collect Windows Event Logs, specifically Event ID 4688 (process creation) with command line logging enabled, or Sysmon Event ID 1.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Enable and collect Windows Event Logs, specifically Event ID 4688 (process creation) with command line logging enabled, or Sysmon Event ID 1.",
+          "description": ""
+        }
+      ],
+      "on_completion": "end--3c3ce6bf-f98f-486d-bf50-efa4bb0fdd7e"
+    },
+    "action--fad84b9b-45e3-41d6-8499-8dd4719c78bb": {
+      "name": "Establish a baseline of normal software deployment and management activities for SCCM and Intune in your environment.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Establish a baseline of normal software deployment and management activities for SCCM and Intune in your environment.",
+          "description": ""
+        }
+      ],
+      "on_completion": "end--e4a128b7-b603-4a47-a5fd-735196f29b69"
+    },
+    "action--fd4c4bed-be44-45b9-a8fc-90c0a16b5541": {
+      "name": "Look for child processes that are scripting engines (e.g., powershell.exe, cmd.exe, wscript.exe) or other binaries being deployed or executed.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Look for child processes that are scripting engines (e.g., powershell.exe, cmd.exe, wscript.exe) or other binaries being deployed or executed.",
+          "description": ""
+        }
+      ],
+      "on_completion": "end--76525a9f-87ed-486b-9ccd-31ff205f620d"
+    },
+    "parallel--8ef42baa-8d75-487e-930b-a9f1fb780b10": {
+      "name": "Collect and analyze process creation events with a focus on parent-child relationships and user context",
+      "type": "parallel",
+      "next_steps": [
+        "action--db51e7bc-83b4-4c4f-a853-126816bfc1b3",
+        "action--a688d8c7-5697-4545-b654-d32d4bb5d086",
+        "action--fd4c4bed-be44-45b9-a8fc-90c0a16b5541",
+        "action--d637ec28-e872-42f3-9604-bd9ff3815045"
+      ],
+      "on_completion": "parallel--c0306588-d5c9-4bbe-ae5c-0a51f6002250"
+    },
+    "parallel--c0306588-d5c9-4bbe-ae5c-0a51f6002250": {
+      "name": "Implement behavioral analytics and baselining",
+      "type": "parallel",
+      "next_steps": [
+        "action--fad84b9b-45e3-41d6-8499-8dd4719c78bb",
+        "action--2153426d-aff3-43cf-ae48-720ee29b7cf3",
+        "action--ca1c6d4b-ae15-4335-9551-7db8095000d3"
+      ],
+      "on_completion": "action--3100191b-e2e0-4684-a9ed-3821b58b03e5"
+    }
+  },
+  "created_by": "individual--506bcd7d-f79e-4c2a-acbe-5fdee7552639",
+  "description": "This is an automatically generated playbook based on the question: A detections playbook for T1072 of MITRE ATT&CK Matrix for Enterprise framework is required.The target platform is Windows. You can find more information at https://attack.mitre.org/detectionstrategies/DET0223#AN0623 . The description of the approach follows: Detects SCCM, Intune, or remote push execution spawning scripts or binaries from SYSTEM context or unusual consoles (e.g., cmtrace.exe launching PowerShell or cmd.exe).",
+  "spec_version": "cacao-2.0",
+  "workflow_start": "start--d35759b3-8973-4dea-b9c2-a9ec4547153a",
+  "agent_definitions": {
+    "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81": {
+      "name": "DummyAgent",
+      "type": "individual",
+      "description": "Dummy Agent to be changed"
+    }
+  },
+  "external_references": [
+    {
+      "url": "https://attack.mitre.org/techniques/T1072/",
+      "name": "MITRE ATT&CK T1072: Software Deployment Tools"
+    },
+    {
+      "url": "https://attack.mitre.org/detectionstrategies/DET0223#AN0623",
+      "name": "MITRE ATT&CK Detection Strategies: DET0223"
+    }
+  ],
+  "__cymph_metadata": {
+    "mappings": {
+      "MITRE ATT&CK Matrix for Enterprise": [
+        "T1072"
+      ]
+    },
+    "document": {
+      "time": 1773063997142,
+      "blocks": [
+        {
+          "id": "Buw0B7EmmM",
+          "data": {
+            "meta": {
+              "start": 1,
+              "counterType": "numeric"
+            },
+            "items": [
+              {
+                "meta": {},
+                "items": [],
+                "content": "Identify and monitor processes spawned by SCCM (System Center Configuration Manager) components, such as CcmExec.exe or Smsexec.exe, especially when they launch scripting engines like PowerShell or cmd.exe."
+              },
+              {
+                "meta": {},
+                "items": [],
+                "content": "Monitor for processes spawned by Intune management components, such as the Intune Management Extension agent, when they initiate scripts or binaries."
+              },
+              {
+                "meta": {},
+                "items": [],
+                "content": "Detect execution of scripts or binaries from unusual console applications, such as cmtrace.exe (a log viewer tool) launching PowerShell or cmd.exe, which may indicate abuse."
+              },
+              {
+                "meta": {},
+                "items": [
+                  {
+                    "meta": {},
+                    "items": [],
+                    "content": "Enable and collect Windows Event Logs, specifically Event ID 4688 (process creation) with command line logging enabled, or Sysmon Event ID 1."
+                  },
+                  {
+                    "meta": {},
+                    "items": [],
+                    "content": "Filter events where the parent process is a known management tool (e.g., CcmExec.exe, Smsexec.exe, IntuneManagementExtension.exe, cmtrace.exe)."
+                  },
+                  {
+                    "meta": {},
+                    "items": [],
+                    "content": "Look for child processes that are scripting engines (e.g., powershell.exe, cmd.exe, wscript.exe) or other binaries being deployed or executed."
+                  },
+                  {
+                    "meta": {},
+                    "items": [],
+                    "content": "Correlate with user context; note instances where SYSTEM or a service account is the parent process user, as this is common for legitimate management but may be abused."
+                  }
+                ],
+                "content": "<b>Collect and analyze process creation events with a focus on parent-child relationships and user context</b>"
+              },
+              {
+                "meta": {},
+                "items": [
+                  {
+                    "meta": {},
+                    "items": [],
+                    "content": "Establish a baseline of normal software deployment and management activities for SCCM and Intune in your environment."
+                  },
+                  {
+                    "meta": {},
+                    "items": [],
+                    "content": "Use SIEM or EDR tools to alert on deviations from the baseline, such as unusual execution chains or timing (e.g., executions outside of maintenance windows)."
+                  },
+                  {
+                    "meta": {},
+                    "items": [],
+                    "content": "Correlate with network connections to detect if spawned processes initiate connections to suspicious or external IP addresses."
+                  }
+                ],
+                "content": "<b>Implement behavioral analytics and baselining</b>"
+              },
+              {
+                "meta": {},
+                "items": [],
+                "content": "Review and investigate alerts for false positives, ensuring legitimate administrative actions are whitelisted or tuned out."
+              },
+              {
+                "meta": {},
+                "items": [],
+                "content": "If malicious activity is confirmed, isolate affected systems, terminate malicious processes, and initiate incident response procedures."
+              }
+            ],
+            "style": "ordered"
+          },
+          "type": "list",
+          "tunes": {
+            "textVariant": ""
+          }
+        }
+      ]
+    }
+  }
+}

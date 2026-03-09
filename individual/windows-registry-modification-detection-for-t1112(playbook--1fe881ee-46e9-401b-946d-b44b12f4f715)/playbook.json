@@ -1,0 +1,477 @@
+{
+  "id": "playbook--1fe881ee-46e9-401b-946d-b44b12f4f715",
+  "name": "Windows Registry Modification Detection for T1112",
+  "type": "playbook",
+  "labels": [
+    "T1112",
+    "Windows",
+    "Registry",
+    "Persistence",
+    "Privilege Escalation",
+    "Defense Evasion"
+  ],
+  "created": "2026-03-09T13:34:53.896Z",
+  "revoked": false,
+  "modified": "2026-03-09T13:34:53.896Z",
+  "priority": 0,
+  "workflow": {
+    "end--35f07922-9e05-4ad5-94ca-f6c49ac0b3c5": {
+      "name": "End",
+      "type": "end"
+    },
+    "end--467a50af-b1cc-42a3-8e4c-0eab2995b84d": {
+      "name": "End",
+      "type": "end"
+    },
+    "end--4d0c8e99-cfe2-4a17-8925-5c278b395e9f": {
+      "name": "End",
+      "type": "end"
+    },
+    "end--7edc303f-2e57-4811-ab3a-87e8f795f588": {
+      "name": "End",
+      "type": "end"
+    },
+    "end--807468e0-9409-48f2-bfa5-6b226ba09bc5": {
+      "name": "End",
+      "type": "end"
+    },
+    "end--80834515-7f3d-439e-bbe3-7cc9f2fb0537": {
+      "name": "End",
+      "type": "end"
+    },
+    "end--84f5ee81-1b51-400f-a3e3-c8962fcf70fb": {
+      "name": "End",
+      "type": "end"
+    },
+    "end--b63cf566-4083-4e86-b48b-fcaca6bdd8b5": {
+      "name": "End",
+      "type": "end"
+    },
+    "end--bfa21634-b92d-4f66-97b6-fc73065bcd4a": {
+      "name": "End",
+      "type": "end"
+    },
+    "end--eecbb4d0-f065-49a8-bb86-fb88dc099e4c": {
+      "name": "End",
+      "type": "end"
+    },
+    "end--f860dcb5-27a3-4c6b-9386-2d03b9a58ee4": {
+      "name": "End",
+      "type": "end"
+    },
+    "start--50e12129-54ac-4a39-b2b4-c8bd8bef3941": {
+      "name": "Start",
+      "type": "start",
+      "on_completion": "action--bb936ea0-44b7-4874-919a-2f7067ed7f56"
+    },
+    "action--0ca83151-f6a7-4b2c-8279-88cd2fcc558c": {
+      "name": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run",
+          "description": ""
+        }
+      ],
+      "on_completion": "end--80834515-7f3d-439e-bbe3-7cc9f2fb0537"
+    },
+    "action--14b33ebf-4f8b-4569-a2fe-518174a03634": {
+      "name": "HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Run",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Run",
+          "description": ""
+        }
+      ],
+      "on_completion": "end--4d0c8e99-cfe2-4a17-8925-5c278b395e9f"
+    },
+    "action--199bec39-77db-4612-b41d-2829de79691f": {
+      "name": "Review and investigate alerts by analyzing the process chain, parent processes, and user context to determine legitimacy and potential threat.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Review and investigate alerts by analyzing the process chain, parent processes, and user context to determine legitimacy and potential threat.",
+          "description": "Review and investigate alerts by analyzing the process chain, parent processes, and user context to determine legitimacy and potential threat."
+        }
+      ],
+      "on_completion": "action--3f186ac2-eb3d-4818-a48c-230dad0e3b8d"
+    },
+    "action--1e720ad0-8c8d-481a-a3f6-3c6ddf84a303": {
+      "name": "PowerShell (Set-ItemProperty, New-ItemProperty)",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "PowerShell (Set-ItemProperty, New-ItemProperty)",
+          "description": ""
+        }
+      ],
+      "on_completion": "end--467a50af-b1cc-42a3-8e4c-0eab2995b84d"
+    },
+    "action--3f186ac2-eb3d-4818-a48c-230dad0e3b8d": {
+      "name": "If malicious activity is confirmed, isolate affected systems, terminate malicious processes, revert registry changes, and conduct a full investigation to determine scope and impact.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "If malicious activity is confirmed, isolate affected systems, terminate malicious processes, revert registry changes, and conduct a full investigation to determine scope and impact.",
+          "description": "If malicious activity is confirmed, isolate affected systems, terminate malicious processes, revert registry changes, and conduct a full investigation to determine scope and impact."
+        }
+      ],
+      "on_completion": "end--eecbb4d0-f065-49a8-bb86-fb88dc099e4c"
+    },
+    "action--46616aea-8e67-4404-aa9f-f1d759b53c73": {
+      "name": "WMI (StdRegProv class methods)",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "WMI (StdRegProv class methods)",
+          "description": ""
+        }
+      ],
+      "on_completion": "end--7edc303f-2e57-4811-ab3a-87e8f795f588"
+    },
+    "action--7061e541-c613-41c4-a419-3db3bd16e6c4": {
+      "name": "Create detection rules to identify modifications to high-risk registry keys associated with persistence, privilege escalation, and defense evasion. Focus on keys such as:",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Create detection rules to identify modifications to high-risk registry keys associated with persistence, privilege escalation, and defense evasion. Focus on keys such as:",
+          "description": "Create detection rules to identify modifications to high-risk registry keys associated with persistence, privilege escalation, and defense evasion. Focus on keys such as:"
+        }
+      ],
+      "on_completion": "parallel--dc4b96c9-f61d-404a-9c6f-9351a36db3bc"
+    },
+    "action--724e7289-b4bf-491e-bba2-25929c94be5b": {
+      "name": "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\Userinit",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\Userinit",
+          "description": ""
+        }
+      ],
+      "on_completion": "end--807468e0-9409-48f2-bfa5-6b226ba09bc5"
+    },
+    "action--83282f28-f1a5-4d86-ab3e-30fc2df18e06": {
+      "name": "Direct API calls (e.g., RegSetValueEx detected via Sysmon Event ID 13)",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Direct API calls (e.g., RegSetValueEx detected via Sysmon Event ID 13)",
+          "description": ""
+        }
+      ],
+      "on_completion": "end--b63cf566-4083-4e86-b48b-fcaca6bdd8b5"
+    },
+    "action--8a5f6d05-c08a-4780-ba6e-fc1a2d70203a": {
+      "name": "Enable detailed auditing policies on Windows systems, specifically: Audit Registry, Audit Process Creation, and Audit Policy Change to ensure relevant events are logged.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Enable detailed auditing policies on Windows systems, specifically: Audit Registry, Audit Process Creation, and Audit Policy Change to ensure relevant events are logged.",
+          "description": "Enable detailed auditing policies on Windows systems, specifically: Audit Registry, Audit Process Creation, and Audit Policy Change to ensure relevant events are logged."
+        }
+      ],
+      "on_completion": "action--7061e541-c613-41c4-a419-3db3bd16e6c4"
+    },
+    "action--922f73d1-9a3a-41a2-907d-4f303a29c458": {
+      "name": "Implement baselining to identify unusual registry write patterns from non-standard processes or user contexts, especially by low-privilege accounts or unknown applications.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Implement baselining to identify unusual registry write patterns from non-standard processes or user contexts, especially by low-privilege accounts or unknown applications.",
+          "description": "Implement baselining to identify unusual registry write patterns from non-standard processes or user contexts, especially by low-privilege accounts or unknown applications."
+        }
+      ],
+      "on_completion": "action--f026cf86-7cd1-4f22-8f46-ba82510705af"
+    },
+    "action--bb2dc272-cea1-4748-b826-f0a59932a40b": {
+      "name": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\* (for service modifications)",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\* (for service modifications)",
+          "description": ""
+        }
+      ],
+      "on_completion": "end--35f07922-9e05-4ad5-94ca-f6c49ac0b3c5"
+    },
+    "action--bb936ea0-44b7-4874-919a-2f7067ed7f56": {
+      "name": "Deploy and configure a SIEM or EDR solution to collect and centralize logs from Windows endpoints, including Windows Event Logs (Security, System, Application), PowerShell logging, and command-line auditing.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Deploy and configure a SIEM or EDR solution to collect and centralize logs from Windows endpoints, including Windows Event Logs (Security, System, Application), PowerShell logging, and command-line auditing.",
+          "description": "Deploy and configure a SIEM or EDR solution to collect and centralize logs from Windows endpoints, including Windows Event Logs (Security, System, Application), PowerShell logging, and command-line auditing."
+        }
+      ],
+      "on_completion": "action--8a5f6d05-c08a-4780-ba6e-fc1a2d70203a"
+    },
+    "action--c14ed67c-8ef0-4e7b-8bcb-7d1f8522b65e": {
+      "name": "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\Notify",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\Notify",
+          "description": ""
+        }
+      ],
+      "on_completion": "end--bfa21634-b92d-4f66-97b6-fc73065bcd4a"
+    },
+    "action--dbc7fe0b-0aa2-402e-a231-fb623b0085fa": {
+      "name": "Correlate registry modification events with subsequent activities, such as service restarts (sc.exe, net stop/start) or process executions that may indicate activation of the change.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Correlate registry modification events with subsequent activities, such as service restarts (sc.exe, net stop/start) or process executions that may indicate activation of the change.",
+          "description": "Correlate registry modification events with subsequent activities, such as service restarts (sc.exe, net stop/start) or process executions that may indicate activation of the change."
+        }
+      ],
+      "on_completion": "action--922f73d1-9a3a-41a2-907d-4f303a29c458"
+    },
+    "action--df7f26fa-04d4-4a76-92ae-74c12ff0a7c7": {
+      "name": "Command-line tools (reg.exe, reg add, reg delete)",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Command-line tools (reg.exe, reg add, reg delete)",
+          "description": ""
+        }
+      ],
+      "on_completion": "end--84f5ee81-1b51-400f-a3e3-c8962fcf70fb"
+    },
+    "action--f026cf86-7cd1-4f22-8f46-ba82510705af": {
+      "name": "Set up alerts for modifications to specific high-value keys, including but not limited to:",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Set up alerts for modifications to specific high-value keys, including but not limited to:",
+          "description": "Set up alerts for modifications to specific high-value keys, including but not limited to:"
+        }
+      ],
+      "on_completion": "parallel--ce6ba370-571f-4f47-8c77-7050d6996267"
+    },
+    "action--ff019e18-7dd6-45e6-8965-11c51a388756": {
+      "name": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\SafeDllSearchMode (for disablement)",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\SafeDllSearchMode (for disablement)",
+          "description": ""
+        }
+      ],
+      "on_completion": "end--f860dcb5-27a3-4c6b-9386-2d03b9a58ee4"
+    },
+    "parallel--ce6ba370-571f-4f47-8c77-7050d6996267": {
+      "name": "Example keys to monitor:",
+      "type": "parallel",
+      "next_steps": [
+        "action--c14ed67c-8ef0-4e7b-8bcb-7d1f8522b65e",
+        "action--724e7289-b4bf-491e-bba2-25929c94be5b",
+        "action--0ca83151-f6a7-4b2c-8279-88cd2fcc558c",
+        "action--14b33ebf-4f8b-4569-a2fe-518174a03634",
+        "action--ff019e18-7dd6-45e6-8965-11c51a388756",
+        "action--bb2dc272-cea1-4748-b826-f0a59932a40b"
+      ],
+      "on_completion": "action--199bec39-77db-4612-b41d-2829de79691f"
+    },
+    "parallel--dc4b96c9-f61d-404a-9c6f-9351a36db3bc": {
+      "name": "Monitor for abnormal modification methods:",
+      "type": "parallel",
+      "next_steps": [
+        "action--df7f26fa-04d4-4a76-92ae-74c12ff0a7c7",
+        "action--1e720ad0-8c8d-481a-a3f6-3c6ddf84a303",
+        "action--46616aea-8e67-4404-aa9f-f1d759b53c73",
+        "action--83282f28-f1a5-4d86-ab3e-30fc2df18e06"
+      ],
+      "on_completion": "action--dbc7fe0b-0aa2-402e-a231-fb623b0085fa"
+    }
+  },
+  "created_by": "individual--506bcd7d-f79e-4c2a-acbe-5fdee7552639",
+  "description": "This is an automatically generated playbook based on the question: A detections playbook for T1112 of MITRE ATT&CK Matrix for Enterprise framework is required.The target platform is Windows. You can find more information at https://attack.mitre.org/detectionstrategies/DET0280#AN0781 . The description of the approach follows: Behavior chain involving abnormal registry modifications via CLI, PowerShell, WMI, or direct API calls, especially targeting persistence, privilege escalation, or defense evasion keys, potentially followed by service restart or process execution. Such as editing Notify/Userinit/Startup keys, or disabling SafeDllSearchMode.",
+  "spec_version": "cacao-2.0",
+  "workflow_start": "start--50e12129-54ac-4a39-b2b4-c8bd8bef3941",
+  "agent_definitions": {
+    "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81": {
+      "name": "DummyAgent",
+      "type": "individual",
+      "description": "Dummy Agent to be changed"
+    }
+  },
+  "external_references": [
+    {
+      "url": "https://attack.mitre.org/techniques/T1112/",
+      "name": "MITRE ATT&CK T1112: Modify Registry"
+    },
+    {
+      "url": "https://attack.mitre.org/detectionstrategies/DET0280#AN0781",
+      "name": "MITRE ATT&CK Detection Strategies: DET0280#AN0781"
+    }
+  ],
+  "__cymph_metadata": {
+    "mappings": {
+      "MITRE ATT&CK Matrix for Enterprise": [
+        "T1112"
+      ]
+    },
+    "document": {
+      "time": 1773063293913,
+      "blocks": [
+        {
+          "id": "lSp8uYTZzq",
+          "data": {
+            "meta": {
+              "start": 1,
+              "counterType": "numeric"
+            },
+            "items": [
+              {
+                "meta": {},
+                "items": [],
+                "content": "Deploy and configure a SIEM or EDR solution to collect and centralize logs from Windows endpoints, including Windows Event Logs (Security, System, Application), PowerShell logging, and command-line auditing."
+              },
+              {
+                "meta": {},
+                "items": [],
+                "content": "Enable detailed auditing policies on Windows systems, specifically: Audit Registry, Audit Process Creation, and Audit Policy Change to ensure relevant events are logged."
+              },
+              {
+                "meta": {},
+                "items": [],
+                "content": "Create detection rules to identify modifications to high-risk registry keys associated with persistence, privilege escalation, and defense evasion. Focus on keys such as:"
+              },
+              {
+                "meta": {},
+                "items": [
+                  {
+                    "meta": {},
+                    "items": [],
+                    "content": "Command-line tools (reg.exe, reg add, reg delete)"
+                  },
+                  {
+                    "meta": {},
+                    "items": [],
+                    "content": "PowerShell (Set-ItemProperty, New-ItemProperty)"
+                  },
+                  {
+                    "meta": {},
+                    "items": [],
+                    "content": "WMI (StdRegProv class methods)"
+                  },
+                  {
+                    "meta": {},
+                    "items": [],
+                    "content": "Direct API calls (e.g., RegSetValueEx detected via Sysmon Event ID 13)"
+                  }
+                ],
+                "content": "<b>Monitor for abnormal modification methods:</b>"
+              },
+              {
+                "meta": {},
+                "items": [],
+                "content": "Correlate registry modification events with subsequent activities, such as service restarts (sc.exe, net stop/start) or process executions that may indicate activation of the change."
+              },
+              {
+                "meta": {},
+                "items": [],
+                "content": "Implement baselining to identify unusual registry write patterns from non-standard processes or user contexts, especially by low-privilege accounts or unknown applications."
+              },
+              {
+                "meta": {},
+                "items": [],
+                "content": "Set up alerts for modifications to specific high-value keys, including but not limited to:"
+              },
+              {
+                "meta": {},
+                "items": [
+                  {
+                    "meta": {},
+                    "items": [],
+                    "content": "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\Notify"
+                  },
+                  {
+                    "meta": {},
+                    "items": [],
+                    "content": "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\Userinit"
+                  },
+                  {
+                    "meta": {},
+                    "items": [],
+                    "content": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run"
+                  },
+                  {
+                    "meta": {},
+                    "items": [],
+                    "content": "HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Run"
+                  },
+                  {
+                    "meta": {},
+                    "items": [],
+                    "content": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\SafeDllSearchMode (for disablement)"
+                  },
+                  {
+                    "meta": {},
+                    "items": [],
+                    "content": "HKLM\\SYSTEM\\CurrentControlSet\\Services* (for service modifications)"
+                  }
+                ],
+                "content": "<b>Example keys to monitor:</b>"
+              },
+              {
+                "meta": {},
+                "items": [],
+                "content": "Review and investigate alerts by analyzing the process chain, parent processes, and user context to determine legitimacy and potential threat."
+              },
+              {
+                "meta": {},
+                "items": [],
+                "content": "If malicious activity is confirmed, isolate affected systems, terminate malicious processes, revert registry changes, and conduct a full investigation to determine scope and impact."
+              }
+            ],
+            "style": "ordered"
+          },
+          "type": "list",
+          "tunes": {
+            "textVariant": ""
+          }
+        }
+      ]
+    }
+  }
+}

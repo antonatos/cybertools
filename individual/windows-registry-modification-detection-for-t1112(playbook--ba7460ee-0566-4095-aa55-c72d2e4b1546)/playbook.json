@@ -451,6 +451,11 @@
       }
     },
     "notes": {},
+    "mappings": {
+      "MITRE ATT&CK Matrix for Enterprise": [
+        "T1078.004"
+      ]
+    },
     "document": {
       "time": 1772212902279,
       "blocks": [

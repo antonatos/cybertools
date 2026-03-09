@@ -1,0 +1,258 @@
+{
+  "id": "playbook--ff0fabf4-8483-4ac5-88ee-49bd333fe51e",
+  "name": "Windows Shutdown/Reboot Command Anomaly Detection Playbook for T1529",
+  "type": "playbook",
+  "labels": [
+    "T1529",
+    "Windows",
+    "Shutdown",
+    "Reboot",
+    "Process Execution",
+    "Event Log Analysis",
+    "MITRE ATT&CK"
+  ],
+  "created": "2026-03-09T13:43:22.727Z",
+  "revoked": false,
+  "modified": "2026-03-09T13:43:22.727Z",
+  "priority": 0,
+  "workflow": {
+    "end--8fca0377-c9ad-40a0-a2b0-ab5519abe75c": {
+      "name": "End",
+      "type": "end"
+    },
+    "end--ca1b93e3-5a1b-451c-89b3-b4455b492259": {
+      "name": "End",
+      "type": "end"
+    },
+    "end--e9de7ac9-19da-4177-9343-20895b9851fd": {
+      "name": "End",
+      "type": "end"
+    },
+    "end--f1c51048-4123-4cb8-80ed-cb3aa61f8e40": {
+      "name": "End",
+      "type": "end"
+    },
+    "start--1f3e334a-b2f4-41eb-9329-94f866b49111": {
+      "name": "Start",
+      "type": "start",
+      "on_completion": "action--11a160eb-702d-4d7d-b8ca-77e99721b623"
+    },
+    "action--11a160eb-702d-4d7d-b8ca-77e99721b623": {
+      "name": "Identify and monitor for the execution of shutdown or reboot commands on Windows systems, specifically targeting processes like shutdown.exe, restart-computer, and other similar utilities.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Identify and monitor for the execution of shutdown or reboot commands on Windows systems, specifically targeting processes like shutdown.exe, restart-computer, and other similar utilities.",
+          "description": "Identify and monitor for the execution of shutdown or reboot commands on Windows systems, specifically targeting processes like shutdown.exe, restart-computer, and other similar utilities."
+        }
+      ],
+      "on_completion": "action--2cb465cb-9453-4593-b0b1-4e64649584dc"
+    },
+    "action--2cb465cb-9453-4593-b0b1-4e64649584dc": {
+      "name": "Collect and analyze Windows Event Logs for system shutdown/restart events, focusing on Event ID 1074 (indicating a process initiated a shutdown) and Event ID 6006 (indicating a clean shutdown event was logged).",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Collect and analyze Windows Event Logs for system shutdown/restart events, focusing on Event ID 1074 (indicating a process initiated a shutdown) and Event ID 6006 (indicating a clean shutdown event was logged).",
+          "description": "Collect and analyze Windows Event Logs for system shutdown/restart events, focusing on Event ID 1074 (indicating a process initiated a shutdown) and Event ID 6006 (indicating a clean shutdown event was logged)."
+        }
+      ],
+      "on_completion": "action--c678f18d-e7ce-47bc-a1aa-edfe84a3488c"
+    },
+    "action--90573b83-78c5-48d2-a94b-440abb76c2e8": {
+      "name": "Review the reason code and comment in Event ID 1074 for legitimacy; suspicious entries may include unexpected reasons or lack of explanation.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Review the reason code and comment in Event ID 1074 for legitimacy; suspicious entries may include unexpected reasons or lack of explanation.",
+          "description": ""
+        }
+      ],
+      "on_completion": "end--8fca0377-c9ad-40a0-a2b0-ab5519abe75c"
+    },
+    "action--95994661-2d95-42f0-8d45-94b948e6c02d": {
+      "name": "Cross-reference the shutdown time with known maintenance windows or scheduled tasks to rule out planned activities.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Cross-reference the shutdown time with known maintenance windows or scheduled tasks to rule out planned activities.",
+          "description": ""
+        }
+      ],
+      "on_completion": "end--f1c51048-4123-4cb8-80ed-cb3aa61f8e40"
+    },
+    "action--c678f18d-e7ce-47bc-a1aa-edfe84a3488c": {
+      "name": "Correlate the process execution events with the system event logs to identify matches where a shutdown command execution is followed by a corresponding shutdown event (e.g., Event ID 1074 or 6006).",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Correlate the process execution events with the system event logs to identify matches where a shutdown command execution is followed by a corresponding shutdown event (e.g., Event ID 1074 or 6006).",
+          "description": "Correlate the process execution events with the system event logs to identify matches where a shutdown command execution is followed by a corresponding shutdown event (e.g., Event ID 1074 or 6006)."
+        }
+      ],
+      "on_completion": "parallel--fd253d78-d7ba-4830-b627-b6b92ba4a58b"
+    },
+    "action--cadef20c-252a-4216-8c2f-e06e4af684f5": {
+      "name": "If correlation indicates an unauthorized or suspicious shutdown/reboot (e.g., executed by a non-privileged user, outside maintenance hours, with no valid reason), escalate the event for further investigation as a potential security incident.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "If correlation indicates an unauthorized or suspicious shutdown/reboot (e.g., executed by a non-privileged user, outside maintenance hours, with no valid reason), escalate the event for further investigation as a potential security incident.",
+          "description": "If correlation indicates an unauthorized or suspicious shutdown/reboot (e.g., executed by a non-privileged user, outside maintenance hours, with no valid reason), escalate the event for further investigation as a potential security incident."
+        }
+      ],
+      "on_completion": "action--e3696d70-207a-480d-bbf4-54e81d202e0f"
+    },
+    "action--e3696d70-207a-480d-bbf4-54e81d202e0f": {
+      "name": "Document all findings, including the user, process, command-line arguments, event log details, and correlation results, for incident response and reporting.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Document all findings, including the user, process, command-line arguments, event log details, and correlation results, for incident response and reporting.",
+          "description": "Document all findings, including the user, process, command-line arguments, event log details, and correlation results, for incident response and reporting."
+        }
+      ],
+      "on_completion": "end--e9de7ac9-19da-4177-9343-20895b9851fd"
+    },
+    "action--ed1c522e-889e-410a-ba99-b1310dba1826": {
+      "name": "Verify the user account that executed the shutdown command is not a member of authorized administrative groups (e.g., Helpdesk, Administrators, or other designated groups with shutdown privileges).",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Verify the user account that executed the shutdown command is not a member of authorized administrative groups (e.g., Helpdesk, Administrators, or other designated groups with shutdown privileges).",
+          "description": ""
+        }
+      ],
+      "on_completion": "end--ca1b93e3-5a1b-451c-89b3-b4455b492259"
+    },
+    "parallel--fd253d78-d7ba-4830-b627-b6b92ba4a58b": {
+      "name": "Check for the absence of administrative context or legitimate authorization for the shutdown/reboot action.",
+      "type": "parallel",
+      "next_steps": [
+        "action--ed1c522e-889e-410a-ba99-b1310dba1826",
+        "action--90573b83-78c5-48d2-a94b-440abb76c2e8",
+        "action--95994661-2d95-42f0-8d45-94b948e6c02d"
+      ],
+      "on_completion": "action--cadef20c-252a-4216-8c2f-e06e4af684f5"
+    }
+  },
+  "created_by": "individual--506bcd7d-f79e-4c2a-acbe-5fdee7552639",
+  "description": "This is an automatically generated playbook based on the question: A detections playbook for T1529 of MITRE ATT&CK Matrix for Enterprise framework is required.The target platform is Windows. You can find more information at https://attack.mitre.org/detectionstrategies/DET0559#AN1538 . The description of the approach follows: Correlate process execution of shutdown/reboot commands (e.g., shutdown.exe, restart-computer) with host status change logs (Event IDs 1074, 6006) and absence of related administrative context (e.g., user not in Helpdesk group).",
+  "spec_version": "cacao-2.0",
+  "workflow_start": "start--1f3e334a-b2f4-41eb-9329-94f866b49111",
+  "agent_definitions": {
+    "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81": {
+      "name": "DummyAgent",
+      "type": "individual",
+      "description": "Dummy Agent to be changed"
+    }
+  },
+  "external_references": [
+    {
+      "url": "https://attack.mitre.org/techniques/T1529/",
+      "name": "MITRE ATT&CK Technique T1529: System Shutdown/Reboot"
+    },
+    {
+      "url": "https://attack.mitre.org/detectionstrategies/DET0559#AN1538",
+      "name": "MITRE ATT&CK Detection Strategies - DET0559#AN1538"
+    },
+    {
+      "url": "https://docs.microsoft.com/en-us/windows/security/threat-protection/auditing/event-1074",
+      "name": "Microsoft Docs - Event ID 1074"
+    },
+    {
+      "url": "https://docs.microsoft.com/en-us/windows/security/threat-protection/auditing/event-6006",
+      "name": "Microsoft Docs - Event ID 6006"
+    }
+  ],
+  "__cymph_metadata": {
+    "mappings": {
+      "MITRE ATT&CK Matrix for Enterprise": [
+        "T1529"
+      ]
+    },
+    "document": {
+      "time": 1773063802743,
+      "blocks": [
+        {
+          "id": "ERtmEo12UB",
+          "data": {
+            "meta": {
+              "start": 1,
+              "counterType": "numeric"
+            },
+            "items": [
+              {
+                "meta": {},
+                "items": [],
+                "content": "Identify and monitor for the execution of shutdown or reboot commands on Windows systems, specifically targeting processes like shutdown.exe, restart-computer, and other similar utilities."
+              },
+              {
+                "meta": {},
+                "items": [],
+                "content": "Collect and analyze Windows Event Logs for system shutdown/restart events, focusing on Event ID 1074 (indicating a process initiated a shutdown) and Event ID 6006 (indicating a clean shutdown event was logged)."
+              },
+              {
+                "meta": {},
+                "items": [],
+                "content": "Correlate the process execution events with the system event logs to identify matches where a shutdown command execution is followed by a corresponding shutdown event (e.g., Event ID 1074 or 6006)."
+              },
+              {
+                "meta": {},
+                "items": [
+                  {
+                    "meta": {},
+                    "items": [],
+                    "content": "Verify the user account that executed the shutdown command is not a member of authorized administrative groups (e.g., Helpdesk, Administrators, or other designated groups with shutdown privileges)."
+                  },
+                  {
+                    "meta": {},
+                    "items": [],
+                    "content": "Review the reason code and comment in Event ID 1074 for legitimacy; suspicious entries may include unexpected reasons or lack of explanation."
+                  },
+                  {
+                    "meta": {},
+                    "items": [],
+                    "content": "Cross-reference the shutdown time with known maintenance windows or scheduled tasks to rule out planned activities."
+                  }
+                ],
+                "content": "Check for the absence of administrative context or legitimate authorization for the shutdown/reboot action."
+              },
+              {
+                "meta": {},
+                "items": [],
+                "content": "If correlation indicates an unauthorized or suspicious shutdown/reboot (e.g., executed by a non-privileged user, outside maintenance hours, with no valid reason), escalate the event for further investigation as a potential security incident."
+              },
+              {
+                "meta": {},
+                "items": [],
+                "content": "Document all findings, including the user, process, command-line arguments, event log details, and correlation results, for incident response and reporting."
+              }
+            ],
+            "style": "ordered"
+          },
+          "type": "list",
+          "tunes": {
+            "textVariant": ""
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,248 @@
+{
+  "id": "playbook--5fd3ec2a-cd0b-474f-9f33-db37362b4c67",
+  "name": "Windows Account Modification Anomaly Detection Playbook for T1531",
+  "type": "playbook",
+  "labels": [
+    "T1531",
+    "Account Access Removal",
+    "Windows",
+    "Detection",
+    "MITRE ATT&CK"
+  ],
+  "created": "2026-03-09T13:45:58.992Z",
+  "revoked": false,
+  "modified": "2026-03-09T13:45:58.992Z",
+  "priority": 0,
+  "workflow": {
+    "end--2de4979f-25b1-4db8-9e11-75ccb02e332d": {
+      "name": "End",
+      "type": "end"
+    },
+    "end--33b68529-8d65-496e-9296-e0f87affa2d8": {
+      "name": "End",
+      "type": "end"
+    },
+    "end--7a850707-ef63-4316-bdfa-8a98c72629df": {
+      "name": "End",
+      "type": "end"
+    },
+    "end--9be6f2b6-0431-44e6-91f8-f4f858d0776e": {
+      "name": "End",
+      "type": "end"
+    },
+    "start--7516ff49-7df7-436c-aa61-cd04bbae7815": {
+      "name": "Start",
+      "type": "start",
+      "on_completion": "action--abad5a7a-59b9-400e-9b57-cb85c1f82376"
+    },
+    "action--05e45293-ca34-472b-ac9f-60d3b90407f6": {
+      "name": "Investigate any anomalies by reviewing full command lines, parent processes, and network connections associated with the events.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Investigate any anomalies by reviewing full command lines, parent processes, and network connections associated with the events.",
+          "description": "Investigate any anomalies by reviewing full command lines, parent processes, and network connections associated with the events."
+        }
+      ],
+      "on_completion": "action--65d3791f-6327-4ff7-a237-2eb68e02c63d"
+    },
+    "action--31f2c205-79b9-4dcd-bb49-f696ba96b5da": {
+      "name": "Verify if the modifying user lacks administrative privileges (non-admin users performing modifications).",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Verify if the modifying user lacks administrative privileges (non-admin users performing modifications).",
+          "description": ""
+        }
+      ],
+      "on_completion": "end--33b68529-8d65-496e-9296-e0f87affa2d8"
+    },
+    "action--5c9c4d00-65d5-4c37-96cd-4eb00db43070": {
+      "name": "Inspect process lineage for use of suspicious tools (e.g., PowerShell, net.exe, net1.exe) in interactive sessions.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Inspect process lineage for use of suspicious tools (e.g., PowerShell, net.exe, net1.exe) in interactive sessions.",
+          "description": ""
+        }
+      ],
+      "on_completion": "end--7a850707-ef63-4316-bdfa-8a98c72629df"
+    },
+    "action--65d3791f-6327-4ff7-a237-2eb68e02c63d": {
+      "name": "If malicious activity is confirmed, isolate affected systems, reset compromised accounts, and revoke unauthorized access.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "If malicious activity is confirmed, isolate affected systems, reset compromised accounts, and revoke unauthorized access.",
+          "description": "If malicious activity is confirmed, isolate affected systems, reset compromised accounts, and revoke unauthorized access."
+        }
+      ],
+      "on_completion": "end--2de4979f-25b1-4db8-9e11-75ccb02e332d"
+    },
+    "action--99e8b8ca-9ab0-4e15-9df3-715b4d6c92ae": {
+      "name": "Correlate account modification events with process creation events by user, timestamp, and source IP/hostname.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Correlate account modification events with process creation events by user, timestamp, and source IP/hostname.",
+          "description": "Correlate account modification events with process creation events by user, timestamp, and source IP/hostname."
+        }
+      ],
+      "on_completion": "parallel--b3a23fed-70f8-4b33-ad15-bba043fd07ac"
+    },
+    "action--9cfb21cc-9576-4b31-ac02-5a22406288d4": {
+      "name": "Collect process creation events (Event ID 4688) with command line arguments from endpoints, focusing on interactive user sessions.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Collect process creation events (Event ID 4688) with command line arguments from endpoints, focusing on interactive user sessions.",
+          "description": "Collect process creation events (Event ID 4688) with command line arguments from endpoints, focusing on interactive user sessions."
+        }
+      ],
+      "on_completion": "action--99e8b8ca-9ab0-4e15-9df3-715b4d6c92ae"
+    },
+    "action--abad5a7a-59b9-400e-9b57-cb85c1f82376": {
+      "name": "Identify and collect Windows event logs related to user account modifications (Event IDs 4722, 4725, 4726) from domain controllers and member servers.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Identify and collect Windows event logs related to user account modifications (Event IDs 4722, 4725, 4726) from domain controllers and member servers.",
+          "description": "Identify and collect Windows event logs related to user account modifications (Event IDs 4722, 4725, 4726) from domain controllers and member servers."
+        }
+      ],
+      "on_completion": "action--9cfb21cc-9576-4b31-ac02-5a22406288d4"
+    },
+    "action--b1a53fff-aa30-427e-8e93-4f9d6d9e5fa0": {
+      "name": "Check if account modifications occurred outside of established IT admin change windows.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Check if account modifications occurred outside of established IT admin change windows.",
+          "description": ""
+        }
+      ],
+      "on_completion": "end--9be6f2b6-0431-44e6-91f8-f4f858d0776e"
+    },
+    "parallel--b3a23fed-70f8-4b33-ad15-bba043fd07ac": {
+      "name": "Analyze correlated events for anomalies:",
+      "type": "parallel",
+      "next_steps": [
+        "action--b1a53fff-aa30-427e-8e93-4f9d6d9e5fa0",
+        "action--31f2c205-79b9-4dcd-bb49-f696ba96b5da",
+        "action--5c9c4d00-65d5-4c37-96cd-4eb00db43070"
+      ],
+      "on_completion": "action--05e45293-ca34-472b-ac9f-60d3b90407f6"
+    }
+  },
+  "created_by": "individual--506bcd7d-f79e-4c2a-acbe-5fdee7552639",
+  "description": "This is an automatically generated playbook based on the question: A detections playbook for T1531 of MITRE ATT&CK Matrix for Enterprise framework is required.The target platform is Windows. You can find more information at https://attack.mitre.org/detectionstrategies/DET0120#AN0334 . The description of the approach follows: Correlated user account modification (reset, disable, deletion) events with anomalous process lineage (e.g., PowerShell or net.exe from an interactive session), especially outside of IT admin change windows or by non-admin users.",
+  "spec_version": "cacao-2.0",
+  "workflow_start": "start--7516ff49-7df7-436c-aa61-cd04bbae7815",
+  "agent_definitions": {
+    "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81": {
+      "name": "DummyAgent",
+      "type": "individual",
+      "description": "Dummy Agent to be changed"
+    }
+  },
+  "external_references": [
+    {
+      "url": "https://attack.mitre.org/techniques/T1531/",
+      "name": "MITRE ATT&CK Technique T1531: Account Access Removal"
+    },
+    {
+      "url": "https://attack.mitre.org/detectionstrategies/DET0120#AN0334",
+      "name": "MITRE ATT&CK Detection Strategy DET0120#AN0334"
+    }
+  ],
+  "__cymph_metadata": {
+    "mappings": {
+      "MITRE ATT&CK Matrix for Enterprise": [
+        "T1531"
+      ]
+    },
+    "document": {
+      "time": 1773063958999,
+      "blocks": [
+        {
+          "id": "eEo2r4QPS1",
+          "data": {
+            "meta": {
+              "start": 1,
+              "counterType": "numeric"
+            },
+            "items": [
+              {
+                "meta": {},
+                "items": [],
+                "content": "Identify and collect Windows event logs related to user account modifications (Event IDs 4722, 4725, 4726) from domain controllers and member servers."
+              },
+              {
+                "meta": {},
+                "items": [],
+                "content": "Collect process creation events (Event ID 4688) with command line arguments from endpoints, focusing on interactive user sessions."
+              },
+              {
+                "meta": {},
+                "items": [],
+                "content": "Correlate account modification events with process creation events by user, timestamp, and source IP/hostname."
+              },
+              {
+                "meta": {},
+                "items": [
+                  {
+                    "meta": {},
+                    "items": [],
+                    "content": "Check if account modifications occurred outside of established IT admin change windows."
+                  },
+                  {
+                    "meta": {},
+                    "items": [],
+                    "content": "Verify if the modifying user lacks administrative privileges (non-admin users performing modifications)."
+                  },
+                  {
+                    "meta": {},
+                    "items": [],
+                    "content": "Inspect process lineage for use of suspicious tools (e.g., PowerShell, net.exe, net1.exe) in interactive sessions."
+                  }
+                ],
+                "content": "Analyze correlated events for anomalies:"
+              },
+              {
+                "meta": {},
+                "items": [],
+                "content": "Investigate any anomalies by reviewing full command lines, parent processes, and network connections associated with the events."
+              },
+              {
+                "meta": {},
+                "items": [],
+                "content": "If malicious activity is confirmed, isolate affected systems, reset compromised accounts, and revoke unauthorized access."
+              }
+            ],
+            "style": "ordered"
+          },
+          "type": "list",
+          "tunes": {
+            "textVariant": ""
+          }
+        }
+      ]
+    }
+  }
+}

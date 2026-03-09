@@ -1,0 +1,377 @@
+{
+  "id": "playbook--91d2bbdc-ae67-4c80-921e-84b386595fef",
+  "name": "Windows External Remote Access Anomaly Detection and Response",
+  "type": "playbook",
+  "labels": [
+    "T1133",
+    "External Remote Services",
+    "Windows",
+    "Detection",
+    "Lateral Movement",
+    "Data Exfiltration"
+  ],
+  "created": "2026-03-09T13:44:15.978Z",
+  "revoked": false,
+  "modified": "2026-03-09T13:44:15.978Z",
+  "priority": 0,
+  "workflow": {
+    "end--5a344e55-729c-49e9-9955-587e238dc843": {
+      "name": "End",
+      "type": "end"
+    },
+    "end--6abe3f6a-200a-4c29-8755-4b91c0325f5e": {
+      "name": "End",
+      "type": "end"
+    },
+    "end--76f4a3c4-4e9e-4193-8137-7b1f132e6139": {
+      "name": "End",
+      "type": "end"
+    },
+    "end--87811f46-9f9c-4bd6-b530-315381ee2639": {
+      "name": "End",
+      "type": "end"
+    },
+    "end--90e9fa5c-e700-4f53-84f4-f28b254ff363": {
+      "name": "End",
+      "type": "end"
+    },
+    "end--ae8e898b-2be5-4fcc-9677-22714e924609": {
+      "name": "End",
+      "type": "end"
+    },
+    "end--b412f573-fbf3-46eb-9125-99cb90f40d98": {
+      "name": "End",
+      "type": "end"
+    },
+    "end--e474c293-44a6-4a9d-a244-adfe37fd687f": {
+      "name": "End",
+      "type": "end"
+    },
+    "end--f15a4f07-280c-445b-ad55-dbbffa9effef": {
+      "name": "End",
+      "type": "end"
+    },
+    "start--7328d274-38ea-4784-ad8e-28dad18c9475": {
+      "name": "Start",
+      "type": "start",
+      "on_completion": "action--5add3e24-63b9-4f53-a7bc-c62b45e24ab3"
+    },
+    "action--0fe9762b-b147-4dcf-be92-8d7bf85d7f92": {
+      "name": "Establish baselines for normal remote access patterns, including typical source geolocations, business hours, and user accounts involved.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Establish baselines for normal remote access patterns, including typical source geolocations, business hours, and user accounts involved.",
+          "description": "Establish baselines for normal remote access patterns, including typical source geolocations, business hours, and user accounts involved."
+        }
+      ],
+      "on_completion": "action--88892e12-2507-42f3-a7df-1e967bd54ac7"
+    },
+    "action--390cee57-46de-4c3f-9aea-4c581b3bff9c": {
+      "name": "Verify if the login occurs outside of established business hours for the organization.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Verify if the login occurs outside of established business hours for the organization.",
+          "description": ""
+        }
+      ],
+      "on_completion": "end--76f4a3c4-4e9e-4193-8137-7b1f132e6139"
+    },
+    "action--5add3e24-63b9-4f53-a7bc-c62b45e24ab3": {
+      "name": "Deploy and configure monitoring tools to capture external remote access attempts (RDP, VPN, Citrix) on Windows endpoints and network perimeter devices.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Deploy and configure monitoring tools to capture external remote access attempts (RDP, VPN, Citrix) on Windows endpoints and network perimeter devices.",
+          "description": "Deploy and configure monitoring tools to capture external remote access attempts (RDP, VPN, Citrix) on Windows endpoints and network perimeter devices."
+        }
+      ],
+      "on_completion": "action--0fe9762b-b147-4dcf-be92-8d7bf85d7f92"
+    },
+    "action--604e2ede-025b-45ec-8da9-661bfc160fea": {
+      "name": "Check for subsequent internal lateral movement attempts (e.g., SMB connections, WMI executions, PsExec usage) from the compromised account/host.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Check for subsequent internal lateral movement attempts (e.g., SMB connections, WMI executions, PsExec usage) from the compromised account/host.",
+          "description": ""
+        }
+      ],
+      "on_completion": "end--90e9fa5c-e700-4f53-84f4-f28b254ff363"
+    },
+    "action--7188ecb9-d589-431d-81ff-01bc362ed08f": {
+      "name": "Monitor for data exfiltration activities (e.g., large outbound transfers, connections to known malicious IPs).",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Monitor for data exfiltration activities (e.g., large outbound transfers, connections to known malicious IPs).",
+          "description": ""
+        }
+      ],
+      "on_completion": "end--e474c293-44a6-4a9d-a244-adfe37fd687f"
+    },
+    "action--80ab9aaf-fb59-426c-a22e-a3dbf981991d": {
+      "name": "Review authentication logs (e.g., Windows Event Logs for RDP, VPN provider logs) for additional context.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Review authentication logs (e.g., Windows Event Logs for RDP, VPN provider logs) for additional context.",
+          "description": ""
+        }
+      ],
+      "on_completion": "end--b412f573-fbf3-46eb-9125-99cb90f40d98"
+    },
+    "action--88892e12-2507-42f3-a7df-1e967bd54ac7": {
+      "name": "Implement alerting for repeated failed login attempts from external sources, with thresholds adjusted to minimize false positives.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Implement alerting for repeated failed login attempts from external sources, with thresholds adjusted to minimize false positives.",
+          "description": "Implement alerting for repeated failed login attempts from external sources, with thresholds adjusted to minimize false positives."
+        }
+      ],
+      "on_completion": "parallel--d05577ca-cd3e-4cfb-ae51-ba8854dd4380"
+    },
+    "action--acc43fee-cb75-4f9e-b874-b820525aaded": {
+      "name": "Immediately isolate the affected endpoint or user session from the network to prevent lateral movement.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Immediately isolate the affected endpoint or user session from the network to prevent lateral movement.",
+          "description": ""
+        }
+      ],
+      "on_completion": "end--87811f46-9f9c-4bd6-b530-315381ee2639"
+    },
+    "action--cd7692e2-5e0c-409f-a7af-516b2610c85c": {
+      "name": "Scan the endpoint for signs of malware, persistence mechanisms, or unauthorized tools.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Scan the endpoint for signs of malware, persistence mechanisms, or unauthorized tools.",
+          "description": ""
+        }
+      ],
+      "on_completion": "end--5a344e55-729c-49e9-9955-587e238dc843"
+    },
+    "action--daaae52d-cd9d-412c-bc90-a683ed82f9b0": {
+      "name": "Check if the successful session originates from an uncommon geolocation (e.g., not in the allowed countries list).",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Check if the successful session originates from an uncommon geolocation (e.g., not in the allowed countries list).",
+          "description": ""
+        }
+      ],
+      "on_completion": "end--6abe3f6a-200a-4c29-8755-4b91c0325f5e"
+    },
+    "action--e06a7a1e-b5b4-490c-9687-c148e1306f5d": {
+      "name": "Escalate to incident response team if lateral movement or data exfiltration is confirmed, and initiate full containment procedures.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Escalate to incident response team if lateral movement or data exfiltration is confirmed, and initiate full containment procedures.",
+          "description": "Escalate to incident response team if lateral movement or data exfiltration is confirmed, and initiate full containment procedures."
+        }
+      ],
+      "on_completion": "action--f122e3dd-66c1-4dc2-808c-eedca43b0548"
+    },
+    "action--f122e3dd-66c1-4dc2-808c-eedca43b0548": {
+      "name": "Update detection rules and access controls based on findings to prevent recurrence.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Update detection rules and access controls based on findings to prevent recurrence.",
+          "description": "Update detection rules and access controls based on findings to prevent recurrence."
+        }
+      ],
+      "on_completion": "end--ae8e898b-2be5-4fcc-9677-22714e924609"
+    },
+    "action--f3c2258c-d451-4b26-8533-5467ec61d62c": {
+      "name": "Cross-reference the user account with known compromised credentials or suspicious activity reports.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Cross-reference the user account with known compromised credentials or suspicious activity reports.",
+          "description": ""
+        }
+      ],
+      "on_completion": "end--f15a4f07-280c-445b-ad55-dbbffa9effef"
+    },
+    "parallel--6eafc65e-a2de-4ecd-a76e-1123661a5830": {
+      "name": "Upon detection of a suspicious successful external login, initiate investigation and response:",
+      "type": "parallel",
+      "next_steps": [
+        "action--acc43fee-cb75-4f9e-b874-b820525aaded",
+        "action--80ab9aaf-fb59-426c-a22e-a3dbf981991d",
+        "action--cd7692e2-5e0c-409f-a7af-516b2610c85c",
+        "action--604e2ede-025b-45ec-8da9-661bfc160fea",
+        "action--7188ecb9-d589-431d-81ff-01bc362ed08f"
+      ],
+      "on_completion": "action--e06a7a1e-b5b4-490c-9687-c148e1306f5d"
+    },
+    "parallel--d05577ca-cd3e-4cfb-ae51-ba8854dd4380": {
+      "name": "Correlate successful external logins following failed attempts with indicators of compromise:",
+      "type": "parallel",
+      "next_steps": [
+        "action--daaae52d-cd9d-412c-bc90-a683ed82f9b0",
+        "action--390cee57-46de-4c3f-9aea-4c581b3bff9c",
+        "action--f3c2258c-d451-4b26-8533-5467ec61d62c"
+      ],
+      "on_completion": "parallel--6eafc65e-a2de-4ecd-a76e-1123661a5830"
+    }
+  },
+  "created_by": "individual--506bcd7d-f79e-4c2a-acbe-5fdee7552639",
+  "description": "This is an automatically generated playbook based on the question: A detections playbook for T1133 of MITRE ATT&CK Matrix for Enterprise framework is required.The target platform is Windows. You can find more information at https://attack.mitre.org/detectionstrategies/DET0354#AN1004 . The description of the approach follows: Unusual or unauthorized external remote access attempts (e.g., RDP, VPN, Citrix) → repeated failed logins followed by a successful session from uncommon geolocations or outside business hours → subsequent internal lateral movement or data exfiltration activities.",
+  "spec_version": "cacao-2.0",
+  "workflow_start": "start--7328d274-38ea-4784-ad8e-28dad18c9475",
+  "agent_definitions": {
+    "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81": {
+      "name": "DummyAgent",
+      "type": "individual",
+      "description": "Dummy Agent to be changed"
+    }
+  },
+  "external_references": [
+    {
+      "url": "https://attack.mitre.org/techniques/T1133/",
+      "name": "MITRE ATT&CK Technique T1133: External Remote Services"
+    },
+    {
+      "url": "https://attack.mitre.org/detectionstrategies/DET0354#AN1004",
+      "name": "MITRE ATT&CK Detection Strategies: DET0354#AN1004"
+    }
+  ],
+  "__cymph_metadata": {
+    "mappings": {
+      "MITRE ATT&CK Matrix for Enterprise": [
+        "T1133"
+      ]
+    },
+    "document": {
+      "time": 1773063855989,
+      "blocks": [
+        {
+          "id": "XteKfG4BCN",
+          "data": {
+            "meta": {
+              "start": 1,
+              "counterType": "numeric"
+            },
+            "items": [
+              {
+                "meta": {},
+                "items": [],
+                "content": "Deploy and configure monitoring tools to capture external remote access attempts (RDP, VPN, Citrix) on Windows endpoints and network perimeter devices."
+              },
+              {
+                "meta": {},
+                "items": [],
+                "content": "Establish baselines for normal remote access patterns, including typical source geolocations, business hours, and user accounts involved."
+              },
+              {
+                "meta": {},
+                "items": [],
+                "content": "Implement alerting for repeated failed login attempts from external sources, with thresholds adjusted to minimize false positives."
+              },
+              {
+                "meta": {},
+                "items": [
+                  {
+                    "meta": {},
+                    "items": [],
+                    "content": "Check if the successful session originates from an uncommon geolocation (e.g., not in the allowed countries list)."
+                  },
+                  {
+                    "meta": {},
+                    "items": [],
+                    "content": "Verify if the login occurs outside of established business hours for the organization."
+                  },
+                  {
+                    "meta": {},
+                    "items": [],
+                    "content": "Cross-reference the user account with known compromised credentials or suspicious activity reports."
+                  }
+                ],
+                "content": "Correlate successful external logins following failed attempts with indicators of compromise:"
+              },
+              {
+                "meta": {},
+                "items": [
+                  {
+                    "meta": {},
+                    "items": [],
+                    "content": "Immediately isolate the affected endpoint or user session from the network to prevent lateral movement."
+                  },
+                  {
+                    "meta": {},
+                    "items": [],
+                    "content": "Review authentication logs (e.g., Windows Event Logs for RDP, VPN provider logs) for additional context."
+                  },
+                  {
+                    "meta": {},
+                    "items": [],
+                    "content": "Scan the endpoint for signs of malware, persistence mechanisms, or unauthorized tools."
+                  },
+                  {
+                    "meta": {},
+                    "items": [],
+                    "content": "Check for subsequent internal lateral movement attempts (e.g., SMB connections, WMI executions, PsExec usage) from the compromised account/host."
+                  },
+                  {
+                    "meta": {},
+                    "items": [],
+                    "content": "Monitor for data exfiltration activities (e.g., large outbound transfers, connections to known malicious IPs)."
+                  }
+                ],
+                "content": "Upon detection of a suspicious successful external login, initiate investigation and response:"
+              },
+              {
+                "meta": {},
+                "items": [],
+                "content": "Escalate to incident response team if lateral movement or data exfiltration is confirmed, and initiate full containment procedures."
+              },
+              {
+                "meta": {},
+                "items": [],
+                "content": "Update detection rules and access controls based on findings to prevent recurrence."
+              }
+            ],
+            "style": "ordered"
+          },
+          "type": "list",
+          "tunes": {
+            "textVariant": ""
+          }
+        }
+      ]
+    }
+  }
+}

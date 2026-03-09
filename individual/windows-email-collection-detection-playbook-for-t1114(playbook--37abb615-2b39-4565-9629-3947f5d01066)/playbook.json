@@ -1,0 +1,289 @@
+{
+  "id": "playbook--37abb615-2b39-4565-9629-3947f5d01066",
+  "name": "Windows Email Collection Detection Playbook for T1114",
+  "type": "playbook",
+  "labels": [
+    "T1114",
+    "Email Collection",
+    "Windows",
+    "Detection",
+    "MITRE ATT&CK"
+  ],
+  "created": "2026-03-09T13:45:51.227Z",
+  "revoked": false,
+  "modified": "2026-03-09T13:45:51.227Z",
+  "priority": 0,
+  "workflow": {
+    "end--184d88c8-9c49-4937-a146-c6b5cab4234a": {
+      "name": "End",
+      "type": "end"
+    },
+    "end--346e6e8c-383a-44e9-b48f-9ec252482965": {
+      "name": "End",
+      "type": "end"
+    },
+    "end--6615e90b-0c4b-49f0-a1b4-6f72a94b84c1": {
+      "name": "End",
+      "type": "end"
+    },
+    "end--78441aaf-2fd3-4f7a-aeec-05c612cc4057": {
+      "name": "End",
+      "type": "end"
+    },
+    "end--d386802c-5ccc-477c-a91a-3e67f2e061e6": {
+      "name": "End",
+      "type": "end"
+    },
+    "start--19b3b7ed-e626-4e55-b806-c88088003fb9": {
+      "name": "Start",
+      "type": "start",
+      "on_completion": "action--0439a2eb-aab1-424b-b83a-9c6889d0ee5f"
+    },
+    "action--0439a2eb-aab1-424b-b83a-9c6889d0ee5f": {
+      "name": "Collect and monitor Windows Event Logs for Event ID 4738 (A user account was changed) to detect email forwarding rule creation in Exchange environments.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Collect and monitor Windows Event Logs for Event ID 4738 (A user account was changed) to detect email forwarding rule creation in Exchange environments.",
+          "description": "Collect and monitor Windows Event Logs for Event ID 4738 (A user account was changed) to detect email forwarding rule creation in Exchange environments."
+        }
+      ],
+      "on_completion": "action--4f5e28c0-1055-435d-8b7d-d0457eda291a"
+    },
+    "action--4f5e28c0-1055-435d-8b7d-d0457eda291a": {
+      "name": "Collect and monitor Exchange transport logs for the presence of the 'X-MS-Exchange-Organization-AutoForwarded' header, which indicates automatic email forwarding.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Collect and monitor Exchange transport logs for the presence of the 'X-MS-Exchange-Organization-AutoForwarded' header, which indicates automatic email forwarding.",
+          "description": "Collect and monitor Exchange transport logs for the presence of the 'X-MS-Exchange-Organization-AutoForwarded' header, which indicates automatic email forwarding."
+        }
+      ],
+      "on_completion": "action--f7848897-0c4a-4401-b1f1-f55941caa99e"
+    },
+    "action--528021e0-3c6f-496a-8d55-d064ad007427": {
+      "name": "Correlate the 'X-MS-Exchange-Organization-AutoForwarded' header in logs with network connections to external SMTP servers.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Correlate the 'X-MS-Exchange-Organization-AutoForwarded' header in logs with network connections to external SMTP servers.",
+          "description": ""
+        }
+      ],
+      "on_completion": "end--6615e90b-0c4b-49f0-a1b4-6f72a94b84c1"
+    },
+    "action--5758b9ff-da83-4596-b88f-0a3ffa91da3c": {
+      "name": "Correlate access to .pst/.ost files with network connections to external SMTP servers or suspicious process execution.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Correlate access to .pst/.ost files with network connections to external SMTP servers or suspicious process execution.",
+          "description": ""
+        }
+      ],
+      "on_completion": "end--78441aaf-2fd3-4f7a-aeec-05c612cc4057"
+    },
+    "action--857386f1-2f97-4d94-88fc-682ba149a11c": {
+      "name": "Investigate any correlations for signs of data exfiltration, such as large volumes of data being sent externally.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Investigate any correlations for signs of data exfiltration, such as large volumes of data being sent externally.",
+          "description": ""
+        }
+      ],
+      "on_completion": "end--d386802c-5ccc-477c-a91a-3e67f2e061e6"
+    },
+    "action--88a44029-f211-406e-aab5-356ef188e74a": {
+      "name": "Monitor file system access (e.g., via Sysmon Event ID 11) to .pst and .ost files, which are common email data files in Outlook, to detect unauthorized access or exfiltration attempts.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Monitor file system access (e.g., via Sysmon Event ID 11) to .pst and .ost files, which are common email data files in Outlook, to detect unauthorized access or exfiltration attempts.",
+          "description": "Monitor file system access (e.g., via Sysmon Event ID 11) to .pst and .ost files, which are common email data files in Outlook, to detect unauthorized access or exfiltration attempts."
+        }
+      ],
+      "on_completion": "action--bd64a249-8c46-4d84-bcb3-4a00d6a98d63"
+    },
+    "action--bd64a249-8c46-4d84-bcb3-4a00d6a98d63": {
+      "name": "Monitor network connections (e.g., via Sysmon Event ID 3) to external SMTP servers (ports 25, 465, 587) from non-mail server systems, which may indicate data exfiltration via email.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Monitor network connections (e.g., via Sysmon Event ID 3) to external SMTP servers (ports 25, 465, 587) from non-mail server systems, which may indicate data exfiltration via email.",
+          "description": "Monitor network connections (e.g., via Sysmon Event ID 3) to external SMTP servers (ports 25, 465, 587) from non-mail server systems, which may indicate data exfiltration via email."
+        }
+      ],
+      "on_completion": "parallel--708e0aa8-ee2b-48e2-8144-622c8892e370"
+    },
+    "action--f0ede08b-82a4-472b-bce5-4b2f61d7339d": {
+      "name": "If malicious activity is confirmed, isolate affected systems, revoke unauthorized email forwarding rules, and reset credentials for compromised accounts.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "If malicious activity is confirmed, isolate affected systems, revoke unauthorized email forwarding rules, and reset credentials for compromised accounts.",
+          "description": "If malicious activity is confirmed, isolate affected systems, revoke unauthorized email forwarding rules, and reset credentials for compromised accounts."
+        }
+      ],
+      "on_completion": "end--184d88c8-9c49-4937-a146-c6b5cab4234a"
+    },
+    "action--f5523295-7693-4b38-8283-072997e62d50": {
+      "name": "Correlate email forwarding rule creation (Event ID 4738) with execution of suspicious processes (e.g., PowerShell) around the same time.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Correlate email forwarding rule creation (Event ID 4738) with execution of suspicious processes (e.g., PowerShell) around the same time.",
+          "description": ""
+        }
+      ],
+      "on_completion": "end--346e6e8c-383a-44e9-b48f-9ec252482965"
+    },
+    "action--f7848897-0c4a-4401-b1f1-f55941caa99e": {
+      "name": "Monitor process creation events (e.g., via Sysmon Event ID 1) for suspicious processes such as PowerShell, cmd.exe, or other scripting engines that may be used to manipulate email rules or data.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Monitor process creation events (e.g., via Sysmon Event ID 1) for suspicious processes such as PowerShell, cmd.exe, or other scripting engines that may be used to manipulate email rules or data.",
+          "description": "Monitor process creation events (e.g., via Sysmon Event ID 1) for suspicious processes such as PowerShell, cmd.exe, or other scripting engines that may be used to manipulate email rules or data."
+        }
+      ],
+      "on_completion": "action--88a44029-f211-406e-aab5-356ef188e74a"
+    },
+    "parallel--708e0aa8-ee2b-48e2-8144-622c8892e370": {
+      "name": "Correlate the collected events to identify potential malicious activity:",
+      "type": "parallel",
+      "next_steps": [
+        "action--f5523295-7693-4b38-8283-072997e62d50",
+        "action--528021e0-3c6f-496a-8d55-d064ad007427",
+        "action--5758b9ff-da83-4596-b88f-0a3ffa91da3c",
+        "action--857386f1-2f97-4d94-88fc-682ba149a11c"
+      ],
+      "on_completion": "action--f0ede08b-82a4-472b-bce5-4b2f61d7339d"
+    }
+  },
+  "created_by": "individual--506bcd7d-f79e-4c2a-acbe-5fdee7552639",
+  "description": "This is an automatically generated playbook based on the question: A detections playbook for T1114 of MITRE ATT&CK Matrix for Enterprise framework is required.The target platform is Windows. You can find more information at https://attack.mitre.org/detectionstrategies/DET0476#AN1309 . The description of the approach follows: Correlates creation of email forwarding rules or header anomalies (e.g., X-MS-Exchange-Organization-AutoForwarded) with suspicious process execution, file access of .pst/.ost files, and network connections to external SMTP servers.",
+  "spec_version": "cacao-2.0",
+  "workflow_start": "start--19b3b7ed-e626-4e55-b806-c88088003fb9",
+  "agent_definitions": {
+    "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81": {
+      "name": "DummyAgent",
+      "type": "individual",
+      "description": "Dummy Agent to be changed"
+    }
+  },
+  "external_references": [
+    {
+      "url": "https://attack.mitre.org/techniques/T1114/",
+      "name": "MITRE ATT&CK Technique T1114: Email Collection"
+    },
+    {
+      "url": "https://attack.mitre.org/detectionstrategies/DET0476#AN1309",
+      "name": "MITRE ATT&CK Detection Strategy DET0476#AN1309"
+    }
+  ],
+  "__cymph_metadata": {
+    "mappings": {
+      "MITRE ATT&CK Matrix for Enterprise": [
+        "T1114"
+      ]
+    },
+    "document": {
+      "time": 1773063951240,
+      "blocks": [
+        {
+          "id": "HrtkvaEYCz",
+          "data": {
+            "meta": {
+              "start": 1,
+              "counterType": "numeric"
+            },
+            "items": [
+              {
+                "meta": {},
+                "items": [],
+                "content": "Collect and monitor Windows Event Logs for Event ID 4738 (A user account was changed) to detect email forwarding rule creation in Exchange environments."
+              },
+              {
+                "meta": {},
+                "items": [],
+                "content": "Collect and monitor Exchange transport logs for the presence of the 'X-MS-Exchange-Organization-AutoForwarded' header, which indicates automatic email forwarding."
+              },
+              {
+                "meta": {},
+                "items": [],
+                "content": "Monitor process creation events (e.g., via Sysmon Event ID 1) for suspicious processes such as PowerShell, cmd.exe, or other scripting engines that may be used to manipulate email rules or data."
+              },
+              {
+                "meta": {},
+                "items": [],
+                "content": "Monitor file system access (e.g., via Sysmon Event ID 11) to .pst and .ost files, which are common email data files in Outlook, to detect unauthorized access or exfiltration attempts."
+              },
+              {
+                "meta": {},
+                "items": [],
+                "content": "Monitor network connections (e.g., via Sysmon Event ID 3) to external SMTP servers (ports 25, 465, 587) from non-mail server systems, which may indicate data exfiltration via email."
+              },
+              {
+                "meta": {},
+                "items": [
+                  {
+                    "meta": {},
+                    "items": [],
+                    "content": "Correlate email forwarding rule creation (Event ID 4738) with execution of suspicious processes (e.g., PowerShell) around the same time."
+                  },
+                  {
+                    "meta": {},
+                    "items": [],
+                    "content": "Correlate the 'X-MS-Exchange-Organization-AutoForwarded' header in logs with network connections to external SMTP servers."
+                  },
+                  {
+                    "meta": {},
+                    "items": [],
+                    "content": "Correlate access to .pst/.ost files with network connections to external SMTP servers or suspicious process execution."
+                  },
+                  {
+                    "meta": {},
+                    "items": [],
+                    "content": "Investigate any correlations for signs of data exfiltration, such as large volumes of data being sent externally."
+                  }
+                ],
+                "content": "Correlate the collected events to identify potential malicious activity:"
+              },
+              {
+                "meta": {},
+                "items": [],
+                "content": "If malicious activity is confirmed, isolate affected systems, revoke unauthorized email forwarding rules, and reset credentials for compromised accounts."
+              }
+            ],
+            "style": "ordered"
+          },
+          "type": "list",
+          "tunes": {
+            "textVariant": ""
+          }
+        }
+      ]
+    }
+  }
+}

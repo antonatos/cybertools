@@ -1,0 +1,403 @@
+{
+  "id": "playbook--d5621f37-9911-4994-bcf7-250bb99710c4",
+  "name": "Windows Endpoint and Service Resource Exhaustion Detection Playbook",
+  "type": "playbook",
+  "labels": [
+    "T1499",
+    "Endpoint Denial of Service",
+    "Windows",
+    "Resource Exhaustion",
+    "Service Crash"
+  ],
+  "created": "2026-03-09T13:43:10.784Z",
+  "revoked": false,
+  "modified": "2026-03-09T13:43:10.784Z",
+  "priority": 0,
+  "workflow": {
+    "end--0a88cc9c-4c03-4795-befe-675c94d9b0c8": {
+      "name": "End",
+      "type": "end"
+    },
+    "end--32d9df23-db7c-4df3-84c9-6af5df9ec095": {
+      "name": "End",
+      "type": "end"
+    },
+    "end--5ed14248-0ed3-4518-8c34-5daffb6733b8": {
+      "name": "End",
+      "type": "end"
+    },
+    "end--75e65ad1-6975-4ebf-a2fd-d3e7aa394f0b": {
+      "name": "End",
+      "type": "end"
+    },
+    "end--809088d4-22a7-4ee8-b7a1-ff693f105feb": {
+      "name": "End",
+      "type": "end"
+    },
+    "end--88720d66-f5b2-4c56-a2b9-0d2209b9c982": {
+      "name": "End",
+      "type": "end"
+    },
+    "end--8fd16234-d191-4940-8784-66f59452993b": {
+      "name": "End",
+      "type": "end"
+    },
+    "end--9f8c97e0-1477-4635-b6b7-f89a59837a49": {
+      "name": "End",
+      "type": "end"
+    },
+    "end--a7393665-65bc-4943-b90c-8fa2c07d65f5": {
+      "name": "End",
+      "type": "end"
+    },
+    "end--b4b8cf56-151a-49a3-b084-1b9febf702fa": {
+      "name": "End",
+      "type": "end"
+    },
+    "start--b47e7c4e-cc00-4900-81f2-14705c66679d": {
+      "name": "Start",
+      "type": "start",
+      "on_completion": "action--2eff2a6e-1239-4ed6-bf1d-7b732234f70d"
+    },
+    "action--2eff2a6e-1239-4ed6-bf1d-7b732234f70d": {
+      "name": "Establish baseline monitoring for normal CPU and memory usage patterns on Windows endpoints and servers.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Establish baseline monitoring for normal CPU and memory usage patterns on Windows endpoints and servers.",
+          "description": "Establish baseline monitoring for normal CPU and memory usage patterns on Windows endpoints and servers."
+        }
+      ],
+      "on_completion": "action--9d8215ad-4dfc-41fa-b6bd-177ec36fc720"
+    },
+    "action--4a9672c4-a5e4-4a21-94da-6cac9546e03e": {
+      "name": "Identify rapid spawning of child processes with similar resource consumption patterns",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Identify rapid spawning of child processes with similar resource consumption patterns",
+          "description": ""
+        }
+      ],
+      "on_completion": "end--b4b8cf56-151a-49a3-b084-1b9febf702fa"
+    },
+    "action--79d62bd7-e454-4be7-aec5-2b604f79541d": {
+      "name": "Correlate resource exhaustion events with process parent-child relationships",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Correlate resource exhaustion events with process parent-child relationships",
+          "description": ""
+        }
+      ],
+      "on_completion": "end--a7393665-65bc-4943-b90c-8fa2c07d65f5"
+    },
+    "action--9d8215ad-4dfc-41fa-b6bd-177ec36fc720": {
+      "name": "Deploy and configure real-time monitoring tools to track process creation, system resource consumption (CPU, memory, handles), and service health.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Deploy and configure real-time monitoring tools to track process creation, system resource consumption (CPU, memory, handles), and service health.",
+          "description": "Deploy and configure real-time monitoring tools to track process creation, system resource consumption (CPU, memory, handles), and service health."
+        }
+      ],
+      "on_completion": "parallel--c0330549-e1af-495b-8b1e-c2c9f34a80d4"
+    },
+    "action--aeacaa81-8b31-459f-9cbf-cf8fcf893b63": {
+      "name": "Implement automated response actions for confirmed cases: isolate affected endpoints, terminate malicious processes, and restart crashed services.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Implement automated response actions for confirmed cases: isolate affected endpoints, terminate malicious processes, and restart crashed services.",
+          "description": "Implement automated response actions for confirmed cases: isolate affected endpoints, terminate malicious processes, and restart crashed services."
+        }
+      ],
+      "on_completion": "action--baf614a1-d9a5-4f56-8873-cfee2568ee5e"
+    },
+    "action--b1cbc979-58f8-4c84-89e5-c26f29bb1b40": {
+      "name": "Monitor for service crash events (Event ID 7031, 7023, 7026) in System logs",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Monitor for service crash events (Event ID 7031, 7023, 7026) in System logs",
+          "description": ""
+        }
+      ],
+      "on_completion": "end--809088d4-22a7-4ee8-b7a1-ff693f105feb"
+    },
+    "action--baf614a1-d9a5-4f56-8873-cfee2568ee5e": {
+      "name": "Conduct forensic analysis on affected systems to identify root cause and persistence mechanisms.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Conduct forensic analysis on affected systems to identify root cause and persistence mechanisms.",
+          "description": "Conduct forensic analysis on affected systems to identify root cause and persistence mechanisms."
+        }
+      ],
+      "on_completion": "action--fa17474f-5b59-47a2-a5ae-683333d7cab3"
+    },
+    "action--d7998a4a-853e-437c-a55f-ac56f8edf684": {
+      "name": "Implement time-based detection for rapid resource consumption spikes",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Implement time-based detection for rapid resource consumption spikes",
+          "description": ""
+        }
+      ],
+      "on_completion": "end--75e65ad1-6975-4ebf-a2fd-d3e7aa394f0b"
+    },
+    "action--efc29499-7d3f-492c-9951-c00558a98489": {
+      "name": "Detect processes allocating abnormally high memory (e.g., >2GB for typical user processes)",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Detect processes allocating abnormally high memory (e.g., >2GB for typical user processes)",
+          "description": ""
+        }
+      ],
+      "on_completion": "end--8fd16234-d191-4940-8784-66f59452993b"
+    },
+    "action--f27d870c-3a94-440c-805c-5308fdc22093": {
+      "name": "Monitor for processes with sustained CPU usage above 90% for extended periods",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Monitor for processes with sustained CPU usage above 90% for extended periods",
+          "description": ""
+        }
+      ],
+      "on_completion": "end--88720d66-f5b2-4c56-a2b9-0d2209b9c982"
+    },
+    "action--f53a6c3e-9c11-4843-865e-23608853c988": {
+      "name": "Cross-reference with user account activity and login sessions",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Cross-reference with user account activity and login sessions",
+          "description": ""
+        }
+      ],
+      "on_completion": "end--9f8c97e0-1477-4635-b6b7-f89a59837a49"
+    },
+    "action--f621094e-7331-416f-bc39-e81b6e05719a": {
+      "name": "Set thresholds for CPU/memory usage that trigger alerts when exceeded",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Set thresholds for CPU/memory usage that trigger alerts when exceeded",
+          "description": ""
+        }
+      ],
+      "on_completion": "end--32d9df23-db7c-4df3-84c9-6af5df9ec095"
+    },
+    "action--f8eb9743-0250-42cb-b2a8-53c45c6c4ee7": {
+      "name": "Detect abnormal service control requests (start/stop/restart) from non-administrative accounts",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Detect abnormal service control requests (start/stop/restart) from non-administrative accounts",
+          "description": ""
+        }
+      ],
+      "on_completion": "end--0a88cc9c-4c03-4795-befe-675c94d9b0c8"
+    },
+    "action--fa17474f-5b59-47a2-a5ae-683333d7cab3": {
+      "name": "Update detection rules based on investigation findings and threat intelligence.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Update detection rules based on investigation findings and threat intelligence.",
+          "description": "Update detection rules based on investigation findings and threat intelligence."
+        }
+      ],
+      "on_completion": "end--5ed14248-0ed3-4518-8c34-5daffb6733b8"
+    },
+    "parallel--c0330549-e1af-495b-8b1e-c2c9f34a80d4": {
+      "name": "Implement detection rules for resource exhaustion indicators",
+      "type": "parallel",
+      "next_steps": [
+        "action--f27d870c-3a94-440c-805c-5308fdc22093",
+        "action--efc29499-7d3f-492c-9951-c00558a98489",
+        "action--4a9672c4-a5e4-4a21-94da-6cac9546e03e",
+        "action--b1cbc979-58f8-4c84-89e5-c26f29bb1b40",
+        "action--f8eb9743-0250-42cb-b2a8-53c45c6c4ee7"
+      ],
+      "on_completion": "parallel--dca33a36-1c2d-4f7f-8211-cfc11dc8ef1d"
+    },
+    "parallel--dca33a36-1c2d-4f7f-8211-cfc11dc8ef1d": {
+      "name": "Configure alerting and correlation logic",
+      "type": "parallel",
+      "next_steps": [
+        "action--f621094e-7331-416f-bc39-e81b6e05719a",
+        "action--79d62bd7-e454-4be7-aec5-2b604f79541d",
+        "action--d7998a4a-853e-437c-a55f-ac56f8edf684",
+        "action--f53a6c3e-9c11-4843-865e-23608853c988"
+      ],
+      "on_completion": "action--aeacaa81-8b31-459f-9cbf-cf8fcf893b63"
+    }
+  },
+  "created_by": "individual--506bcd7d-f79e-4c2a-acbe-5fdee7552639",
+  "description": "This is an automatically generated playbook based on the question: A detections playbook for T1499 of MITRE ATT&CK Matrix for Enterprise framework is required.The target platform is Windows. You can find more information at https://attack.mitre.org/detectionstrategies/DET0208#AN0584 . The description of the approach follows: Excessive resource exhaustion or service crash induced by processes launched by users or scripts that rapidly consume CPU/memory or attempt malformed service interactions.",
+  "spec_version": "cacao-2.0",
+  "workflow_start": "start--b47e7c4e-cc00-4900-81f2-14705c66679d",
+  "agent_definitions": {
+    "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81": {
+      "name": "DummyAgent",
+      "type": "individual",
+      "description": "Dummy Agent to be changed"
+    }
+  },
+  "external_references": [
+    {
+      "url": "https://attack.mitre.org/techniques/T1499/",
+      "name": "MITRE ATT&CK Technique T1499: Endpoint Denial of Service"
+    },
+    {
+      "url": "https://attack.mitre.org/detectionstrategies/DET0208#AN0584",
+      "name": "MITRE ATT&CK Detection Strategies DET0208#AN0584"
+    },
+    {
+      "url": "https://docs.microsoft.com/en-us/windows/win32/eventlog/event-logging",
+      "name": "Microsoft Windows Event Log Reference"
+    }
+  ],
+  "__cymph_metadata": {
+    "mappings": {
+      "MITRE ATT&CK Matrix for Enterprise": [
+        "T1499"
+      ]
+    },
+    "document": {
+      "time": 1773063790793,
+      "blocks": [
+        {
+          "id": "bRucqrI0VF",
+          "data": {
+            "meta": {
+              "start": 1,
+              "counterType": "numeric"
+            },
+            "items": [
+              {
+                "meta": {},
+                "items": [],
+                "content": "Establish baseline monitoring for normal CPU and memory usage patterns on Windows endpoints and servers."
+              },
+              {
+                "meta": {},
+                "items": [],
+                "content": "Deploy and configure real-time monitoring tools to track process creation, system resource consumption (CPU, memory, handles), and service health."
+              },
+              {
+                "meta": {},
+                "items": [
+                  {
+                    "meta": {},
+                    "items": [],
+                    "content": "Monitor for processes with sustained CPU usage above 90% for extended periods"
+                  },
+                  {
+                    "meta": {},
+                    "items": [],
+                    "content": "Detect processes allocating abnormally high memory (e.g., >2GB for typical user processes)"
+                  },
+                  {
+                    "meta": {},
+                    "items": [],
+                    "content": "Identify rapid spawning of child processes with similar resource consumption patterns"
+                  },
+                  {
+                    "meta": {},
+                    "items": [],
+                    "content": "Monitor for service crash events (Event ID 7031, 7023, 7026) in System logs"
+                  },
+                  {
+                    "meta": {},
+                    "items": [],
+                    "content": "Detect abnormal service control requests (start/stop/restart) from non-administrative accounts"
+                  }
+                ],
+                "content": "Implement detection rules for resource exhaustion indicators"
+              },
+              {
+                "meta": {},
+                "items": [
+                  {
+                    "meta": {},
+                    "items": [],
+                    "content": "Set thresholds for CPU/memory usage that trigger alerts when exceeded"
+                  },
+                  {
+                    "meta": {},
+                    "items": [],
+                    "content": "Correlate resource exhaustion events with process parent-child relationships"
+                  },
+                  {
+                    "meta": {},
+                    "items": [],
+                    "content": "Implement time-based detection for rapid resource consumption spikes"
+                  },
+                  {
+                    "meta": {},
+                    "items": [],
+                    "content": "Cross-reference with user account activity and login sessions"
+                  }
+                ],
+                "content": "Configure alerting and correlation logic"
+              },
+              {
+                "meta": {},
+                "items": [],
+                "content": "Implement automated response actions for confirmed cases: isolate affected endpoints, terminate malicious processes, and restart crashed services."
+              },
+              {
+                "meta": {},
+                "items": [],
+                "content": "Conduct forensic analysis on affected systems to identify root cause and persistence mechanisms."
+              },
+              {
+                "meta": {},
+                "items": [],
+                "content": "Update detection rules based on investigation findings and threat intelligence."
+              }
+            ],
+            "style": "ordered"
+          },
+          "type": "list",
+          "tunes": {
+            "textVariant": ""
+          }
+        }
+      ]
+    }
+  }
+}
