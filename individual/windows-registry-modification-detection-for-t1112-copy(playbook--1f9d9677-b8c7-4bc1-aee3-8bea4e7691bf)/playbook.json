@@ -1,0 +1,562 @@
+{
+  "id": "playbook--1f9d9677-b8c7-4bc1-aee3-8bea4e7691bf",
+  "name": "Windows Registry Modification Detection for T1112 (copy)",
+  "type": "playbook",
+  "labels": [
+    "T1112",
+    "Windows",
+    "Registry",
+    "Persistence",
+    "Defense Evasion",
+    "Privilege Escalation",
+    "Detection"
+  ],
+  "created": "2026-02-27T17:21:42.253Z",
+  "revoked": false,
+  "informed": [
+    "individual--ebbef7ee-720e-48b8-a595-da11af5eaba2"
+  ],
+  "modified": "2026-03-05T21:26:32.480Z",
+  "priority": 0,
+  "workflow": {
+    "end--5ec21d15-61f5-4e1a-a564-5a3f2becced1": {
+      "name": "End",
+      "type": "end"
+    },
+    "end--5f6656fc-ba2d-4478-bb87-e31a8ac3397f": {
+      "name": "End",
+      "type": "end"
+    },
+    "end--77b4401e-6eba-44f7-97ea-638c4d01884b": {
+      "name": "End",
+      "type": "end"
+    },
+    "end--d04b8045-eca2-49aa-812d-64486cb4b882": {
+      "name": "End",
+      "type": "end"
+    },
+    "end--d247f791-1bcb-4f4b-9acc-7bc6f4f818a7": {
+      "name": "End",
+      "type": "end"
+    },
+    "end--d78f7f60-6542-43da-b3f7-c038cdc4e9a2": {
+      "name": "End",
+      "type": "end"
+    },
+    "end--e3b5bf3e-ba88-4104-86f5-a5bd8e59713e": {
+      "name": "End",
+      "type": "end"
+    },
+    "start--4e23c168-0f29-4490-b244-87d609047239": {
+      "name": "Start",
+      "type": "start",
+      "on_completion": "action--1b2fb5e7-dfd9-497a-b584-68d654cd55c1"
+    },
+    "action--0a20758b-d241-46b2-8e63-82f9ca9b6c7a": {
+      "name": "Monitor for direct API calls indicative of registry manipulation. This is typically done by EDR solutions monitoring for calls to functions like RegSetValueExW, RegCreateKeyExA, etc., especially when targeting sensitive keys.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Monitor for direct API calls indicative of registry manipulation. This is typically done by EDR solutions monitoring for calls to functions like RegSetValueExW, RegCreateKeyExA, etc., especially when targeting sensitive keys.",
+          "description": "Monitor for direct API calls indicative of registry manipulation. This is typically done by EDR solutions monitoring for calls to functions like RegSetValueExW, RegCreateKeyExA, etc., especially when targeting sensitive keys."
+        }
+      ],
+      "on_completion": "parallel--2c22f5cd-9d79-42af-a3ef-4695f27538f7"
+    },
+    "action--0bd1adab-656e-47dc-834e-32765e3b7f4e": {
+      "name": "Persistence via Run Keys: HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run, HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Run, HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\RunOnce",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Persistence via Run Keys: HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run, HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Run, HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\RunOnce",
+          "description": ""
+        }
+      ],
+      "on_completion": "end--e3b5bf3e-ba88-4104-86f5-a5bd8e59713e"
+    },
+    "action--1b2fb5e7-dfd9-497a-b584-68d654cd55c1": {
+      "name": "Deploy and configure a SIEM or EDR solution to collect and centralize Windows event logs, specifically focusing on Security, System, and PowerShell logs.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Deploy and configure a SIEM or EDR solution to collect and centralize Windows event logs, specifically focusing on Security, System, and PowerShell logs.",
+          "description": "Deploy and configure a SIEM or EDR solution to collect and centralize Windows event logs, specifically focusing on Security, System, and PowerShell logs."
+        }
+      ],
+      "on_completion": "action--b5f451bd-1fe4-40a4-a88c-27bfd410664f"
+    },
+    "action--367ebec7-596b-4c9f-a481-95b6a8775e22": {
+      "name": "Establish a baseline of normal administrative activity for registry changes in your environment to reduce false positives. Tune detection rules to exclude changes made by known management and deployment tools (e.g., SCCM, Group Policy).",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Establish a baseline of normal administrative activity for registry changes in your environment to reduce false positives. Tune detection rules to exclude changes made by known management and deployment tools (e.g., SCCM, Group Policy).",
+          "description": "Establish a baseline of normal administrative activity for registry changes in your environment to reduce false positives. Tune detection rules to exclude changes made by known management and deployment tools (e.g., SCCM, Group Policy)."
+        }
+      ],
+      "on_completion": "action--7b2efde3-6bf9-47fb-aac5-94ddabc845b3"
+    },
+    "action--68708c51-ce7d-4d01-b752-674cfbfab5ac": {
+      "name": "Create detection rules to identify PowerShell being used to modify the registry, particularly using cmdlets like Set-ItemProperty, New-ItemProperty, or Remove-ItemProperty targeting high-risk keys.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Create detection rules to identify PowerShell being used to modify the registry, particularly using cmdlets like Set-ItemProperty, New-ItemProperty, or Remove-ItemProperty targeting high-risk keys.",
+          "description": "Create detection rules to identify PowerShell being used to modify the registry, particularly using cmdlets like Set-ItemProperty, New-ItemProperty, or Remove-ItemProperty targeting high-risk keys."
+        }
+      ],
+      "on_completion": "action--9d08d3de-2bf4-4ed6-bc20-cf0921c3a9b1"
+    },
+    "action--797f4fd8-c90e-4a61-ae49-fe5dcaf96b36": {
+      "name": "Defense Evasion: HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\SafeDllSearchMode (disabling it by setting to 0)",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Defense Evasion: HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\SafeDllSearchMode (disabling it by setting to 0)",
+          "description": ""
+        }
+      ],
+      "on_completion": "end--d78f7f60-6542-43da-b3f7-c038cdc4e9a2"
+    },
+    "action--7b2efde3-6bf9-47fb-aac5-94ddabc845b3": {
+      "name": "Implement automated alerting for high-confidence detections, ensuring alerts are routed to the security operations team for immediate investigation.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Implement automated alerting for high-confidence detections, ensuring alerts are routed to the security operations team for immediate investigation.",
+          "description": "Implement automated alerting for high-confidence detections, ensuring alerts are routed to the security operations team for immediate investigation."
+        }
+      ],
+      "on_completion": "action--7e689c71-a5c9-4ecd-a7ed-f8ac2324e6ed"
+    },
+    "action--7e689c71-a5c9-4ecd-a7ed-f8ac2324e6ed": {
+      "name": "Document investigation procedures for analysts. This should include steps to identify the parent process of the registry modification, analyze the command-line arguments, and investigate the target binary or script that is being persisted.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Document investigation procedures for analysts. This should include steps to identify the parent process of the registry modification, analyze the command-line arguments, and investigate the target binary or script that is being persisted.",
+          "description": "Document investigation procedures for analysts. This should include steps to identify the parent process of the registry modification, analyze the command-line arguments, and investigate the target binary or script that is being persisted."
+        }
+      ],
+      "on_completion": "end--d04b8045-eca2-49aa-812d-64486cb4b882"
+    },
+    "action--992fd4a7-8d0a-4b0b-bc77-5963209a151a": {
+      "name": "Correlate registry modification events with subsequent process execution or service management activity (e.g., starting a new process, restarting a service like UAC via consent.exe) that could indicate the activation of the persistence mechanism.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Correlate registry modification events with subsequent process execution or service management activity (e.g., starting a new process, restarting a service like UAC via consent.exe) that could indicate the activation of the persistence mechanism.",
+          "description": "Correlate registry modification events with subsequent process execution or service management activity (e.g., starting a new process, restarting a service like UAC via consent.exe) that could indicate the activation of the persistence mechanism."
+        }
+      ],
+      "on_completion": "action--367ebec7-596b-4c9f-a481-95b6a8775e22"
+    },
+    "action--9d08d3de-2bf4-4ed6-bc20-cf0921c3a9b1": {
+      "name": "Create detection rules to identify WMI being used for registry modification, such as through the StdRegProv class and its methods (e.g., SetStringValue, CreateKey, DeleteValue).",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Create detection rules to identify WMI being used for registry modification, such as through the StdRegProv class and its methods (e.g., SetStringValue, CreateKey, DeleteValue).",
+          "description": "Create detection rules to identify WMI being used for registry modification, such as through the StdRegProv class and its methods (e.g., SetStringValue, CreateKey, DeleteValue)."
+        }
+      ],
+      "on_completion": "action--0a20758b-d241-46b2-8e63-82f9ca9b6c7a"
+    },
+    "action--b255e216-4b87-42b3-bc09-dcb895dbb389": {
+      "name": "Persistence via Services: HKLM\\System\\CurrentControlSet\\Services\\[Service Name]",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Persistence via Services: HKLM\\System\\CurrentControlSet\\Services\\[Service Name]",
+          "description": ""
+        }
+      ],
+      "on_completion": "end--5ec21d15-61f5-4e1a-a564-5a3f2becced1"
+    },
+    "action--b5f451bd-1fe4-40a4-a88c-27bfd410664f": {
+      "name": "Enable detailed auditing for registry modifications. This typically involves enabling Audit Policy: 'Audit registry' for both success and failure, and may require enabling advanced auditing via 'Audit object access'.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Enable detailed auditing for registry modifications. This typically involves enabling Audit Policy: 'Audit registry' for both success and failure, and may require enabling advanced auditing via 'Audit object access'.",
+          "description": "Enable detailed auditing for registry modifications. This typically involves enabling Audit Policy: 'Audit registry' for both success and failure, and may require enabling advanced auditing via 'Audit object access'."
+        }
+      ],
+      "on_completion": "action--df63ec5f-1f98-433b-9995-1b34b7023fba"
+    },
+    "action--d6c63101-ed1b-4a0c-9c4b-576f610e57ea": {
+      "name": "Privilege Escalation via Debugger Hijacking: HKLM\\Software\\Microsoft\\Windows NT\\CurrentVersion\\Image File Execution Options\\[Target executable]\\Debugger",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Privilege Escalation via Debugger Hijacking: HKLM\\Software\\Microsoft\\Windows NT\\CurrentVersion\\Image File Execution Options\\[Target executable]\\Debugger",
+          "description": ""
+        }
+      ],
+      "on_completion": "end--77b4401e-6eba-44f7-97ea-638c4d01884b"
+    },
+    "action--d80ca579-10ef-4e19-a677-67571768aa10": {
+      "name": "Other common targets: HKLM\\Software\\Microsoft\\Windows NT\\CurrentVersion\\AeDebug, various file extension hijacks, AppInit_DLLs",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Other common targets: HKLM\\Software\\Microsoft\\Windows NT\\CurrentVersion\\AeDebug, various file extension hijacks, AppInit_DLLs",
+          "description": ""
+        }
+      ],
+      "on_completion": "end--5f6656fc-ba2d-4478-bb87-e31a8ac3397f"
+    },
+    "action--df63ec5f-1f98-433b-9995-1b34b7023fba": {
+      "name": "Create detection rules to identify command-line tools (e.g., reg.exe, reg add, reg delete) being used to modify high-risk registry keys associated with persistence, privilege escalation, or defense evasion.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Create detection rules to identify command-line tools (e.g., reg.exe, reg add, reg delete) being used to modify high-risk registry keys associated with persistence, privilege escalation, or defense evasion.",
+          "description": "Create detection rules to identify command-line tools (e.g., reg.exe, reg add, reg delete) being used to modify high-risk registry keys associated with persistence, privilege escalation, or defense evasion."
+        }
+      ],
+      "on_completion": "action--68708c51-ce7d-4d01-b752-674cfbfab5ac"
+    },
+    "action--f68744e5-bb1b-4a6d-b66b-fd6fc2d1c6a2": {
+      "name": "Persistence via Logon: HKCU\\Software\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\Userinit, HKLM\\Software\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\Shell, HKLM\\Software\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\Notify",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Persistence via Logon: HKCU\\Software\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\Userinit, HKLM\\Software\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\Shell, HKLM\\Software\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\Notify",
+          "description": ""
+        }
+      ],
+      "on_completion": "end--d247f791-1bcb-4f4b-9acc-7bc6f4f818a7"
+    },
+    "parallel--2c22f5cd-9d79-42af-a3ef-4695f27538f7": {
+      "name": "Define and monitor for modifications to specific high-risk registry keys and values. The following are common examples, but the list should be tailored to your environment:",
+      "type": "parallel",
+      "next_steps": [
+        "action--f68744e5-bb1b-4a6d-b66b-fd6fc2d1c6a2",
+        "action--0bd1adab-656e-47dc-834e-32765e3b7f4e",
+        "action--b255e216-4b87-42b3-bc09-dcb895dbb389",
+        "action--d6c63101-ed1b-4a0c-9c4b-576f610e57ea",
+        "action--797f4fd8-c90e-4a61-ae49-fe5dcaf96b36",
+        "action--d80ca579-10ef-4e19-a677-67571768aa10"
+      ],
+      "on_completion": "action--992fd4a7-8d0a-4b0b-bc77-5963209a151a"
+    }
+  },
+  "consulted": [
+    "individual--0e7ef725-663b-4685-9129-6058faafc19d"
+  ],
+  "created_by": "individual--506bcd7d-f79e-4c2a-acbe-5fdee7552639",
+  "accountable": "individual--a9c609fb-630f-4d24-8467-60fa587bb44a",
+  "description": "This is an automatically generated playbook based on the question: A detections playbook for T1112 of MITRE ATT&CK Matrix for Enterprise framework is required.The target platform is Windows. You can find more information at https://attack.mitre.org/detectionstrategies/DET0280#AN0781 . The description of the approach follows: Behavior chain involving abnormal registry modifications via CLI, PowerShell, WMI, or direct API calls, especially targeting persistence, privilege escalation, or defense evasion keys, potentially followed by service restart or process execution. Such as editing Notify/Userinit/Startup keys, or disabling SafeDllSearchMode.",
+  "last_tested": {
+    "date": "2026-03-01T22:00:00.000Z",
+    "mode": "Tabletop Exercise"
+  },
+  "responsible": [
+    "individual--506bcd7d-f79e-4c2a-acbe-5fdee7552639"
+  ],
+  "spec_version": "cacao-2.0",
+  "threat_types": [
+    "Phishing",
+    "Social engineering",
+    "Man-in-the-Middle (MitM) Attacks",
+    "AI-powered attacks",
+    "Password attacks",
+    "Business email compromise",
+    "Spoofing",
+    "Data exfiltration"
+  ],
+  "workflow_start": "start--4e23c168-0f29-4490-b244-87d609047239",
+  "agent_definitions": {
+    "individual--0e7ef725-663b-4685-9129-6058faafc19d": {
+      "name": "Cymph Management",
+      "type": "individual",
+      "description": "Cymph Management ()"
+    },
+    "individual--506bcd7d-f79e-4c2a-acbe-5fdee7552639": {
+      "name": "Spiros Antonatos",
+      "type": "individual",
+      "description": "Spiros Antonatos"
+    },
+    "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81": {
+      "name": "DummyAgent",
+      "type": "individual",
+      "description": "Dummy Agent to be changed"
+    }
+  },
+  "target_definitions": {
+    "linux--b326a6d6-87c0-4fbb-a03b-0b3f1a00ae10": {
+      "name": "linux1",
+      "type": "linux",
+      "address": {
+        "ipv4": [
+          "1.2.3.4"
+        ]
+      }
+    },
+    "server--6a00ed2d-4e86-4acd-9a85-30a8fd9b0ac7": {
+      "name": "Hidden Server",
+      "type": "server",
+      "state": "Don't show"
+    },
+    "individual--ebbef7ee-720e-48b8-a595-da11af5eaba2": {
+      "name": "Spiros",
+      "type": "individual",
+      "description": "Spiros (SOC Engineer)"
+    }
+  },
+  "external_references": [
+    {
+      "url": "https://attack.mitre.org/techniques/T1112/",
+      "name": "MITRE ATT&CK - T1112: Modify Registry"
+    },
+    {
+      "url": "https://attack.mitre.org/detectionstrategies/DET0280#AN0781",
+      "name": "MITRE ATT&CK - Detection Strategies - DET0280#AN0781"
+    }
+  ],
+  "__cymph_metadata": {
+    "nodes": {
+      "end--5ec21d15-61f5-4e1a-a564-5a3f2becced1": {
+        "x": 1850,
+        "y": 3779
+      },
+      "end--5f6656fc-ba2d-4478-bb87-e31a8ac3397f": {
+        "x": 2950,
+        "y": 3779
+      },
+      "end--77b4401e-6eba-44f7-97ea-638c4d01884b": {
+        "x": 2400,
+        "y": 3779
+      },
+      "end--d04b8045-eca2-49aa-812d-64486cb4b882": {
+        "x": 750,
+        "y": 4990
+      },
+      "end--d247f791-1bcb-4f4b-9acc-7bc6f4f818a7": {
+        "x": 3500,
+        "y": 3779
+      },
+      "end--d78f7f60-6542-43da-b3f7-c038cdc4e9a2": {
+        "x": 1300,
+        "y": 3779
+      },
+      "end--e3b5bf3e-ba88-4104-86f5-a5bd8e59713e": {
+        "x": 200,
+        "y": 3779
+      },
+      "start--4e23c168-0f29-4490-b244-87d609047239": {
+        "x": 1850,
+        "y": 77
+      },
+      "action--0a20758b-d241-46b2-8e63-82f9ca9b6c7a": {
+        "x": 1850,
+        "y": 2499
+      },
+      "action--0bd1adab-656e-47dc-834e-32765e3b7f4e": {
+        "x": 200,
+        "y": 3337
+      },
+      "action--1b2fb5e7-dfd9-497a-b584-68d654cd55c1": {
+        "x": 1850,
+        "y": 427
+      },
+      "action--367ebec7-596b-4c9f-a481-95b6a8775e22": {
+        "x": 750,
+        "y": 3779
+      },
+      "action--68708c51-ce7d-4d01-b752-674cfbfab5ac": {
+        "x": 1850,
+        "y": 1672.5
+      },
+      "action--797f4fd8-c90e-4a61-ae49-fe5dcaf96b36": {
+        "x": 1300,
+        "y": 3337
+      },
+      "action--7b2efde3-6bf9-47fb-aac5-94ddabc845b3": {
+        "x": 750,
+        "y": 4198
+      },
+      "action--7e689c71-a5c9-4ecd-a7ed-f8ac2324e6ed": {
+        "x": 750,
+        "y": 4617
+      },
+      "action--992fd4a7-8d0a-4b0b-bc77-5963209a151a": {
+        "x": 750,
+        "y": 3337
+      },
+      "action--9d08d3de-2bf4-4ed6-bc20-cf0921c3a9b1": {
+        "x": 1850,
+        "y": 2080
+      },
+      "action--b255e216-4b87-42b3-bc09-dcb895dbb389": {
+        "x": 1850,
+        "y": 3337
+      },
+      "action--b5f451bd-1fe4-40a4-a88c-27bfd410664f": {
+        "x": 1850,
+        "y": 834.5
+      },
+      "action--d6c63101-ed1b-4a0c-9c4b-576f610e57ea": {
+        "x": 2400,
+        "y": 3337
+      },
+      "action--d80ca579-10ef-4e19-a677-67571768aa10": {
+        "x": 2950,
+        "y": 3337
+      },
+      "action--df63ec5f-1f98-433b-9995-1b34b7023fba": {
+        "x": 1850,
+        "y": 1253.5
+      },
+      "action--f68744e5-bb1b-4a6d-b66b-fd6fc2d1c6a2": {
+        "x": 3500,
+        "y": 3337
+      },
+      "parallel--2c22f5cd-9d79-42af-a3ef-4695f27538f7": {
+        "x": 1850,
+        "y": 2918
+      }
+    },
+    "notes": {},
+    "document": {
+      "time": 1772212902279,
+      "blocks": [
+        {
+          "id": "816mmbLT8o",
+          "data": {
+            "meta": {
+              "start": 1,
+              "counterType": "numeric"
+            },
+            "items": [
+              {
+                "meta": {},
+                "items": [],
+                "content": "Deploy and configure a SIEM or EDR solution to collect and centralize Windows event logs, specifically focusing on Security, System, and PowerShell logs."
+              },
+              {
+                "meta": {},
+                "items": [],
+                "content": "Enable detailed auditing for registry modifications. This typically involves enabling Audit Policy: 'Audit registry' for both success and failure, and may require enabling advanced auditing via 'Audit object access'."
+              },
+              {
+                "meta": {},
+                "items": [],
+                "content": "Create detection rules to identify command-line tools (e.g., reg.exe, reg add, reg delete) being used to modify high-risk registry keys associated with persistence, privilege escalation, or defense evasion."
+              },
+              {
+                "meta": {},
+                "items": [],
+                "content": "Create detection rules to identify PowerShell being used to modify the registry, particularly using cmdlets like Set-ItemProperty, New-ItemProperty, or Remove-ItemProperty targeting high-risk keys."
+              },
+              {
+                "meta": {},
+                "items": [],
+                "content": "Create detection rules to identify WMI being used for registry modification, such as through the StdRegProv class and its methods (e.g., SetStringValue, CreateKey, DeleteValue)."
+              },
+              {
+                "meta": {},
+                "items": [],
+                "content": "Monitor for direct API calls indicative of registry manipulation. This is typically done by EDR solutions monitoring for calls to functions like RegSetValueExW, RegCreateKeyExA, etc., especially when targeting sensitive keys."
+              },
+              {
+                "meta": {},
+                "items": [
+                  {
+                    "meta": {},
+                    "items": [],
+                    "content": "Persistence via Logon: HKCU\\Software\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\Userinit, HKLM\\Software\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\Shell, HKLM\\Software\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\Notify"
+                  },
+                  {
+                    "meta": {},
+                    "items": [],
+                    "content": "Persistence via Run Keys: HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run, HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Run, HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\RunOnce"
+                  },
+                  {
+                    "meta": {},
+                    "items": [],
+                    "content": "Persistence via Services: HKLM\\System\\CurrentControlSet\\Services[Service Name]"
+                  },
+                  {
+                    "meta": {},
+                    "items": [],
+                    "content": "Privilege Escalation via Debugger Hijacking: HKLM\\Software\\Microsoft\\Windows NT\\CurrentVersion\\Image File Execution Options[Target executable]\\Debugger"
+                  },
+                  {
+                    "meta": {},
+                    "items": [],
+                    "content": "Defense Evasion: HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\SafeDllSearchMode (disabling it by setting to 0)"
+                  },
+                  {
+                    "meta": {},
+                    "items": [],
+                    "content": "Other common targets: HKLM\\Software\\Microsoft\\Windows NT\\CurrentVersion\\AeDebug, various file extension hijacks, AppInit_DLLs"
+                  }
+                ],
+                "content": "Define and monitor for modifications to specific high-risk registry keys and values. The following are common examples, but the list should be tailored to your environment:"
+              },
+              {
+                "meta": {},
+                "items": [],
+                "content": "Correlate registry modification events with subsequent process execution or service management activity (e.g., starting a new process, restarting a service like UAC via consent.exe) that could indicate the activation of the persistence mechanism."
+              },
+              {
+                "meta": {},
+                "items": [],
+                "content": "Establish a baseline of normal administrative activity for registry changes in your environment to reduce false positives. Tune detection rules to exclude changes made by known management and deployment tools (e.g., SCCM, Group Policy)."
+              },
+              {
+                "meta": {},
+                "items": [],
+                "content": "Implement automated alerting for high-confidence detections, ensuring alerts are routed to the security operations team for immediate investigation."
+              },
+              {
+                "meta": {},
+                "items": [],
+                "content": "Document investigation procedures for analysts. This should include steps to identify the parent process of the registry modification, analyze the command-line arguments, and investigate the target binary or script that is being persisted."
+              }
+            ],
+            "style": "ordered"
+          },
+          "type": "list",
+          "tunes": {
+            "textVariant": ""
+          }
+        }
+      ]
+    }
+  }
+}
