@@ -16,7 +16,7 @@
   "informed": [
     "individual--ebbef7ee-720e-48b8-a595-da11af5eaba2"
   ],
-  "modified": "2026-03-05T21:26:32.480Z",
+  "modified": "2026-03-09T11:56:45.159Z",
   "priority": 0,
   "workflow": {
     "end--5ec21d15-61f5-4e1a-a564-5a3f2becced1": {
@@ -418,8 +418,8 @@
         "y": 3337
       },
       "action--9d08d3de-2bf4-4ed6-bc20-cf0921c3a9b1": {
-        "x": 1850,
-        "y": 2080
+        "x": 2160,
+        "y": 2160
       },
       "action--b255e216-4b87-42b3-bc09-dcb895dbb389": {
         "x": 1850,
@@ -451,6 +451,11 @@
       }
     },
     "notes": {},
+    "mappings": {
+      "MITRE ATT&CK Matrix for Enterprise": [
+        "T1583"
+      ]
+    },
     "document": {
       "time": 1772212902279,
       "blocks": [
