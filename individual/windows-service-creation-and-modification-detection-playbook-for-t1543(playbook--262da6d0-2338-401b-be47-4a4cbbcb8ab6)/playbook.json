@@ -1,0 +1,243 @@
+{
+  "id": "playbook--262da6d0-2338-401b-be47-4a4cbbcb8ab6",
+  "name": "Windows Service Creation and Modification Detection Playbook for T1543",
+  "type": "playbook",
+  "labels": [
+    "T1543",
+    "Windows",
+    "Service Creation",
+    "Persistence",
+    "MITRE ATT&CK"
+  ],
+  "created": "2026-03-09T12:54:08.173Z",
+  "revoked": false,
+  "modified": "2026-03-09T12:54:08.173Z",
+  "priority": 0,
+  "workflow": {
+    "end--067aee8e-0440-446d-bed1-5c2bd9508cf0": {
+      "name": "End",
+      "type": "end"
+    },
+    "end--47495269-6e3e-49a1-99fc-731f70561954": {
+      "name": "End",
+      "type": "end"
+    },
+    "end--f1f8e9b5-4e70-410c-80b5-d75983302fd5": {
+      "name": "End",
+      "type": "end"
+    },
+    "start--171b66eb-082f-4a4a-9492-4960d625c360": {
+      "name": "Start",
+      "type": "start",
+      "on_completion": "action--edd5dd31-4f99-4f05-9fde-d25496b2ddcb"
+    },
+    "action--174b891c-05bc-4325-87bd-49c1e97826e5": {
+      "name": "Identify processes spawning sc.exe, powershell.exe, or services.exe from non-standard or unexpected parent processes.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Identify processes spawning sc.exe, powershell.exe, or services.exe from non-standard or unexpected parent processes.",
+          "description": ""
+        }
+      ],
+      "on_completion": "end--47495269-6e3e-49a1-99fc-731f70561954"
+    },
+    "action--2dc74842-4598-4dcf-9e6d-4b34832e0bd1": {
+      "name": "Monitor the Windows Registry for modifications to autostart service entries, especially in HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Monitor the Windows Registry for modifications to autostart service entries, especially in HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services.",
+          "description": "Monitor the Windows Registry for modifications to autostart service entries, especially in HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services."
+        }
+      ],
+      "on_completion": "action--ef533c7d-fad9-40b7-b638-940f2fa29188"
+    },
+    "action--3615a50d-a922-4d73-bf42-0084ed5c2575": {
+      "name": "Generate alerts for any detected suspicious service creation, modification, or associated behaviors that deviate from baseline norms.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Generate alerts for any detected suspicious service creation, modification, or associated behaviors that deviate from baseline norms.",
+          "description": "Generate alerts for any detected suspicious service creation, modification, or associated behaviors that deviate from baseline norms."
+        }
+      ],
+      "on_completion": "end--067aee8e-0440-446d-bed1-5c2bd9508cf0"
+    },
+    "action--4a253317-7e50-42b5-b6a5-833af776ecb5": {
+      "name": "Monitor Windows API calls, particularly ChangeServiceConfig, for unauthorized or anomalous service configuration changes.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Monitor Windows API calls, particularly ChangeServiceConfig, for unauthorized or anomalous service configuration changes.",
+          "description": "Monitor Windows API calls, particularly ChangeServiceConfig, for unauthorized or anomalous service configuration changes."
+        }
+      ],
+      "on_completion": "action--2dc74842-4598-4dcf-9e6d-4b34832e0bd1"
+    },
+    "action--6d178973-651d-429a-b9a5-675a79623d2a": {
+      "name": "Correlate process trees with user context and execution time to identify suspicious activity.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Correlate process trees with user context and execution time to identify suspicious activity.",
+          "description": ""
+        }
+      ],
+      "on_completion": "end--f1f8e9b5-4e70-410c-80b5-d75983302fd5"
+    },
+    "action--a8899545-4cde-425a-9123-73924dfecaed": {
+      "name": "Correlate detected events with known legitimate administrative activity to reduce false positives.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Correlate detected events with known legitimate administrative activity to reduce false positives.",
+          "description": "Correlate detected events with known legitimate administrative activity to reduce false positives."
+        }
+      ],
+      "on_completion": "action--3615a50d-a922-4d73-bf42-0084ed5c2575"
+    },
+    "action--edd5dd31-4f99-4f05-9fde-d25496b2ddcb": {
+      "name": "Collect and monitor command-line arguments for processes such as sc.exe, powershell.exe, and services.exe for service creation or modification commands.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Collect and monitor command-line arguments for processes such as sc.exe, powershell.exe, and services.exe for service creation or modification commands.",
+          "description": "Collect and monitor command-line arguments for processes such as sc.exe, powershell.exe, and services.exe for service creation or modification commands."
+        }
+      ],
+      "on_completion": "action--4a253317-7e50-42b5-b6a5-833af776ecb5"
+    },
+    "action--ef533c7d-fad9-40b7-b638-940f2fa29188": {
+      "name": "Monitor file system writes to the %SystemRoot%\\System32 directory, specifically for the creation or modification of service-related executable files.",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Monitor file system writes to the %SystemRoot%\\System32 directory, specifically for the creation or modification of service-related executable files.",
+          "description": "Monitor file system writes to the %SystemRoot%\\System32 directory, specifically for the creation or modification of service-related executable files."
+        }
+      ],
+      "on_completion": "parallel--2126b1d1-a7ab-4284-9173-2f4ef7cec0f8"
+    },
+    "parallel--2126b1d1-a7ab-4284-9173-2f4ef7cec0f8": {
+      "name": "Analyze process creation events to detect anomalous parent-child process relationships involving service management tools.",
+      "type": "parallel",
+      "next_steps": [
+        "action--174b891c-05bc-4325-87bd-49c1e97826e5",
+        "action--6d178973-651d-429a-b9a5-675a79623d2a"
+      ],
+      "on_completion": "action--a8899545-4cde-425a-9123-73924dfecaed"
+    }
+  },
+  "created_by": "individual--506bcd7d-f79e-4c2a-acbe-5fdee7552639",
+  "description": "This is an automatically generated playbook based on the question: A detections playbook for T1543 of MITRE ATT&CK Matrix for Enterprise framework is required.The target platform is Windows. You can find more information at https://attack.mitre.org/detectionstrategies/DET0571#AN1575 . The description of the approach follows: Detects command-line or API-based creation/modification of Windows Services via `sc.exe`, `powershell.exe`, `services.exe`, or `ChangeServiceConfig`. Looks for creation/modification of autostart services via registry changes, file drops to `System32\\services`, and anomalous parent-child process trees.",
+  "spec_version": "cacao-2.0",
+  "workflow_start": "start--171b66eb-082f-4a4a-9492-4960d625c360",
+  "agent_definitions": {
+    "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81": {
+      "name": "DummyAgent",
+      "type": "individual",
+      "description": "Dummy Agent to be changed"
+    }
+  },
+  "external_references": [
+    {
+      "url": "https://attack.mitre.org/techniques/T1543/",
+      "name": "MITRE ATT&CK Technique T1543: Create or Modify System Process"
+    },
+    {
+      "url": "https://attack.mitre.org/detectionstrategies/DET0571#AN1575",
+      "name": "MITRE ATT&CK Detection Strategies: DET0571"
+    }
+  ],
+  "__cymph_metadata": {
+    "mappings": {
+      "MITRE ATT&CK Matrix for Enterprise": [
+        "T1543"
+      ]
+    },
+    "document": {
+      "time": 1773060848200,
+      "blocks": [
+        {
+          "id": "P1UAF5E6uf",
+          "data": {
+            "meta": {
+              "start": 1,
+              "counterType": "numeric"
+            },
+            "items": [
+              {
+                "meta": {},
+                "items": [],
+                "content": "Collect and monitor command-line arguments for processes such as sc.exe, powershell.exe, and services.exe for service creation or modification commands."
+              },
+              {
+                "meta": {},
+                "items": [],
+                "content": "Monitor Windows API calls, particularly ChangeServiceConfig, for unauthorized or anomalous service configuration changes."
+              },
+              {
+                "meta": {},
+                "items": [],
+                "content": "Monitor the Windows Registry for modifications to autostart service entries, especially in HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services."
+              },
+              {
+                "meta": {},
+                "items": [],
+                "content": "Monitor file system writes to the %SystemRoot%\\System32 directory, specifically for the creation or modification of service-related executable files."
+              },
+              {
+                "meta": {},
+                "items": [
+                  {
+                    "meta": {},
+                    "items": [],
+                    "content": "Identify processes spawning sc.exe, powershell.exe, or services.exe from non-standard or unexpected parent processes."
+                  },
+                  {
+                    "meta": {},
+                    "items": [],
+                    "content": "Correlate process trees with user context and execution time to identify suspicious activity."
+                  }
+                ],
+                "content": "Analyze process creation events to detect anomalous parent-child process relationships involving service management tools."
+              },
+              {
+                "meta": {},
+                "items": [],
+                "content": "Correlate detected events with known legitimate administrative activity to reduce false positives."
+              },
+              {
+                "meta": {},
+                "items": [],
+                "content": "Generate alerts for any detected suspicious service creation, modification, or associated behaviors that deviate from baseline norms."
+              }
+            ],
+            "style": "ordered"
+          },
+          "type": "list",
+          "tunes": {
+            "textVariant": ""
+          }
+        }
+      ]
+    }
+  }
+}
