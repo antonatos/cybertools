@@ -1,0 +1,72 @@
+{
+  "id": "playbook--93d0c284-6231-4083-9cb7-24608ae84ada",
+  "name": "My workflow",
+  "type": "playbook",
+  "created": "2026-03-09T21:31:17.859Z",
+  "revoked": false,
+  "modified": "2026-03-09T21:34:19.330Z",
+  "priority": 0,
+  "workflow": {
+    "start--2675dfaf-9a46-4751-96b1-6b8344ac250a": {
+      "name": "Start",
+      "type": "start",
+      "on_completion": "action--22e82694-257d-41e5-9e63-3ee851d35541"
+    },
+    "action--22e82694-257d-41e5-9e63-3ee851d35541": {
+      "name": "Code",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "code": "// Loop over input items and add a new field called 'myNewField' to the JSON of each one\nfor (const item of $input.all()) {\n  item.json.myNewField = 1;\n}\n\nreturn $input.all();",
+          "type": "code",
+          "language": "javascript"
+        }
+      ],
+      "on_completion": "action--a7e80d1f-b922-48ce-af03-a08d50ff433f"
+    },
+    "action--a7e80d1f-b922-48ce-af03-a08d50ff433f": {
+      "name": "Wait",
+      "type": "action",
+      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "commands": [
+        {
+          "type": "wait",
+          "waiting_time": 5000
+        }
+      ]
+    }
+  },
+  "created_by": "individual--506bcd7d-f79e-4c2a-acbe-5fdee7552639",
+  "description": "",
+  "spec_version": "cacao-2.0",
+  "workflow_start": "start--2675dfaf-9a46-4751-96b1-6b8344ac250a",
+  "agent_definitions": {
+    "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81": {
+      "name": "DummyAgent",
+      "type": "individual",
+      "description": "Dummy Agent to be changed"
+    }
+  },
+  "__cymph_metadata": {
+    "nodes": {
+      "start--2675dfaf-9a46-4751-96b1-6b8344ac250a": {
+        "x": 0,
+        "y": 0
+      },
+      "action--22e82694-257d-41e5-9e63-3ee851d35541": {
+        "x": 0,
+        "y": 450
+      },
+      "action--a7e80d1f-b922-48ce-af03-a08d50ff433f": {
+        "x": 0,
+        "y": 900
+      }
+    },
+    "notes": {},
+    "document": {
+      "time": 1773092038794,
+      "blocks": []
+    }
+  }
+}
