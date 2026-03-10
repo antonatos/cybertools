@@ -1,0 +1,340 @@
+{
+  "id": "playbook--94b2663d-3813-4895-8bf9-363c250afd0b",
+  "name": "Phishing Defense and Response Playbook",
+  "type": "playbook",
+  "labels": [
+    "phishing",
+    "email-security",
+    "incident-response",
+    "user-awareness"
+  ],
+  "created": "2026-03-10T15:45:04.944Z",
+  "revoked": false,
+  "modified": "2026-03-10T15:45:04.944Z",
+  "priority": 0,
+  "workflow": {
+    "end--602e5326-21d3-4f92-ab6a-7a2c0e14f567": {
+      "name": "End",
+      "type": "end"
+    },
+    "end--7b4f686a-a402-43cd-ac79-c3d4bfbc5de1": {
+      "name": "End",
+      "type": "end"
+    },
+    "end--a0ceda55-caa2-49fb-bb8c-8da64dd31d9b": {
+      "name": "End",
+      "type": "end"
+    },
+    "end--b9712d53-7bbc-4ebd-87dc-08a798a91848": {
+      "name": "End",
+      "type": "end"
+    },
+    "end--bb3fb04b-2746-4a42-9dc6-ba2bd02b274b": {
+      "name": "End",
+      "type": "end"
+    },
+    "end--c1378ab3-1bf5-4f19-a712-c7c068140267": {
+      "name": "End",
+      "type": "end"
+    },
+    "end--d72b0b3a-ff10-43a0-b911-f99745fbf7c8": {
+      "name": "End",
+      "type": "end"
+    },
+    "start--438d3dd8-8f97-4649-857b-edf715b4d895": {
+      "name": "Start",
+      "type": "start",
+      "on_completion": "action--6b0525c1-782e-431d-8220-9b24f2380e45"
+    },
+    "action--12d66532-51e3-49e1-a47f-e79ccea61e2a": {
+      "name": "Contain and remediate any compromised accounts or systems",
+      "type": "action",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Contain and remediate any compromised accounts or systems",
+          "description": ""
+        }
+      ],
+      "on_completion": "end--7b4f686a-a402-43cd-ac79-c3d4bfbc5de1"
+    },
+    "action--213d47f5-aac1-4fdc-bb40-ab8cc15a373f": {
+      "name": "Deploy and maintain anti-malware and anti-spam software on all endpoints and email servers.",
+      "type": "action",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Deploy and maintain anti-malware and anti-spam software on all endpoints and email servers.",
+          "description": "Deploy and maintain anti-malware and anti-spam software on all endpoints and email servers."
+        }
+      ],
+      "on_completion": "action--5f494768-a626-4da4-b176-acb0b8da34d0"
+    },
+    "action--45d5e5e4-97ec-42d2-9349-a110b3e3949b": {
+      "name": "Regularly update and patch all systems to protect against known vulnerabilities.",
+      "type": "action",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Regularly update and patch all systems to protect against known vulnerabilities.",
+          "description": "Regularly update and patch all systems to protect against known vulnerabilities."
+        }
+      ],
+      "on_completion": "action--78d29137-20c6-49e9-9b85-bcf07f45df5a"
+    },
+    "action--57fe8f9a-6d42-4b8b-aecd-5b4f03c160e2": {
+      "name": "Require DMARC, DKIM, and SPF to prevent email spoofing",
+      "type": "action",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Require DMARC, DKIM, and SPF to prevent email spoofing",
+          "description": ""
+        }
+      ],
+      "on_completion": "end--c1378ab3-1bf5-4f19-a712-c7c068140267"
+    },
+    "action--5f494768-a626-4da4-b176-acb0b8da34d0": {
+      "name": "Enable multi-factor authentication (MFA) for all user accounts to reduce the impact of compromised credentials.",
+      "type": "action",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Enable multi-factor authentication (MFA) for all user accounts to reduce the impact of compromised credentials.",
+          "description": "Enable multi-factor authentication (MFA) for all user accounts to reduce the impact of compromised credentials."
+        }
+      ],
+      "on_completion": "action--97247e19-00c0-431d-9ff6-c0703ac7f3c6"
+    },
+    "action--67a209e4-2f6a-4434-95ed-4c4bbe0d2153": {
+      "name": "Block suspicious file attachments (e.g., .exe, .js)",
+      "type": "action",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Block suspicious file attachments (e.g., .exe, .js)",
+          "description": ""
+        }
+      ],
+      "on_completion": "end--a0ceda55-caa2-49fb-bb8c-8da64dd31d9b"
+    },
+    "action--6b0525c1-782e-431d-8220-9b24f2380e45": {
+      "name": "Implement email filtering solutions to detect and block phishing attempts before they reach users.",
+      "type": "action",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Implement email filtering solutions to detect and block phishing attempts before they reach users.",
+          "description": "Implement email filtering solutions to detect and block phishing attempts before they reach users."
+        }
+      ],
+      "on_completion": "action--213d47f5-aac1-4fdc-bb40-ab8cc15a373f"
+    },
+    "action--78d29137-20c6-49e9-9b85-bcf07f45df5a": {
+      "name": "Perform simulated phishing exercises to test and improve user awareness.",
+      "type": "action",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Perform simulated phishing exercises to test and improve user awareness.",
+          "description": "Perform simulated phishing exercises to test and improve user awareness."
+        }
+      ],
+      "on_completion": "end--602e5326-21d3-4f92-ab6a-7a2c0e14f567"
+    },
+    "action--7ae43767-0382-4e5f-89b5-8bab9ddf1d78": {
+      "name": "Implement banner warnings for external emails",
+      "type": "action",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Implement banner warnings for external emails",
+          "description": ""
+        }
+      ],
+      "on_completion": "end--d72b0b3a-ff10-43a0-b911-f99745fbf7c8"
+    },
+    "action--852b1a9e-12c1-4454-992c-3801ce1dd8aa": {
+      "name": "Monitor and analyze email traffic for anomalies and phishing indicators.",
+      "type": "action",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Monitor and analyze email traffic for anomalies and phishing indicators.",
+          "description": "Monitor and analyze email traffic for anomalies and phishing indicators."
+        }
+      ],
+      "on_completion": "parallel--70adab0e-c4d2-4bdd-8cff-95de04464067"
+    },
+    "action--97247e19-00c0-431d-9ff6-c0703ac7f3c6": {
+      "name": "Conduct regular security awareness training for employees to recognize phishing attempts.",
+      "type": "action",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Conduct regular security awareness training for employees to recognize phishing attempts.",
+          "description": "Conduct regular security awareness training for employees to recognize phishing attempts."
+        }
+      ],
+      "on_completion": "parallel--aa30679a-6344-4e37-9c45-f964ecb3a92d"
+    },
+    "action--be08961e-7542-4c1b-aa71-82c424609d56": {
+      "name": "Create a clear reporting process for suspected phishing emails",
+      "type": "action",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Create a clear reporting process for suspected phishing emails",
+          "description": ""
+        }
+      ],
+      "on_completion": "end--bb3fb04b-2746-4a42-9dc6-ba2bd02b274b"
+    },
+    "action--edfc138e-11a0-4c98-a6ba-c88532345b3e": {
+      "name": "Isolate and investigate reported emails promptly",
+      "type": "action",
+      "commands": [
+        {
+          "type": "manual",
+          "command": "Isolate and investigate reported emails promptly",
+          "description": ""
+        }
+      ],
+      "on_completion": "end--b9712d53-7bbc-4ebd-87dc-08a798a91848"
+    },
+    "parallel--70adab0e-c4d2-4bdd-8cff-95de04464067": {
+      "name": "Develop an incident response plan for phishing attacks",
+      "type": "parallel",
+      "next_steps": [
+        "action--be08961e-7542-4c1b-aa71-82c424609d56",
+        "action--edfc138e-11a0-4c98-a6ba-c88532345b3e",
+        "action--12d66532-51e3-49e1-a47f-e79ccea61e2a"
+      ],
+      "on_completion": "action--45d5e5e4-97ec-42d2-9349-a110b3e3949b"
+    },
+    "parallel--aa30679a-6344-4e37-9c45-f964ecb3a92d": {
+      "name": "Establish and enforce email security policies",
+      "type": "parallel",
+      "next_steps": [
+        "action--57fe8f9a-6d42-4b8b-aecd-5b4f03c160e2",
+        "action--7ae43767-0382-4e5f-89b5-8bab9ddf1d78",
+        "action--67a209e4-2f6a-4434-95ed-4c4bbe0d2153"
+      ],
+      "on_completion": "action--852b1a9e-12c1-4454-992c-3801ce1dd8aa"
+    }
+  },
+  "created_by": "individual--506bcd7d-f79e-4c2a-acbe-5fdee7552639",
+  "description": "This is an automatically generated playbook based on the question: i want a playbook for defending against phishing",
+  "spec_version": "cacao-2.0",
+  "workflow_start": "start--438d3dd8-8f97-4649-857b-edf715b4d895",
+  "external_references": [
+    {
+      "url": "https://www.cisa.gov/news-events/news/phishing-guidance-stopping-email-attacks",
+      "name": "CISA Phishing Guidance"
+    },
+    {
+      "url": "https://csrc.nist.gov/publications/detail/sp/800-53/rev-5/final",
+      "name": "NIST SP 800-53 Security and Privacy Controls"
+    }
+  ],
+  "__cymph_metadata": {
+    "document": {
+      "time": 1773157504975,
+      "blocks": [
+        {
+          "id": "Sh2dySppmV",
+          "data": {
+            "meta": {
+              "start": 1,
+              "counterType": "numeric"
+            },
+            "items": [
+              {
+                "meta": {},
+                "items": [],
+                "content": "Implement email filtering solutions to detect and block phishing attempts before they reach users."
+              },
+              {
+                "meta": {},
+                "items": [],
+                "content": "Deploy and maintain anti-malware and anti-spam software on all endpoints and email servers."
+              },
+              {
+                "meta": {},
+                "items": [],
+                "content": "Enable multi-factor authentication (MFA) for all user accounts to reduce the impact of compromised credentials."
+              },
+              {
+                "meta": {},
+                "items": [],
+                "content": "Conduct regular security awareness training for employees to recognize phishing attempts."
+              },
+              {
+                "meta": {},
+                "items": [
+                  {
+                    "meta": {},
+                    "items": [],
+                    "content": "Require DMARC, DKIM, and SPF to prevent email spoofing"
+                  },
+                  {
+                    "meta": {},
+                    "items": [],
+                    "content": "Implement banner warnings for external emails"
+                  },
+                  {
+                    "meta": {},
+                    "items": [],
+                    "content": "Block suspicious file attachments (e.g., .exe, .js)"
+                  }
+                ],
+                "content": "<b>Establish and enforce email security policies</b>"
+              },
+              {
+                "meta": {},
+                "items": [],
+                "content": "Monitor and analyze email traffic for anomalies and phishing indicators."
+              },
+              {
+                "meta": {},
+                "items": [
+                  {
+                    "meta": {},
+                    "items": [],
+                    "content": "Create a clear reporting process for suspected phishing emails"
+                  },
+                  {
+                    "meta": {},
+                    "items": [],
+                    "content": "Isolate and investigate reported emails promptly"
+                  },
+                  {
+                    "meta": {},
+                    "items": [],
+                    "content": "Contain and remediate any compromised accounts or systems"
+                  }
+                ],
+                "content": "<b>Develop an incident response plan for phishing attacks</b>"
+              },
+              {
+                "meta": {},
+                "items": [],
+                "content": "Regularly update and patch all systems to protect against known vulnerabilities."
+              },
+              {
+                "meta": {},
+                "items": [],
+                "content": "Perform simulated phishing exercises to test and improve user awareness."
+              }
+            ],
+            "style": "ordered"
+          },
+          "type": "list",
+          "tunes": {
+            "textVariant": ""
+          }
+        }
+      ]
+    }
+  }
+}

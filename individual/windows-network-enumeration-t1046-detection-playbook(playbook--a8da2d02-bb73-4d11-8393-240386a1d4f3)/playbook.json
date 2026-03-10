@@ -11,7 +11,7 @@
   ],
   "created": "2026-03-09T16:16:24.382Z",
   "revoked": false,
-  "modified": "2026-03-09T16:31:53.245Z",
+  "modified": "2026-03-10T15:06:14.900Z",
   "priority": 0,
   "workflow": {
     "end--2cdc5d77-dd7b-4a99-bd3e-b55db6a566e0": {
@@ -77,7 +77,7 @@
     "action--40ebe8bb-42c0-4dba-aa5b-45026c23415f": {
       "name": "Deploy and configure a SIEM or log aggregation tool to collect and correlate Windows event logs (e.g., Security, Sysmon) and network data.",
       "type": "action",
-      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "agent": "individual--506bcd7d-f79e-4c2a-acbe-5fdee7552639",
       "commands": [
         {
           "type": "manual",
@@ -168,7 +168,7 @@
     "action--fdcd6701-0f7f-41db-a576-e599b537a448": {
       "name": "Enable and configure Sysmon logging with a focus on Event ID 1 (Process creation) and Event ID 3 (Network connection).",
       "type": "action",
-      "agent": "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81",
+      "agent": "team--d0579052-ccf5-41c3-9d92-dac2a04a0246",
       "commands": [
         {
           "type": "manual",
@@ -194,6 +194,16 @@
   "spec_version": "cacao-2.0",
   "workflow_start": "start--40514b26-7696-4c36-bb51-eec3d71e812e",
   "agent_definitions": {
+    "team--d0579052-ccf5-41c3-9d92-dac2a04a0246": {
+      "name": "client3",
+      "type": "group",
+      "description": null
+    },
+    "individual--506bcd7d-f79e-4c2a-acbe-5fdee7552639": {
+      "name": "Spiros Antonatos",
+      "type": "individual",
+      "description": "Spiros Antonatos (asdasd)"
+    },
     "individual--fec38468-27ce-4f9e-b8f5-0aafd58afd81": {
       "name": "DummyAgent",
       "type": "individual",

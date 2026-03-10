@@ -1,0 +1,59 @@
+{
+  "id": "playbook--be9f735d-ff80-41e0-b79c-d8c5b1add3b5",
+  "name": "My workflow",
+  "type": "playbook",
+  "created": "2026-03-10T15:44:27.959Z",
+  "revoked": false,
+  "modified": "2026-03-10T15:44:27.959Z",
+  "priority": 0,
+  "workflow": {
+    "start--4cae726c-62da-4673-a533-d5de22bdb513": {
+      "name": "Start",
+      "type": "start",
+      "on_completion": "action--365fe690-202f-4a44-9be2-e99c1a0d8628"
+    },
+    "action--365fe690-202f-4a44-9be2-e99c1a0d8628": {
+      "name": "Code",
+      "type": "action",
+      "commands": [
+        {
+          "code": "// Loop over input items and add a new field called 'myNewField' to the JSON of each one\nfor (const item of $input.all()) {\n  item.json.myNewField = 1;\n}\n\nreturn $input.all();",
+          "type": "code",
+          "language": "javascript"
+        }
+      ],
+      "on_completion": "action--fa812be0-a4da-4180-9699-c52f0e88eaaf"
+    },
+    "action--fa812be0-a4da-4180-9699-c52f0e88eaaf": {
+      "name": "Wait",
+      "type": "action",
+      "commands": [
+        {
+          "type": "wait",
+          "waiting_time": 5000
+        }
+      ]
+    }
+  },
+  "created_by": "individual--506bcd7d-f79e-4c2a-acbe-5fdee7552639",
+  "description": "",
+  "spec_version": "cacao-2.0",
+  "workflow_start": "start--4cae726c-62da-4673-a533-d5de22bdb513",
+  "__cymph_metadata": {
+    "nodes": {
+      "start--4cae726c-62da-4673-a533-d5de22bdb513": {
+        "x": 0,
+        "y": 0
+      },
+      "action--365fe690-202f-4a44-9be2-e99c1a0d8628": {
+        "x": 0,
+        "y": 450
+      },
+      "action--fa812be0-a4da-4180-9699-c52f0e88eaaf": {
+        "x": 0,
+        "y": 900
+      }
+    },
+    "notes": {}
+  }
+}
