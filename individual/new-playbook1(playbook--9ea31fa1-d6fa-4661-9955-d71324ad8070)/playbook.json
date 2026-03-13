@@ -1,0 +1,27 @@
+{
+  "id": "playbook--9ea31fa1-d6fa-4661-9955-d71324ad8070",
+  "name": "New Playbook1",
+  "type": "playbook",
+  "created": "2026-03-13T16:13:43.055Z",
+  "revoked": false,
+  "modified": "2026-03-13T16:14:13.923Z",
+  "workflow": {
+    "start--b6c62023-dbd4-422e-adf9-505277f29a79": {
+      "name": "Start",
+      "type": "start"
+    }
+  },
+  "created_by": "individual--506bcd7d-f79e-4c2a-acbe-5fdee7552639",
+  "description": "This is a template playbook containing only a start and end node",
+  "spec_version": "cacao-2.0",
+  "workflow_start": "start--b6c62023-dbd4-422e-adf9-505277f29a79",
+  "__cymph_metadata": {
+    "nodes": {
+      "start--b6c62023-dbd4-422e-adf9-505277f29a79": {
+        "x": 190,
+        "y": 88
+      }
+    },
+    "notes": {}
+  }
+}
